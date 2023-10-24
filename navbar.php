@@ -10,9 +10,13 @@
     <h1 class="naviText"><a href="footwear.php">Obuwie</a></h1>
     <h1 class="naviText"<a href="">Akcesoria</a></h1>
     <div class="navBarIcon">
-        <img src="icons/shopping-cart.png" alt="shopping-cart" width="50px" height="50px">
+        <a href="">
+            <img src="icons/shopping-cart.png" alt="shopping-cart" width="50px" height="50px">
+        </a>
     </div>
     <div class="navBarIcon">
-        <img src="icons/user.png" alt="userIcon" width="50px" height="50px">
+        <a href="login.php">
+            <img src="icons/user.png" alt="userIcon" width="50px" height="50px">
+        </a>
     </div>
 </div>

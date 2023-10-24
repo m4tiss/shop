@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/registration.css">
+
+
+    <script src="scripts/login.js"></script>
 </head>
 <body>
 </body>

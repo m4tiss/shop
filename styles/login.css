@@ -1,0 +1,81 @@
+.hidden {
+  display: none;
+}
+
+.loginContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 500px;
+  height: 500px;
+  border-radius: 40px;
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+}
+
+.inputTitle {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: normal;
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-evenly;
+}
+
+.inputLogin {
+  width: 300px;
+  height: 40px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 2px 2px 8px gray;
+  padding: 5px 20px;
+  margin: 2px auto;
+}
+
+.inputInfo {
+  margin: 2px auto;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.loginButton {
+  width: 200px;
+  height: 50px;
+  border-radius: 30px;
+  margin: 2px auto;
+  cursor: pointer;
+  background: black;
+  color: white;
+  box-shadow: 2px 2px 8px gray;
+}
+
+.toRegistration {
+  margin: 2px auto;
+  font-weight: normal;
+  font-size: 20px;
+  margin-top: 20px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=login.css.map */

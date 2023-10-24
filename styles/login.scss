@@ -1,0 +1,85 @@
+@mixin centerFlexContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin ColumnContent {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin setInfoOrWarring{
+  margin: 2px auto;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+$grayGradient: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+
+.hidden{
+  display: none;
+}
+
+.loginContainer {
+  width: 100%;
+  min-height: 100vh;
+  @include centerFlexContent;
+}
+
+.loginDiv {
+  @include ColumnContent;
+  justify-content: space-evenly;
+  width: 500px;
+  height: 500px;
+  border-radius: 40px;
+  background:$grayGradient;
+}
+
+.inputTitle {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: normal;
+  font-size:30px;
+  letter-spacing: 5px;
+}
+
+.loginForm {
+  @include ColumnContent;
+  height: 300px;
+  justify-content: space-evenly;
+}
+
+.inputLogin {
+  width: 300px;
+  height: 40px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 2px 2px 8px gray;
+  padding: 5px 20px;
+  margin: 2px auto;
+}
+
+.inputInfo {
+ @include setInfoOrWarring
+}
+.loginButton {
+  width: 200px;
+  height: 50px;
+  border-radius: 30px;
+  margin: 2px auto;
+  cursor: pointer;
+  background: black;
+  color: white;
+  box-shadow: 2px 2px 8px gray;
+}
+.toRegistration{
+  @include setInfoOrWarring;
+  margin-top: 20px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+a{
+  @include centerFlexContent
+}

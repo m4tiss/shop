@@ -1,0 +1,18 @@
+.registrationDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 500px;
+  height: 800px;
+  border-radius: 40px;
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+}
+
+.registrationForm {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  justify-content: space-evenly;
+}
+
+/*# sourceMappingURL=registration.css.map */
