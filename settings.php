@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Step in Style</title>
     <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/footer.css">
 </head>
 <body>
