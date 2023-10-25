@@ -31,3 +31,15 @@
   color: white;
   box-shadow: 2px 2px 8px gray;
 }
+
+@media screen and (max-width: 1700px) {
+  .contentDiv {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .contentDiv{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

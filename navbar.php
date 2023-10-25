@@ -8,9 +8,9 @@
     </div>
     <h1 class="naviText"><a href="clothes.php">Odzież</a></h1>
     <h1 class="naviText"><a href="footwear.php">Obuwie</a></h1>
-    <h1 class="naviText"<a href="accessories.php">Akcesoria</a></h1>
+    <h1 class="naviText"><a href="accessories.php">Akcesoria</a></h1>
     <div class="navBarIcon">
-        <a href="">
+        <a href="basket.php">
             <img src="icons/shopping-cart.png" alt="shopping-cart" width="50px" height="50px">
         </a>
     </div>
