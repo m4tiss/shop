@@ -2,7 +2,7 @@
   display: none;
 }
 
-.loginContainer {
+.loginOrRegistrationContainer {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -36,7 +36,7 @@
   justify-content: space-evenly;
 }
 
-.inputLogin {
+.input {
   width: 300px;
   height: 40px;
   border: none;
@@ -63,7 +63,7 @@
   box-shadow: 2px 2px 8px gray;
 }
 
-.toRegistration {
+.changeLoginWindow {
   margin: 2px auto;
   font-weight: normal;
   font-size: 20px;

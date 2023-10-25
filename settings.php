@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/footer.css">
     <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="styles/registration.css">
+    <link rel="stylesheet" href="styles/clothes.css">
 
 
     <script src="scripts/login.js"></script>
