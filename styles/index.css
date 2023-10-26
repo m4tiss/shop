@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+a {
+  display: none;
+}
+
 .mainPhoto {
   width: 100%;
   display: flex;
@@ -42,6 +46,7 @@
   justify-content: space-evenly;
   border-radius: 40px;
   border: black solid 1px;
+  cursor: pointer;
 }
 
 .productLayout img {
@@ -53,6 +58,10 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.productLayout:hover {
+  scale: 1.05;
 }
 
 @media screen and (max-width: 1300px) {

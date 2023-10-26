@@ -12,13 +12,15 @@
         <h2>WYGLĄDAJ JAK CHCESZ</h2>
     </div>
     <div class="productContainer">
-        <div class="productLayout">
-            <img src="images/airForce.jpg" alt="airForce">
-            <div class="productInfo">
-                <h3 class="productName">Air Force</h3>
-                <h3 class="productPrice">260,00zł</h3>
+        <a href="product.php">
+            <div class="productLayout">
+                <img src="images/airForce.jpg" alt="airForce">
+                <div class="productInfo">
+                    <h3 class="productName">Air Force</h3>
+                    <h3 class="productPrice">260,00zł</h3>
+                </div>
             </div>
-        </div>
+        </a>
         <div class="productLayout">2</div>
         <div class="productLayout">3</div>
         <div class="productLayout">4</div>

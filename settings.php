@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="styles/registration.css">
     <link rel="stylesheet" href="styles/clothes.css">
+    <link rel="stylesheet" href="styles/product.css">
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="scripts/login.js"></script>
 </head>
 <body>
