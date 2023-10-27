@@ -1,8 +1,11 @@
-
 <?php
-session_start();
-$conn = mysqli_connect('localhost','root','praktyka','shop');
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+$servername = "localhost";
+$username = "root";
+$password = "praktyka";
+$database = "shop";
+
+$conn = new mysqli($servername, $username, $password, $database);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
