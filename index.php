@@ -1,9 +1,13 @@
 <?php include_once('settings.php') ?>
-<?php include('navbar.php'); ?>
+<?php include('navbar.php');
+
+
+
+?>
 <div>
     <div class="mainPhoto">
         <a href="footwear.php">
-            <img src="images/mainPhoto2.jpg" alt="mainPhoto">
+            <img src="images/mainPhoto.jpg" alt="mainPhoto">
         </a>
     </div>
     <div class="discountText">
@@ -14,7 +18,7 @@
     <div class="productContainer">
         <a href="product.php">
             <div class="productLayout">
-                <img src="images/airForce.jpg" alt="airForce">
+                <img src="images/dame8.jpg" alt="airForce">
                 <div class="productInfo">
                     <h3 class="productName">Air Force</h3>
                     <h3 class="productPrice">260,00zł</h3>

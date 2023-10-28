@@ -33,6 +33,49 @@
   box-shadow: 2px 2px 8px gray;
 }
 
+.filtrationAndSortingTitle {
+  color: deeppink;
+  margin: 20px 0;
+  letter-spacing: 5px;
+}
+
+.filtrationAndSortingSubtitle {
+  color: black;
+  margin: 10px 0;
+  letter-spacing: 3px;
+}
+
+.producersFiltration {
+  height: 300px;
+}
+
+.producerContainer {
+  width: 100%;
+}
+
+.producerNameLabel {
+  font-size: 20px;
+}
+
+.photoProductContainer {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.selectSorting {
+  width: 300px;
+  height: 50px;
+  border-radius: 30px;
+  margin: 40px auto;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px gray;
+  font-size: 20px;
+  padding: 2px 20px;
+}
+
 @media screen and (max-width: 1700px) {
   .contentDiv {
     grid-template-columns: repeat(2, 1fr);
