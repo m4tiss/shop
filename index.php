@@ -1,8 +1,5 @@
 <?php include_once('settings.php') ?>
 <?php include('navbar.php');
-
-
-
 ?>
 <div>
     <div class="mainPhoto">

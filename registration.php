@@ -37,19 +37,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo "Error: " . $insertUser . "<br>" . mysqli_error($conn);
                 }
                 if ($result = mysqli_query($conn, $getId)) {
-                    if (mysqli_num_rows($result) < 0) {
-                        echo "Problem z bazą danych";
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $clientId = $row['idUser'];
+                        }
+                        $add_email = "INSERT INTO contacts(idUser,email,phoneNumber) VALUES ($clientId,'$email','000000000')";
+                        if (mysqli_query($conn, $add_email)) {
+
+                        } else {
+                            echo "Problem z pobraniem dodaniem emailu";
+                        }
+                    } else {
+                        echo "Problem z pobraniem idUsera bazą danych";
                     }
                     mysqli_free_result($result);
                 } else {
                     echo "Problem z pobraniem idUsera bazą danych";
                 }
-                $add_email = "INSERT INTO contacts(idUser,email,phoneNumber) VALUES ($clientId,'$email','000000000')";
-                if (mysqli_query($conn, $add_email)) {
 
-                } else {
-                    echo "Problem z pobraniem dodaniem emailu";
-                }
             }
         }
     }
