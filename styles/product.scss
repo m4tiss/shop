@@ -16,13 +16,16 @@
   align-items: center;
   margin: auto 0;
 }
-.addToBasket{
+.rightPanel{
   width: 50%;
   @include centerFlexContent;
-  justify-content: left;
-}
+  flex-direction: column;
+  align-items:start;
+  justify-content: center;
+ }
 .photoContainer{
   width: 600px;
+  height: 400px;
   @include centerFlexContent;
   justify-content: center;
   border: #252525 solid 4px;
@@ -30,4 +33,21 @@
 }
 .productDescription{
   padding: 40px;
+}
+.addToBasket{
+  width: 200px;
+  height: 50px;
+  border-radius: 30px;
+  cursor: pointer;
+  background: black;
+  color: white;
+  box-shadow: 2px 2px 8px gray;
+}
+.rightPanelInfo{
+}
+
+@media screen and (max-width: 1700px) {
+  .addToBasket{
+    width: 100px;
+  }
 }

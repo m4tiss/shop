@@ -46,14 +46,22 @@
 }
 
 .producersFiltration {
-  height: 300px;
+  height: 200px;
 }
 
 .producerContainer {
   width: 100%;
 }
 
+.categoryContainer {
+  width: 100%;
+}
+
 .producerNameLabel {
+  font-size: 20px;
+}
+
+.categoryNameLabel {
   font-size: 20px;
 }
 
@@ -79,6 +87,12 @@
 @media screen and (max-width: 1700px) {
   .contentDiv {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .button {
+    width: 100px;
+  }
+  .selectSorting {
+    width: 150px;
   }
 }
 @media screen and (max-width: 1200px) {

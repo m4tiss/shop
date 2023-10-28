@@ -29,7 +29,6 @@ function showExistEmailErrorMessage() {
         errorWarning.innerHTML = 'Użytkownik z takim emailem już istnieje';
     });
 
-
 }
 function showNameErrorMessage() {
     document.addEventListener("DOMContentLoaded", function() {
