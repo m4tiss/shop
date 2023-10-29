@@ -1,40 +1,60 @@
-@mixin centerFlexContent{
+@mixin centerFlexContent {
   display: flex;
   align-items: center;
 }
 
-.contentContainer{
+.contentContainer {
   width: 100%;
   min-height: 90vh;
   display: flex;
   margin: 20px 0;
 }
-.photoAndDescription{
-  width:50%;
+
+.photoAndDescription {
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: auto 0;
 }
-.rightPanel{
-  width: 50%;
+
+.rightPanel {
+  width: 30%;
   @include centerFlexContent;
   flex-direction: column;
-  align-items:start;
+  align-items: start;
   justify-content: center;
- }
-.photoContainer{
+}
+.rightPanelDetails{
+  width:300px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+.photoContainer {
   width: 600px;
   height: 400px;
   @include centerFlexContent;
   justify-content: center;
-  border: #252525 solid 4px;
-  box-shadow:0 0 20px 5px rgba(0, 0, 0, 0.5);
+  border: deeppink solid 4px;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
 }
-.productDescription{
+
+.nameProductUnderPhoto{
+  margin-top: 40px;
+}
+
+.productDescription {
+  width: 60%;
   padding: 40px;
+  text-align: center;
 }
-.addToBasket{
+
+.addToBasket {
   width: 200px;
   height: 50px;
   border-radius: 30px;
@@ -43,27 +63,46 @@
   color: white;
   box-shadow: 2px 2px 8px gray;
 }
-.rightPanelInfo{
+
+.sizes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  place-items: center;
 }
 
+.sizeButton {
+  width: 100px;
+  height: 50px;
+  background: white;
+  font-size: 18px;
+  margin: 0 5px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.sizeButton:hover {
+  background: black;
+  color: white;
+}
 @media screen and (max-width: 1700px) {
-  .contentContainer{
+  .contentContainer {
     display: block;
   }
-  .photoAndDescription{
-    width:100%;
+  .photoAndDescription {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto 0;
   }
-  .rightPanel{
+  .rightPanel {
     width: 100%;
     @include centerFlexContent;
     flex-direction: column;
     justify-content: center;
   }
-  .addToBasket{
+  .addToBasket {
     width: 100px;
   }
 }

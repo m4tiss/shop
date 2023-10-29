@@ -63,6 +63,7 @@ a {
 
 .productLayout:hover {
   scale: 1.05;
+  border: deeppink solid 1px;
 }
 
 @media screen and (max-width: 1300px) {

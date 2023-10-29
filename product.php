@@ -23,7 +23,7 @@
                      <div class="photoContainer">
                     <img src="images/' . $productImage . '" alt="' . $productName . '" width="400px">
                      </div>
-                     <h2> ' . $productName . '</h2>
+                     <h2 class="nameProductUnderPhoto" > ' . $productName . '</h2>
                     <p class="productDescription">' . $productDescription . '</p>
                      </div>';
                 }
@@ -38,7 +38,7 @@
     }
     ?>
     <div class="rightPanel">
-
+        <div class="rightPanelDetails">
             <?php
             include_once('config.php');
             echo'<h2 class="rightPanelInfo"> ' . $productName . '</h2>
@@ -55,12 +55,11 @@
                 $size = $sizeRows['nameSizee'];
                 echo '<button class="sizeButton" >'.$size.'</button>';
             }
-
-
             echo' </div>
-            <h2 class="rightPanelInfo"> ' . $productPrice . '</h2>'
+            <h2 class="rightPanelInfo"> Cena: ' . $productPrice . ' zł</h2>'
             ?>
         <button class="addToBasket">Dodaj do koszyka</button>
+        </div>
     </div>
 </div>
 <?php include('footer.php'); ?>
