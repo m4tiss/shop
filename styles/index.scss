@@ -11,11 +11,15 @@ a{
   display: flex;
   justify-content:center;
   align-items: center;
+  overflow: hidden;
 }
 .mainPhoto img {
   width:100%;
   cursor: pointer;
 }
+//.slide{
+//  width: 100%;
+//}
 .discountText{
   display: flex;
   justify-content:space-evenly;
