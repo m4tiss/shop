@@ -1,0 +1,30 @@
+.contentContainerFooter {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.paymentMethodsTitle {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.mainContentPaymentMethods {
+  width: 70%;
+  text-align: center;
+}
+
+.paymentMethods {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.paymentMethod {
+  margin: 50px 0;
+}
+
+/*# sourceMappingURL=paymentMethod.css.map */

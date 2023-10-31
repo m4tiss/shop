@@ -77,7 +77,6 @@ function filterProducts() {
                         product.style.display = 'flex';
                 } else {
                         product.style.display = 'none';
-                        productsContainer.insertBefore(product, productsContainer.firstChild);
                 }
         })
         sortProducts();

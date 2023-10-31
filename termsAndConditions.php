@@ -1,6 +1,6 @@
 <?php include_once('settings.php')?>
 <?php include('navbar.php'); ?>
-    <div class="contentContainerTerms">
+    <div class="contentContainerFooter">
        <div class="mainContentFooterElement">
            <h2  class="termsTitle">REGULAMIN KORZYSTANIA STEP IN STYLE</h2>
            <p class="termsContent">1. WSTĘP
