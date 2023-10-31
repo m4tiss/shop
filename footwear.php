@@ -42,8 +42,9 @@
                     echo '<ul class=producersFiltration>';
                     while ($row = mysqli_fetch_assoc($categories_Result)) {
                         $categoryName = $row['nameCategory'];
+                        $categorySplitName = str_replace(array(' ', '\t', '\n', '\r'), '', $categoryName);
                         echo '<li class="categoryContainer">
-                    <input class="checkboxCategory" type="checkbox" id="' . $categoryName . '" name="' . $categoryName . '" value="' . $categoryName . '">
+                    <input class="checkboxCategory" type="checkbox" id="' . $categoryName . '" name="' . $categoryName . '" value="' . $categorySplitName . '">
                     <label class="categoryNameLabel" for="' . $categoryName . '">' . $categoryName . '</label><br>
                   </li>';
                     }
@@ -65,9 +66,9 @@
             <option value="A-Z">A-Z</option>
             <option value="Z-A">Z-A</option>
         </select>
-        <button id="button" class="button" onclick="applyFilters()">Zastosuj</button>
+        <button id="button" class="button" onclick="filterProducts()">Zastosuj</button>
     </div>
-    <div class="contentDiv">
+    <div id="productsContainer" class="contentDiv">
 
         <?php include_once('config.php');
 
@@ -80,8 +81,25 @@
                     $productPrice = $row['price'];
                     $productImage = $row['image'];
                     $productId = $row['idProduct'];
-                    echo '<a href="product.php?id=' . $productId . '">';
-                    echo '<div class="productLayout">';
+                    $productCategory = $row['idCategory'];
+                    $productProducerId = $row['idProducer'];
+
+                    $getCategoryName = "SELECT nameCategory FROM categories WHERE idCategory=$productCategory";
+                    $category_Result = mysqli_query($conn, $getCategoryName);
+                    $row_with_categoryName = mysqli_fetch_assoc($category_Result);
+
+                    $categoryProductName = $row_with_categoryName['nameCategory'];
+                    $categoryProductName = str_replace(array(' ', '\t', '\n', '\r'), '', $categoryProductName);
+
+                    $getProducerName = "SELECT nameProducer FROM producers WHERE idProducer=$productProducerId";
+                    $producer_Result = mysqli_query($conn, $getProducerName);
+                    $row_with_producerName = mysqli_fetch_assoc($producer_Result);
+
+                    $producerProductName = $row_with_producerName['nameProducer'];
+                    $producerProductName = str_replace(array(' ', '\t', '\n', '\r'), '', $producerProductName);
+
+                    echo '<div class="productLayout '.$categoryProductName.' '.$producerProductName.'">';
+                    echo '<a class="linkToPageProduct" href="product.php?id=' . $productId . '">';
                     echo '<div class="photoProductContainer">';
                     echo '<img src="images/' . $productImage . '" alt="' . $productName . '">';
                     echo '</div>';
@@ -89,8 +107,8 @@
                     echo '<h3 class="productName">' . $productName . '</h3>';
                     echo '<h3 class="productPrice">' . $productPrice . 'zł</h3>';
                     echo '</div>';
-                    echo '</div>';
                     echo '</a>';
+                    echo '</div>';
                 }
             } else {
                 echo "Brak dostępnych produktów.";
@@ -102,4 +120,5 @@
         ?>
     </div>
 </div>
+<script src="filtration.js"></script>
 <?php include('footer.php'); ?>

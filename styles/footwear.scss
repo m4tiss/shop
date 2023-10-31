@@ -74,6 +74,13 @@
   font-size: 20px;
   padding: 2px 20px;
 }
+.linkToPageProduct{
+  width: 400px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
 @media screen and (max-width: 1700px) {
   .contentDiv {
     grid-template-columns: repeat(2, 1fr);
