@@ -5,7 +5,6 @@
   padding: 30px 0;
   width: 100%;
 }
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -14,4 +13,11 @@
 }
 .footerElements{
   cursor: pointer;
+}
+.contentContainerFooter{
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  margin: 20px 0;
+  justify-content: center;
 }

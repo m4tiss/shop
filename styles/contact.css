@@ -1,0 +1,49 @@
+.contentContactsContainer {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.contactTitle {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.phoneAndMail {
+  width: 100%;
+  display: flex;
+  margin: 150px 0;
+}
+
+.photoDiv {
+  width: 300px;
+}
+
+.phoneContainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emailContainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contactTitles {
+  margin: 50px;
+  font-size: 35px;
+}
+
+.returnsInfo {
+  font-size: 40px;
+}
+
+/*# sourceMappingURL=contact.css.map */

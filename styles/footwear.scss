@@ -81,6 +81,7 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
+
 @media screen and (max-width: 1700px) {
   .contentDiv {
     grid-template-columns: repeat(2, 1fr);
