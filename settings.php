@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="styles/footer.css">
     <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="styles/registration.css">
-    <link rel="stylesheet" href="styles/clothes.css">
     <link rel="stylesheet" href="styles/product.css">
     <link rel="stylesheet" href="styles/footwear.css">
     <link rel="stylesheet" href="styles/termsAndConditions.css">

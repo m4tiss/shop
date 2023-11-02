@@ -3,7 +3,7 @@
 ?>
 <div>
     <div class="mainPhoto">
-        <a href="footwear.php">
+        <a href="content.php">
             <img src="images/mainPhoto.jpg" alt="mainPhoto">
         </a>
     </div>
