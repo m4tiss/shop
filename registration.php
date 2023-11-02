@@ -2,6 +2,12 @@
 include_once('settings.php');
 include('navbar.php');
 include_once('config.php');
+session_start();
+
+if (!empty($_SESSION['users'])) {
+    header("Location: account.php");
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];

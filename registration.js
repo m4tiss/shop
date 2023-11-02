@@ -28,8 +28,25 @@ function showExistEmailErrorMessage() {
         errorWarning.style.display = "block";
         errorWarning.innerHTML = 'Użytkownik z takim emailem już istnieje';
     });
-
 }
+
+function showNotExistEmailErrorMessage() {
+    document.addEventListener("DOMContentLoaded", function() {
+        var errorWarning = document.getElementById("errorWarring");
+        errorWarning.style.display = "block";
+        errorWarning.innerHTML = 'Użytkownik z takim emailem nie istnieje';
+    });
+}
+
+function showInvalidPasswordMessage() {
+    document.addEventListener("DOMContentLoaded", function() {
+        var errorWarning = document.getElementById("errorWarring");
+        errorWarning.style.display = "block";
+        errorWarning.innerHTML = 'Nieprawidłowe hasło';
+    });
+}
+
+
 function showNameErrorMessage() {
     document.addEventListener("DOMContentLoaded", function() {
         var errorWarning = document.getElementById("errorWarring");
