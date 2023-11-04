@@ -1,5 +1,25 @@
 <?php include_once('settings.php')?>
-<?php include('navbar.php'); ?>
+<?php include('navbar.php');
+
+session_start();
+if (isset($_SESSION['basket']) && is_array($_SESSION['basket'])) {
+    // Iteruj przez każdy element w tablicy sesji 'basket'
+    foreach ($_SESSION['basket'] as $index => $productInfo) {
+        // Wyświetl informacje o produkcie z sesji
+        $idProduct = $productInfo['idProduct'];
+        $size = $productInfo['size'];
+        $quantity = $productInfo['quantity'];
+
+        echo "Indeks: $index<br>";
+        echo "ID Produktu: $idProduct<br>";
+        echo "Rozmiar: $size<br>";
+        echo "Ilość: $quantity<br>";
+    }
+} else {
+    echo "Koszyk jest pusty.";
+}
+
+?>
 <div class="mainBasketContainer">
 
     <div class="elementsBasketContainer">

@@ -21,7 +21,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
     <script src="registrationAndLogin.js"></script>
     <script src="filtration.js"></script>
     <script src="index.js"></script>

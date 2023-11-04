@@ -3,6 +3,7 @@
 <div class="contentContainer">
     <?php
     include_once('config.php');
+    session_start();
 
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $productId = $_GET['id'];
@@ -40,7 +41,6 @@
     <div class="rightPanel">
         <div class="rightPanelDetails">
             <?php
-            include_once('config.php');
             echo'<h2 class="rightPanelInfo"> ' . $productName . '</h2>
                  <div class="sizes">';
 
@@ -51,16 +51,24 @@
             $departament = $rows['storeDepartament'];
             $getSizes = "SELECT nameSizee FROM sizees WHERE storeDepartament='$departament'";
             $sizeesResult = mysqli_query($conn, $getSizes);
+//            while ($sizeRows = mysqli_fetch_assoc($sizeesResult)) {
+//                $size = $sizeRows['nameSizee'];
+//                echo '<button class="sizeButton" >'.$size.'</button>';
+//            }
             while ($sizeRows = mysqli_fetch_assoc($sizeesResult)) {
                 $size = $sizeRows['nameSizee'];
-                echo '<button class="sizeButton" >'.$size.'</button>';
+                echo '<label>
+                    <input id="idPrzyciskuRadio" type="radio" name="selectedSize" value="' . $size . '"> ' . $size . '
+                </label>';
             }
             echo' </div>
-            <h2 class="rightPanelInfo"> Cena: ' . $productPrice . ' zł</h2>'
+            <h2 class="rightPanelInfo"> Cena: ' . $productPrice . ' zł</h2>';
+
+            echo '<button class="addToBasket"  onclick="addToBasketSession(' . $productId . ')">Dodaj do koszyka</button>'
             ?>
-        <button class="addToBasket">Dodaj do koszyka</button>
         </div>
     </div>
 </div>
+<script src="basket.js"></script>
 <?php include('footer.php'); ?>
 
