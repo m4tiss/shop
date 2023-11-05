@@ -1,4 +1,4 @@
-async function addToBasketSession(productId,size) {
+async function addToBasketSession(productId) {
 
     console.log(productId);
     const selectedSizeInput = document.querySelector('input[name="selectedSize"]:checked');
@@ -11,6 +11,7 @@ async function addToBasketSession(productId,size) {
             },
             body: "idProduct=" + productId + "&size=" + selectedSizeValue,
         });
+
         if (!response.ok) {
             console.log("Error podczas wysłania")
         }
