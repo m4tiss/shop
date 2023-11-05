@@ -22,3 +22,17 @@ function getProductById($conn, $productId) {
     }
     return $productData;
 }
+
+function updateProductInDB($conn, $amount,$user_id,$idProduct,$size) {
+    $updateProductInDB = "UPDATE baskets SET amount=$amount WHERE idUser=$user_id and  idProduct=$idProduct and sizee=$size";
+    mysqli_query($conn, $updateProductInDB);
+}
+
+function addProductToDB($conn, $amount,$user_id,$idProduct,$size) {
+    $insertProductToDB = "INSERT INTO baskets (idUser, idProduct,amount,sizee) VALUES ('$user_id', '$idProduct','$amount','$size')";
+    mysqli_query($conn, $insertProductToDB);
+}
+function deleteProductFromDB($conn,$user_id,$idProduct,$size){
+    $deleteProductFromDB = "DELETE FROM baskets WHERE idUser=$user_id and  idProduct=$idProduct and sizee='$size' ";
+    mysqli_query($conn, $deleteProductFromDB);
+}

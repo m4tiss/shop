@@ -29,6 +29,7 @@
         <div class="rightPanelDetails">
             <?php
             echo '<h2 class="rightPanelInfo"> ' . $product['name'] . '</h2>
+                    <h2 class="rightPanelInfo"> Rozmiary:</h2>
                  <div class="sizes">';
 
 
