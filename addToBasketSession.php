@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idProduct']) && isset
     }
 
     $index = $idProduct . $size;
-    echo $index;
 
     if (array_key_exists($index, $_SESSION['basket']) && $_SESSION['basket'][$index]['size'] === $size) {
         $_SESSION['basket'][$index]['quantity'] += 1;

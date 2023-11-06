@@ -1,6 +1,7 @@
 <?php include_once('settings.php');
 include('navbar.php');
 include_once('config.php');
+include_once('functions.php');
 session_start();
 
 if (!empty($_SESSION['users'])) {
@@ -41,6 +42,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             if (password_verify($password, $passwordFromDB)) {
                                 $_SESSION['users'] = $row['idUser'];
+
+                                if(!empty($_SESSION['basket'])){
+                                    // Jeśli koszyk bez logowania jest ma zawartość to z bazy usuwam poprzedni koszyk i pobieram nowy z sesji
+                                    deleteAllFromDB($conn,$_SESSION['users']);
+                                    foreach ($_SESSION['basket'] as $product) {
+                                        addProductToDB($conn,$product['quantity'],$_SESSION['users'],$product['idProduct'],$product['size']);
+                                    }
+                                }else{
+                                    // Jeśli koszyk bez logowania jest pusty to z bazy się pobiera ostatni koszyk klienta
+                                    $products = getProductsFromBasket($conn,$_SESSION['users']);
+                                    foreach ($products as $product){
+                                        $index = $product['idProduct'] . $product['sizee'];
+                                        $_SESSION['basket'][$index] = array(
+                                            'idProduct' => $product['idProduct'],
+                                            'size' => $product['sizee'],
+                                            'quantity' => $product['amount']
+                                        );
+                                    }
+
+                                }
                                 header("Location: account.php");
                                     echo 'Działa Logowanko';
                             } else {
