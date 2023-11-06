@@ -67,3 +67,23 @@ function deleteAllFromDB($conn,$user_id){
     $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=$user_id";
     mysqli_query($conn, $deleteAllFromDB);
 }
+function getUserById($conn,$user_id){
+    $getUser = "SELECT * FROM users WHERE idUser=$user_id";
+    $user = array();
+
+    if ($userResult = mysqli_query($conn, $getUser)) {
+        if (mysqli_num_rows($userResult) > 0) {
+            while ($row = mysqli_fetch_assoc($userResult)) {
+                $user['id'] = $row['idUser'];
+                $user['name'] = $row['name'];
+                $user['surname'] = $row['surname'];
+                $user['password'] = $row['password'];
+            }
+        }
+        else{
+            echo "Taki użytkownik nie istnirje";
+            exit();
+        }
+    }
+    return $user;
+}
