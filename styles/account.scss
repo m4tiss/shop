@@ -25,59 +25,85 @@
   height: 100%;
   display: flex;
 }
-.contactsAndAddressesContainer{
+
+.contactsAndAddressesContainer {
   width: 50%;
   @include columnAlignCenter;
-  gap:40px;
+  gap: 40px;
 }
-.addressesContainer{
+
+.addressesContainer {
   width: 50%;
   display: flex;
   justify-content: center;
 }
-.contactDiv{
-  height:200px;
-  width: 300px;
-  @include basicFrame;
-}
-.addressDiv{
-  height:300px;
+
+.contactDiv {
+  height: 200px;
   width: 400px;
   @include basicFrame;
 }
-.contactAndAddressesContent{
+
+.addressDiv {
+  height: 300px;
+  width: 400px;
+  @include basicFrame;
+}
+
+.contactAndAddressesContent {
   @include columnJustifyCenter;
   width: 70%;
-  margin:40px 0;
+  margin: 40px 0;
   padding-left: 40px;
   gap: 5px;
 }
-.editIconContactAndAddresses{
+
+.editIconContactAndAddresses {
   width: 30%;
   @include flexCenterCenter;
 }
-.contactAndInfo{
+
+.removeIconContactAndAddresses {
+  width: 30%;
+  @include flexCenterCenter;
+}
+
+.contactAndInfo {
   font-size: 25px;
 }
-.contactEmail{
+
+.contactEmail {
   font-size: 20px;
 }
-.contactNumber{
+
+.contactNumber {
   font-size: 20px;
 }
-.addIconContact{
+
+.addIconContact {
   width: 100%;
   height: 80px;
   @include flexJustifyCenter;
 }
-.addIconAddresses{
+
+.addIconAddresses {
   width: 100%;
   height: 80px;
   @include flexJustifyCenter;
 }
-.name{
+
+.name {
   font-size: 25px;
 }
-.surname{
+.warningInAccount{
+  color: red;
+  margin: 40px 0;
+}
+
+.surname {
   font-size: 25px;
+}
+
+.addIcon {
+  cursor: pointer;
 }

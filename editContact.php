@@ -8,8 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phoneNumber = $_POST['phoneNumber'];
     $userId=$_SESSION['users'];
     $contactId =  $_POST['idContact'];
-    editContactInDB($conn,$contactId,$userId,$email,$phoneNumber);
-    header("Location:account.php");
+    if(isEmailExists($conn,$email)===false or isEmailExists($conn,$email)==$contactId){
+        editContactInDB($conn,$contactId,$userId,$email,$phoneNumber);
+        header("Location:account.php");
+    }
+    else{
+        header("Location:account.php?error=1");
+    }
 }
 
 $email = $_GET['email'] ?? '';

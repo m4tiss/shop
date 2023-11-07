@@ -27,7 +27,6 @@ session_start();
                             <a href="deleteFromBasketSession.php?index='.$product['id'].''.$size.'">
                             <img class="XIcon" src="images/xIcon.png" width="50px"/>
                             </a>
-                            
                            </div>';
                 $totalSum += $product['price'] * $quantity;
             }

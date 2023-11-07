@@ -23,6 +23,10 @@ $user_id = $_SESSION['users'];
         echo '<p class="name">' . $user['name'] . '</p>
                 <h2>Nazwisko:</h2>
              <p class="surname">' . $user['surname'] . '</p>';
+
+        if (isset($_GET['error'])) {
+            echo'<h2 id="warningAccount" class="warningInAccount">Nie możesz dodać tego maila on już istnieje!</h2>';
+        }
         ?>
         <div class="contactsAndAddresses">
             <div class="contactsAndAddressesContainer">
@@ -36,18 +40,24 @@ $user_id = $_SESSION['users'];
                         <h3 class="contactInfo">Email</h3>
                         <p class="contactEmail">' . $contact['email'] . '</p>
                         <h3 class="contactInfo">Numer telefonu</h3>';
-                    echo ($contact['phoneNumber'] === '000000000') ? '<p style="color: red" class="contactNumber">UZUPEŁNIJ NUMER!</p>' : '<p class="contactNumber">' . $contact['phoneNumber'] . '</p>';
+                    echo ($contact['phoneNumber'] === '000000000') ? '<p style="color: red" class="contactNumber">UZUPEŁNIJ NUMER!</p>' :
+                        '<p class="contactNumber">' . $contact['phoneNumber'] . '</p>';
                     echo '
                     </div>
                     <div class="editIconContactAndAddresses">
-                        <a href="editContact.php?email='. $contact['email'] .'&number='.$numberOfContact.'"><img src="images/editIcon.jpg" width="50px"></a>
-                    </div>
-                </div>';
+                        <a href="editContact.php?email=' . $contact['email'] . '&number=' . $numberOfContact . '"><img src="images/editIcon.jpg" width="50px"></a>
+                    </div>';
+                    if ($numberOfContact != 1) {
+                        echo '<div class="removeIconContactAndAddresses">
+                                 <a href="account.php"><img class="XIcon" src="images/xIcon.png" width="50px"/></a>
+                              </div>';
+                    }
+                    echo '</div>';
                     $numberOfContact++;
                 }
                 ?>
                 <div class="addIconContact">
-                    <img src="images/addIcon.png" width="80px">
+                    <a class="addIcon" href="addContact.php"><img src="images/addIcon.png" width="80px"></a>
                 </div>
 
             </div>
@@ -62,11 +72,11 @@ $user_id = $_SESSION['users'];
                     echo ($address['city'] === '') ? '<p style="color: red" class="addressCity">UZUPEŁNIJ MIASTO!</p>' : '<p class="addressCity">' . $address['city'] . '</p>';
                     echo ' <h3>Kod pocztowy</h3>';
                     echo ($address['zipCode'] === '') ? '<p style="color: red" class="addressZipCode">UZUPEŁNIJ KOD POCZTOWY!</p>' : '<p class="addressZipCode">' . $address['zipCode'] . '</p>';
-                    echo' <h3>Ulica</h3>';
+                    echo ' <h3>Ulica</h3>';
                     echo ($address['street'] === '') ? '<p style="color: red" class="addressStreet">UZUPEŁNIJ ULICE!</p>' : '<p class="addressStreet">' . $address['street'] . '</p>';
-                    echo' <h3>Numer mieszkania</h3>';
+                    echo ' <h3>Numer mieszkania</h3>';
                     echo ($address['streetNumber'] === '') ? '<p style="color: red" class="addressStreetNumber">UZUPEŁNIJ NUMER MIESZKANIA!</p>' : '<p class="addressStreetNumber">' . $address['streetNumber'] . '</p>';
-                    echo'
+                    echo '
                     </div>
                     <div class="editIconContactAndAddresses">
                         <img src="images/editIcon.jpg" width="50px">
@@ -81,5 +91,5 @@ $user_id = $_SESSION['users'];
 
         </div>
     </div>
-
+<script src="account.js"></script>
 <?php include('footer.php'); ?>

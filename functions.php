@@ -1,6 +1,7 @@
 <?php
-include_once ('config.php');
-function getProductById($conn, $productId) {
+include_once('config.php');
+function getProductById($conn, $productId)
+{
     $getProduct = "SELECT * FROM products WHERE idProduct=$productId";
     $productData = array();
 
@@ -14,8 +15,7 @@ function getProductById($conn, $productId) {
                 $productData['id'] = $row['idProduct'];
                 $productData['category'] = $row['idCategory'];
             }
-        }
-        else{
+        } else {
             echo "Produkt już nie istnieje";
             exit();
         }
@@ -24,7 +24,8 @@ function getProductById($conn, $productId) {
 }
 
 
-function getProductsFromBasket($conn, $userId) {
+function getProductsFromBasket($conn, $userId)
+{
     $getProducts = "SELECT * FROM baskets WHERE idUser=$userId";
     $productsData = array();
 
@@ -38,10 +39,9 @@ function getProductsFromBasket($conn, $userId) {
                 $productData['amount'] = $row['amount'];
                 $productData['sizee'] = $row['sizee'];
                 $productsData[$i] = $productData;
-                $i+=1;
+                $i += 1;
             }
-        }
-        else{
+        } else {
             echo "Produkt już nie istnieje";
             exit();
         }
@@ -49,30 +49,59 @@ function getProductsFromBasket($conn, $userId) {
     return $productsData;
 }
 
-function updateProductInDB($conn, $amount,$user_id,$idProduct,$size) {
+function updateProductInDB($conn, $amount, $user_id, $idProduct, $size)
+{
     $updateProductInDB = "UPDATE baskets SET amount=$amount WHERE idUser=$user_id and  idProduct=$idProduct and sizee=$size";
     mysqli_query($conn, $updateProductInDB);
 }
 
-function addProductToDB($conn, $amount,$user_id,$idProduct,$size) {
+function addProductToDB($conn, $amount, $user_id, $idProduct, $size)
+{
     $insertProductToDB = "INSERT INTO baskets (idUser, idProduct,amount,sizee) VALUES ('$user_id', '$idProduct','$amount','$size')";
     mysqli_query($conn, $insertProductToDB);
 }
-function deleteProductFromDB($conn,$user_id,$idProduct,$size){
+
+function deleteProductFromDB($conn, $user_id, $idProduct, $size)
+{
     $deleteProductFromDB = "DELETE FROM baskets WHERE idUser=$user_id and  idProduct=$idProduct and sizee='$size' ";
     mysqli_query($conn, $deleteProductFromDB);
 }
 
-function deleteAllFromDB($conn,$user_id){
+function deleteAllFromDB($conn, $user_id)
+{
     $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=$user_id";
     mysqli_query($conn, $deleteAllFromDB);
 }
 
-function editContactInDB($conn,$contactId,$userId,$email,$phoneNumber){
-    $editValues = "UPDATE contacts SET email='$email', phoneNumber='$phoneNumber' WHERE idUser=$userId AND idContact=$contactId";
-    mysqli_query($conn, $editValues);
+function editContactInDB($conn, $contactId, $userId, $email, $phoneNumber)
+{
+    $editContact = "UPDATE contacts SET email='$email', phoneNumber='$phoneNumber' WHERE idUser=$userId AND idContact=$contactId";
+    mysqli_query($conn, $editContact);
 }
-function getUserById($conn,$user_id){
+
+function addContactToDB($conn, $userId, $email, $phoneNumber)
+{
+    $addContact = "INSERT INTO contacts(idUser,email,phoneNumber) values($userId,'$email','$phoneNumber');";
+    mysqli_query($conn, $addContact);
+}
+
+function isEmailExists($conn, $email)
+{
+    $getAllEmails = "SELECT * FROM contacts";
+    if ($emailResult = mysqli_query($conn, $getAllEmails)) {
+        if (mysqli_num_rows($emailResult) > 0) {
+            while ($row = mysqli_fetch_assoc($emailResult)) {
+                if ($email === $row['email']) return $row['idContact'];
+            }
+        } else {
+            echo "Nie ma żadnego maila w bazie";
+        }
+    }
+    return false;
+}
+
+function getUserById($conn, $user_id)
+{
     $getUser = "SELECT * FROM users WHERE idUser=$user_id";
     $user = array();
     if ($userResult = mysqli_query($conn, $getUser)) {
@@ -83,18 +112,18 @@ function getUserById($conn,$user_id){
                 $user['surname'] = $row['surname'];
                 $user['password'] = $row['password'];
             }
-        }
-        else{
-            echo "Taki użytkownik nie istnirje";
+        } else {
+            echo "Taki użytkownik nie istnieje";
             exit();
         }
     }
     return $user;
 }
 
-function getContactsById($conn,$user_id){
+function getContactsById($conn, $user_id)
+{
     $getContacts = "SELECT * FROM contacts WHERE idUser=$user_id";
-    $contacts= array();
+    $contacts = array();
     if ($contactsResult = mysqli_query($conn, $getContacts)) {
         if (mysqli_num_rows($contactsResult) > 0) {
             $i = 0;
@@ -103,10 +132,9 @@ function getContactsById($conn,$user_id){
                 $contact['email'] = $row['email'];
                 $contact['phoneNumber'] = $row['phoneNumber'];
                 $contacts[$i] = $contact;
-                $i+=1;
+                $i += 1;
             }
-        }
-        else{
+        } else {
             echo "Nie masz żadnego konatktu! Dodaj nowy";
             exit();
         }
@@ -114,9 +142,10 @@ function getContactsById($conn,$user_id){
     return $contacts;
 }
 
-function getAddressesById($conn,$user_id){
+function getAddressesById($conn, $user_id)
+{
     $getAddresses = "SELECT * FROM addresses WHERE idUser=$user_id";
-    $addresses= array();
+    $addresses = array();
     if ($addressesResult = mysqli_query($conn, $getAddresses)) {
         if (mysqli_num_rows($addressesResult) > 0) {
             $i = 0;
@@ -127,10 +156,9 @@ function getAddressesById($conn,$user_id){
                 $address['street'] = $row['street'];
                 $address['streetNumber'] = $row['streetNumber'];
                 $addresses[$i] = $address;
-                $i+=1;
+                $i += 1;
             }
-        }
-        else{
+        } else {
             echo "Nie masz żadnego adresu! Dodaj nowy";
         }
     }
@@ -138,28 +166,28 @@ function getAddressesById($conn,$user_id){
 }
 
 
-function getPhoneNumberFromMail($conn,$email){
+function getPhoneNumberFromMail($conn, $email)
+{
     $getPhoneNumber = "SELECT phoneNumber FROM contacts WHERE email='$email'";
     if ($phoneNumberResult = mysqli_query($conn, $getPhoneNumber)) {
         if (mysqli_num_rows($phoneNumberResult) > 0) {
             $row = mysqli_fetch_assoc($phoneNumberResult);
-                $phoneNumber = $row['phoneNumber'];
-        }
-        else{
+            $phoneNumber = $row['phoneNumber'];
+        } else {
             echo "Nie znaleziono numeru dla tego emaila!";
         }
     }
     return $phoneNumber;
 }
 
-function getContactIdFromMail($conn,$email){
+function getContactIdFromMail($conn, $email)
+{
     $getId = "SELECT idContact FROM contacts WHERE email='$email'";
     if ($idResult = mysqli_query($conn, $getId)) {
         if (mysqli_num_rows($idResult) > 0) {
             $row = mysqli_fetch_assoc($idResult);
             $contactId = $row['idContact'];
-        }
-        else{
+        } else {
             echo "Nie znaleziono id dla tego emaila!";
         }
     }

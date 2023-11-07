@@ -45,7 +45,7 @@
 
 .contactDiv {
   height: 200px;
-  width: 300px;
+  width: 400px;
   display: flex;
   border: lightslategray 1px solid;
   border-radius: 30px;
@@ -70,6 +70,13 @@
 }
 
 .editIconContactAndAddresses {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.removeIconContactAndAddresses {
   width: 30%;
   display: flex;
   justify-content: center;
@@ -106,8 +113,17 @@
   font-size: 25px;
 }
 
+.warningInAccount {
+  color: red;
+  margin: 40px 0;
+}
+
 .surname {
   font-size: 25px;
+}
+
+.addIcon {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=account.css.map */
