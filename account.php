@@ -39,7 +39,7 @@ $user_id = $_SESSION['users'];
                     echo '
                     </div>
                     <div class="editIconContactAndAddresses">
-                        <img src="images/editIcon.jpg" width="50px">
+                        <a href="editContact.php?email='. $contact['email'] .'"><img src="images/editIcon.jpg" width="50px"></a>
                     </div>
                 </div>';
                 }

@@ -1,3 +1,5 @@
+@import 'helpers.scss';
+
 *{
   margin: 0;
   padding: 0;
@@ -8,9 +10,7 @@ a{
 }
 .mainPhoto{
   width: 100%;
-  display: flex;
-  justify-content:center;
-  align-items: center;
+  @include flexCenterCenter;
   overflow: hidden;
 }
 .mainPhoto img {
@@ -39,8 +39,7 @@ a{
 .productLayout{
   width: 400px;
   height: 500px;
-  display: flex;
-  flex-direction: column;
+  @include flexColumn;
   justify-content: space-evenly;
   border-radius: 40px;
   border: black solid 1px;

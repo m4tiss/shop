@@ -1,0 +1,25 @@
+@import "helpers.scss";
+
+.editFormDiv{
+  width: 100%;
+  @include columnAlignCenter;
+  justify-content: center;
+  margin: 20px 0;
+}
+.editForm{
+  @include columnAlignCenter;
+  height: 500px;
+  width: 800px;
+}
+.editInfo{
+  font-size: 30px;
+}
+.editInput{
+  height: 50px;
+  width: 400px;
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 30px;
+  border: none;
+  background: $grayGradient;
+}

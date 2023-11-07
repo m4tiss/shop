@@ -131,3 +131,18 @@ function getAddressesById($conn,$user_id){
     }
     return $addresses;
 }
+
+
+function getPhoneNumberFromMail($conn,$email){
+    $getPhoneNumber = "SELECT phoneNumber FROM contacts WHERE email='$email'";
+    if ($phoneNumberResult = mysqli_query($conn, $getPhoneNumber)) {
+        if (mysqli_num_rows($phoneNumberResult) > 0) {
+            $row = mysqli_fetch_assoc($phoneNumberResult);
+                $phoneNumber = $row['phoneNumber'];
+        }
+        else{
+            echo "Nie znaleziono numeru dla tego emaila!";
+        }
+    }
+    return $phoneNumber;
+}

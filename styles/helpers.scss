@@ -1,4 +1,42 @@
-@mixin centerFlexContenth{
+@mixin flexJustifyCenter{
   display: flex;
   justify-content: center;
 }
+
+@mixin columnAlignCenter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@mixin columnJustifyCenter{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@mixin flexCenterCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin setInfoOrWarring{
+  margin: 2px auto;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+@mixin basicFrame{
+  display: flex;
+  border: lightslategray 1px solid;
+  border-radius: 30px;
+}
+.hidden{
+  display: none;
+}
+$grayGradient: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+$buttonHoverColor: #151515;

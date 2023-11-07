@@ -1,34 +1,13 @@
-@mixin centerFlexContent {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin ColumnContent {
-  display: flex;
-  flex-direction: column;
-}
-
-@mixin setInfoOrWarring{
-  margin: 2px auto;
-  font-weight: normal;
-  font-size: 20px;
-}
-
-$grayGradient: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
-
-.hidden{
-  display: none;
-}
+@import "helpers.scss";
 
 .loginOrRegistrationContainer{
   width: 100%;
   min-height: 100vh;
-  @include centerFlexContent;
+  @include flexCenterCenter;
 }
 
 .loginDiv {
-  @include ColumnContent;
+  @include flexColumn;
   justify-content: space-evenly;
   width: 500px;
   height: 500px;
@@ -46,7 +25,7 @@ $grayGradient: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
 }
 
 .loginForm {
-  @include ColumnContent;
+  @include flexColumn;
   height: 300px;
   justify-content: space-evenly;
 }
@@ -75,7 +54,7 @@ $grayGradient: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
   box-shadow: 2px 2px 8px gray;
 }
 .loginButton:hover{
-  background: #151515;
+  background: $buttonHoverColor;
 }
 .changeLoginWindow{
   @include setInfoOrWarring;
@@ -84,5 +63,5 @@ $grayGradient: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
   cursor: pointer;
 }
 a{
-  @include centerFlexContent
+  @include flexCenterCenter
 }
