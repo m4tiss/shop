@@ -63,6 +63,10 @@
   box-shadow: 2px 2px 8px gray;
 }
 
+.loginButton:hover {
+  background: #151515;
+}
+
 .changeLoginWindow {
   margin: 2px auto;
   font-weight: normal;

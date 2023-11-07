@@ -70,7 +70,6 @@ function deleteAllFromDB($conn,$user_id){
 function getUserById($conn,$user_id){
     $getUser = "SELECT * FROM users WHERE idUser=$user_id";
     $user = array();
-
     if ($userResult = mysqli_query($conn, $getUser)) {
         if (mysqli_num_rows($userResult) > 0) {
             while ($row = mysqli_fetch_assoc($userResult)) {
@@ -86,4 +85,49 @@ function getUserById($conn,$user_id){
         }
     }
     return $user;
+}
+
+function getContactsById($conn,$user_id){
+    $getContacts = "SELECT * FROM contacts WHERE idUser=$user_id";
+    $contacts= array();
+    if ($contactsResult = mysqli_query($conn, $getContacts)) {
+        if (mysqli_num_rows($contactsResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($contactsResult)) {
+                $contact = array();
+                $contact['email'] = $row['email'];
+                $contact['phoneNumber'] = $row['phoneNumber'];
+                $contacts[$i] = $contact;
+                $i+=1;
+            }
+        }
+        else{
+            echo "Nie masz żadnego konatktu! Dodaj nowy";
+            exit();
+        }
+    }
+    return $contacts;
+}
+
+function getAddressesById($conn,$user_id){
+    $getAddresses = "SELECT * FROM addresses WHERE idUser=$user_id";
+    $addresses= array();
+    if ($addressesResult = mysqli_query($conn, $getAddresses)) {
+        if (mysqli_num_rows($addressesResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($addressesResult)) {
+                $address = array();
+                $address['city'] = $row['city'];
+                $address['zipCode'] = $row['zipCode'];
+                $address['street'] = $row['street'];
+                $address['streetNumber'] = $row['streetNumber'];
+                $addresses[$i] = $address;
+                $i+=1;
+            }
+        }
+        else{
+            echo "Nie masz żadnego adresu! Dodaj nowy";
+        }
+    }
+    return $addresses;
 }

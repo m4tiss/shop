@@ -19,25 +19,31 @@ $user_id = $_SESSION['users'];
         <h2>TWOJE KONTO</h2>
         <h2>Imię:</h2>
         <?php
-        $user = getUserById($conn,$_SESSION['users']);
-        echo'<p class="name">'.$user['name'].'</p>
+        $user = getUserById($conn, $_SESSION['users']);
+        echo '<p class="name">' . $user['name'] . '</p>
                 <h2>Nazwisko:</h2>
-             <p class="surname">'.$user['surname'].'</p>';
+             <p class="surname">' . $user['surname'] . '</p>';
         ?>
         <div class="contactsAndAddresses">
             <div class="contactsAndAddressesContainer">
                 <h2>Kontakty</h2>
-                <div class="contactDiv">
+                <?php
+                $contacts = getContactsById($conn, $_SESSION['users']);
+                foreach ($contacts as $contact) {
+                    echo '<div class="contactDiv">
                     <div class="contactAndAddressesContent">
                         <h3 class="contactInfo">Email</h3>
-                        <p class="contactEmail">testowy@op.pl</p>
-                        <h3 class="contactInfo">Numer telefonu</h3>
-                        <p class="contactNumber">797 094 698</p>
+                        <p class="contactEmail">' . $contact['email'] . '</p>
+                        <h3 class="contactInfo">Numer telefonu</h3>';
+                    echo ($contact['phoneNumber'] === '000000000') ? '<p style="color: red" class="contactNumber">UZUPEŁNIJ NUMER!</p>' : '<p class="contactNumber">' . $contact['phoneNumber'] . '</p>';
+                    echo '
                     </div>
                     <div class="editIconContactAndAddresses">
                         <img src="images/editIcon.jpg" width="50px">
                     </div>
-                </div>
+                </div>';
+                }
+                ?>
                 <div class="addIconContact">
                     <img src="images/addIcon.png" width="80px">
                 </div>
@@ -45,21 +51,27 @@ $user_id = $_SESSION['users'];
             </div>
             <div class="contactsAndAddressesContainer">
                 <h2>Adresy</h2>
-                <div class="addressDiv">
+                <?php
+                $addresses = getAddressesById($conn, $_SESSION['users']);
+                foreach ($addresses as $address) {
+                    echo '<div class="addressDiv">
                     <div class="contactAndAddressesContent">
-                        <h3>Miasto</h3>
-                        <p>Zgierz</p>
-                        <h3>Kod pocztowy</h3>
-                        <p>95-100</p>
-                        <h3>Ulica</h3>
-                        <p>Wincentego Witosa</p>
-                        <h3>Numer mieszkania</h3>
-                        <p>32</p>
+                        <h3>Miasto</h3>';
+                    echo ($address['city'] === '') ? '<p style="color: red" class="addressCity">UZUPEŁNIJ MIASTO!</p>' : '<p class="addressCity">' . $address['city'] . '</p>';
+                    echo ' <h3>Kod pocztowy</h3>';
+                    echo ($address['zipCode'] === '') ? '<p style="color: red" class="addressZipCode">UZUPEŁNIJ KOD POCZTOWY!</p>' : '<p class="addressZipCode">' . $address['zipCode'] . '</p>';
+                    echo' <h3>Ulica</h3>';
+                    echo ($address['street'] === '') ? '<p style="color: red" class="addressStreet">UZUPEŁNIJ ULICE!</p>' : '<p class="addressStreet">' . $address['street'] . '</p>';
+                    echo' <h3>Numer mieszkania</h3>';
+                    echo ($address['streetNumber'] === '') ? '<p style="color: red" class="addressStreetNumber">UZUPEŁNIJ NUMER MIESZKANIA!</p>' : '<p class="addressStreetNumber">' . $address['streetNumber'] . '</p>';
+                    echo'
                     </div>
                     <div class="editIconContactAndAddresses">
                         <img src="images/editIcon.jpg" width="50px">
                     </div>
-                </div>
+                </div>';
+                }
+                ?>
                 <div class="addIconAddresses">
                     <img src="images/addIcon.png" width="80px">
                 </div>

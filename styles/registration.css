@@ -26,6 +26,10 @@
   box-shadow: 2px 2px 8px gray;
 }
 
+.registrationButton:hover {
+  background: #151515;
+}
+
 #errorWarring {
   display: none;
   color: red;

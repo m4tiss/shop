@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h3 class="inputInfo">Nazwisko</h3><input class="input" type="text" name="surname"><br>
                 <h3 class="inputInfo">Email</h3><input class="input" type="email" name="email"><br>
                 <h3 class="inputInfo">Hasło</h3> <input class="input" type="password" name="password"><br>
-                <input class="loginButton" type="submit" value="Zarejestruj">
+                <input class="registrationButton" type="submit" value="Zarejestruj">
                 <a href="login.php">
                     <label id="toLogin" class="changeLoginWindow">Mam już konto</label>
                 </a>

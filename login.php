@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form id="loginForm" class="loginForm" action="login.php" method="post">
                 <h3 class="inputInfo">Email</h3><input class="input" type="email" name="email"><br>
                 <h3 class="inputInfo">Hasło</h3> <input class="input" type="password" name="password"><br>
-                <input class="registrationButton" type="submit" value="Zaloguj">
+                <input class="loginButton" type="submit" value="Zaloguj">
                 <a href="registration.php">
                     <label id="toRegistration" class="changeLoginWindow">Nie mam jeszcze konta</label>
                 </a>

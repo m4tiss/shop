@@ -74,6 +74,9 @@ $grayGradient: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
   color: white;
   box-shadow: 2px 2px 8px gray;
 }
+.loginButton:hover{
+  background: #151515;
+}
 .changeLoginWindow{
   @include setInfoOrWarring;
   margin-top: 20px;
