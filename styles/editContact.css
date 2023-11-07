@@ -33,4 +33,17 @@
   background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
 }
 
+.disabledInput {
+  height: 50px;
+  width: 400px;
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+  text-align: center;
+  background: white;
+  color: black;
+}
+
 /*# sourceMappingURL=editContact.css.map */

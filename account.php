@@ -29,6 +29,7 @@ $user_id = $_SESSION['users'];
                 <h2>Kontakty</h2>
                 <?php
                 $contacts = getContactsById($conn, $_SESSION['users']);
+                $numberOfContact = 1;
                 foreach ($contacts as $contact) {
                     echo '<div class="contactDiv">
                     <div class="contactAndAddressesContent">
@@ -39,9 +40,10 @@ $user_id = $_SESSION['users'];
                     echo '
                     </div>
                     <div class="editIconContactAndAddresses">
-                        <a href="editContact.php?email='. $contact['email'] .'"><img src="images/editIcon.jpg" width="50px"></a>
+                        <a href="editContact.php?email='. $contact['email'] .'&number='.$numberOfContact.'"><img src="images/editIcon.jpg" width="50px"></a>
                     </div>
                 </div>';
+                    $numberOfContact++;
                 }
                 ?>
                 <div class="addIconContact">

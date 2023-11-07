@@ -35,6 +35,15 @@
   border: lightslategray 1px solid;
   border-radius: 30px;
 }
+@mixin basicInput{
+  height: 50px;
+  width: 400px;
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 30px;
+  border: none;
+  background: $grayGradient;
+}
 .hidden{
   display: none;
 }

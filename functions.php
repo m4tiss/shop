@@ -67,6 +67,11 @@ function deleteAllFromDB($conn,$user_id){
     $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=$user_id";
     mysqli_query($conn, $deleteAllFromDB);
 }
+
+function editContactInDB($conn,$contactId,$userId,$email,$phoneNumber){
+    $editValues = "UPDATE contacts SET email='$email', phoneNumber='$phoneNumber' WHERE idUser=$userId AND idContact=$contactId";
+    mysqli_query($conn, $editValues);
+}
 function getUserById($conn,$user_id){
     $getUser = "SELECT * FROM users WHERE idUser=$user_id";
     $user = array();
@@ -145,4 +150,18 @@ function getPhoneNumberFromMail($conn,$email){
         }
     }
     return $phoneNumber;
+}
+
+function getContactIdFromMail($conn,$email){
+    $getId = "SELECT idContact FROM contacts WHERE email='$email'";
+    if ($idResult = mysqli_query($conn, $getId)) {
+        if (mysqli_num_rows($idResult) > 0) {
+            $row = mysqli_fetch_assoc($idResult);
+            $contactId = $row['idContact'];
+        }
+        else{
+            echo "Nie znaleziono id dla tego emaila!";
+        }
+    }
+    return $contactId;
 }
