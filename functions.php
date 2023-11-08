@@ -85,6 +85,17 @@ function addContactToDB($conn, $userId, $email, $phoneNumber)
     mysqli_query($conn, $addContact);
 }
 
+function deleteContactFromDB($conn, $contactId)
+{
+    $deleteContact = "DELETE FROM contacts WHERE idContact=$contactId";
+    mysqli_query($conn, $deleteContact);
+}
+
+function deleteAddressFromDB($conn, $addressId)
+{
+    $deleteAddress = "DELETE FROM addresses WHERE idAddress=$addressId";
+    mysqli_query($conn, $deleteAddress);
+}
 function isEmailExists($conn, $email)
 {
     $getAllEmails = "SELECT * FROM contacts";
@@ -151,6 +162,7 @@ function getAddressesById($conn, $user_id)
             $i = 0;
             while ($row = mysqli_fetch_assoc($addressesResult)) {
                 $address = array();
+                $address['idAddress'] = $row['idAddress'];
                 $address['city'] = $row['city'];
                 $address['zipCode'] = $row['zipCode'];
                 $address['street'] = $row['street'];

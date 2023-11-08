@@ -24,6 +24,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 40px;
   place-items: center;
+  align-items: baseline;
 }
 
 .button {
@@ -109,7 +110,9 @@
 }
 @media screen and (max-width: 1200px) {
   .contentDiv {
-    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 

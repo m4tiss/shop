@@ -48,8 +48,9 @@ $user_id = $_SESSION['users'];
                         <a href="editContact.php?email=' . $contact['email'] . '&number=' . $numberOfContact . '"><img src="images/editIcon.jpg" width="50px"></a>
                     </div>';
                     if ($numberOfContact != 1) {
+                        $contactId = getContactIdFromMail($conn,$contact['email']);
                         echo '<div class="removeIconContactAndAddresses">
-                                 <a href="account.php"><img class="XIcon" src="images/xIcon.png" width="50px"/></a>
+                                 <a href="deleteContact.php?idContact=' .$contactId. '"><img class="XIcon" src="images/xIcon.png" width="50px"/></a>
                               </div>';
                     }
                     echo '</div>';
@@ -79,7 +80,10 @@ $user_id = $_SESSION['users'];
                     echo '
                     </div>
                     <div class="editIconContactAndAddresses">
-                        <img src="images/editIcon.jpg" width="50px">
+                        <a href=""><img src="images/editIcon.jpg" width="50px"></a>
+                    </div>
+                    <div class="removeIconContactAndAddresses">
+                         <a href="deleteAddress.php?id=' .$address['idAddress'].'"><img class="XIcon" src="images/xIcon.png" width="50px"/></a>
                     </div>
                 </div>';
                 }
