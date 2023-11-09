@@ -5,22 +5,22 @@
             <h2 class="paymentMethodsTitle">Metody płatności w STEP IN STYLE</h2>
             <div class="paymentMethods">
                 <div class="paymentMethod">
-                    <img src="images/blik.png" width="200px">
+                    <img src="icons/blik.png" width="200px">
                 </div>
                 <div class="paymentMethod">
-                    <img src="images/paypro.png" width="200px">
+                    <img src="icons/paypro.png" width="200px">
                 </div>
                 <div class="paymentMethod">
-                    <img src="images/paypal.jpg" width="200px">
+                    <img src="icons/paypal.jpg" width="200px">
                 </div>
                 <div class="paymentMethod">
-                    <img src="images/przelewy24.png" width="200px">
+                    <img src="icons/przelewy24.png" width="200px">
                 </div>
                 <div class="paymentMethod">
-                    <img src="images/ipko.png" width="200px">
+                    <img src="icons/ipko.png" width="200px">
                 </div>
                 <div class="paymentMethod">
-                    <img src="images/payu.png" width="200px">
+                    <img src="icons/payu.png" width="200px">
                 </div>
             </div>
 

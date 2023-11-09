@@ -1,13 +1,7 @@
+@import "helpers.scss";
 @mixin centerFlexContent {
   display: flex;
   align-items: center;
-}
-
-@mixin pageTemplate{
-  width: 100%;
-  min-height: 90vh;
-  display: flex;
-  margin: 20px 0;
 }
 
 .contentContainer {

@@ -9,16 +9,17 @@
 }
 
 
-.logoutPanel {
+.buttonsPanel {
   width: 100%;
   @include flexJustifyCenter;
-  margin: 30px 0;
+  margin: 40px 0;
 }
 
-.logoutLink {
+.buttonLink {
   width: min-content;
   height: min-content;
 }
+
 
 .contactsAndAddresses {
   width: 100%;
@@ -106,4 +107,13 @@
 
 .addIcon {
   cursor: pointer;
+}
+.buttonAccount{
+  width: 200px;
+  height: 50px;
+  @include basicButton;
+  margin: 0 30px;
+}
+.buttonAccount:hover{
+    @include basicButtonHover;
 }

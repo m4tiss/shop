@@ -11,9 +11,12 @@ $user_id = $_SESSION['users'];
 ?>
 
     <div class="contentAccountContainer">
-        <div class="logoutPanel">
-            <a class="logoutLink" href="logout.php">
-                <button class="button">Logout</button>
+        <div class="buttonsPanel">
+            <a class="buttonLink" href="logout.php">
+                <button class="buttonAccount">Logout</button>
+            </a>
+            <a class="buttonLink" href="login.php">
+                <button class="buttonAccount">Historia Zamówień</button>
             </a>
         </div>
         <h2>TWOJE KONTO</h2>
@@ -95,5 +98,4 @@ $user_id = $_SESSION['users'];
 
         </div>
     </div>
-<script src="account.js"></script>
 <?php include('footer.php'); ?>

@@ -36,7 +36,7 @@ session_start();
                 <h3>Produkty: ' . $totalSum . ' zł</h3>
                 <h3>Dostawa: ' . $delivery . ' zł</h3>
                 <h3>Suma: ' . ($totalSum + $delivery) . '</h3>
-                <button class="button">Przejdź do płatności</button>
+                <a href="choosePayment.php"><button class="button">Przejdź do płatności</button></a>
              </div>';
             }else{
                 echo '<h2>Koszyk jest pusty</h2>';

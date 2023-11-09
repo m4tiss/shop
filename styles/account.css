@@ -11,14 +11,14 @@
   margin: 20px 0;
 }
 
-.logoutPanel {
+.buttonsPanel {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 30px 0;
+  margin: 40px 0;
 }
 
-.logoutLink {
+.buttonLink {
   width: min-content;
   height: min-content;
 }
@@ -124,6 +124,21 @@
 
 .addIcon {
   cursor: pointer;
+}
+
+.buttonAccount {
+  width: 200px;
+  height: 50px;
+  border-radius: 30px;
+  cursor: pointer;
+  background: black;
+  color: white;
+  box-shadow: 2px 2px 8px gray;
+  margin: 0 30px;
+}
+
+.buttonAccount:hover {
+  background: #151515;
 }
 
 /*# sourceMappingURL=account.css.map */

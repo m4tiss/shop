@@ -44,6 +44,22 @@
   border: none;
   background: $grayGradient;
 }
+@mixin basicButton{
+  border-radius: 30px;
+  cursor: pointer;
+  background: black;
+  color: white;
+  box-shadow: 2px 2px 8px gray;
+}
+@mixin basicButtonHover{
+  background: $buttonHoverColor;
+}
+@mixin pageTemplate{
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  margin: 20px 0;
+}
 .hidden{
   display: none;
 }

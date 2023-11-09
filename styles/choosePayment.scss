@@ -1,0 +1,15 @@
+@import "helpers.scss";
+
+
+.paymentsContainer{
+  @include pageTemplate;
+  @include columnAlignCenter
+}
+.payments{
+  width: 400px;
+  @include columnAlignCenter;
+  justify-content: space-evenly;
+}
+.payment{
+  @include flexCenterCenter;
+}

@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 .contentContainer {
   width: 100%;
   min-height: 90vh;
