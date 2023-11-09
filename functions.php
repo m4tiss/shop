@@ -96,6 +96,16 @@ function deleteAddressFromDB($conn, $addressId)
     $deleteAddress = "DELETE FROM addresses WHERE idAddress=$addressId";
     mysqli_query($conn, $deleteAddress);
 }
+
+function addAddressToDB($conn, $userId,$city,$zipCode,$street,$streetNumber)
+{
+    $addAddress = "INSERT INTO addresses(idUser,city,zipCode,street,streetNumber) values($userId,'$city','$zipCode','$street','$streetNumber');";
+    mysqli_query($conn, $addAddress);
+}
+function editAddressInDB($conn,$idAddress,$city,$zipCode,$street,$streetNumber){
+    $editAddress = "UPDATE addresses SET city='$city', zipCode='$zipCode',street='$street',streetNumber='$streetNumber' WHERE idAddress=$idAddress";
+    mysqli_query($conn, $editAddress);
+}
 function isEmailExists($conn, $email)
 {
     $getAllEmails = "SELECT * FROM contacts";
@@ -151,6 +161,24 @@ function getContactsById($conn, $user_id)
         }
     }
     return $contacts;
+}
+function getAddressById($conn,$idAddress){
+    $getAddress = "SELECT * FROM addresses WHERE idAddress=$idAddress";
+    if ($addressResult = mysqli_query($conn, $getAddress)) {
+        if (mysqli_num_rows($addressResult) > 0) {
+            $row = mysqli_fetch_assoc($addressResult);
+                $address = array();
+                $address['idAddress'] = $row['idAddress'];
+                $address['city'] = $row['city'];
+                $address['zipCode'] = $row['zipCode'];
+                $address['street'] = $row['street'];
+                $address['streetNumber'] = $row['streetNumber'];
+        } else {
+            echo "Nie ma takiego adresu w bazie!";
+        }
+    }
+    return $address;
+
 }
 
 function getAddressesById($conn, $user_id)

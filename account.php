@@ -80,7 +80,7 @@ $user_id = $_SESSION['users'];
                     echo '
                     </div>
                     <div class="editIconContactAndAddresses">
-                        <a href=""><img src="images/editIcon.jpg" width="50px"></a>
+                        <a href="editAddresses.php?id=' .$address['idAddress'].'"><img src="images/editIcon.jpg" width="50px"></a>
                     </div>
                     <div class="removeIconContactAndAddresses">
                          <a href="deleteAddress.php?id=' .$address['idAddress'].'"><img class="XIcon" src="images/xIcon.png" width="50px"/></a>
@@ -89,7 +89,7 @@ $user_id = $_SESSION['users'];
                 }
                 ?>
                 <div class="addIconAddresses">
-                    <img src="images/addIcon.png" width="80px">
+                    <a class="addIcon" href="addAddress.php"><img src="images/addIcon.png" width="80px"></a>
                 </div>
             </div>
 
