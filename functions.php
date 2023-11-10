@@ -205,6 +205,26 @@ function getAddressesById($conn, $user_id)
     return $addresses;
 }
 
+function getAllPaymentMethods($conn){
+    $getPaymentMethods = "SELECT * FROM payments";
+    $paymentMethods = array();
+    if ($paymentMethodsResult = mysqli_query($conn, $getPaymentMethods)) {
+        if (mysqli_num_rows($paymentMethodsResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($paymentMethodsResult)) {
+                $paymentMethod = array();
+                $paymentMethod['idPayment'] = $row['idPayment'];
+                $paymentMethod['namePayment'] = $row['namePayment'];
+                $paymentMethod['icon'] = $row['icon'];
+                $paymentMethods[$i] = $paymentMethod;
+                $i += 1;
+            }
+        } else {
+            echo "Nie ma żadnych dostępnych metod płatności!";
+        }
+    }
+    return $paymentMethods;
+}
 
 function getPhoneNumberFromMail($conn, $email)
 {

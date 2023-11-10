@@ -1,18 +1,26 @@
-<?php include_once('settings.php')?>
+<?php include_once('settings.php') ?>
 <?php include('navbar.php');
 include('functions.php');
 session_start();
 ?>
 
 <div class="paymentsContainer">
-    <div class="payments">
-        <div class="payment">
-                <input type="radio" name="selectedPayment" value="">
-                <img src="icons/payu.png" width="200px">
+    <form method="post" action="completeOrder.php">
+        <div class="payments">
+            <?php
+            $paymentMethods = getAllPaymentMethods($conn);
+            foreach ($paymentMethods as $paymentMethod) {
+                echo ' <div class="payment">
+                    <input type="radio" name="selectedPayment" value="' . $paymentMethod['idPayment'] . '">
+                    <img src="icons/' . $paymentMethod['icon'] . '" width="200px">
+                </div>
+        ';
+            }
+            ?>
+            <button type="submit" class="button">Złóź zamówienie</button>
         </div>
-    </div>
-    <button class="button">Złóź zamówienie</button>
-</div>
 
+    </form>
+</div>
 
 <?php include('footer.php'); ?>
