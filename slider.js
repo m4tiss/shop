@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (currentIndex < slides.length - 1) {
             currentIndex++;
         } else {
-            currentIndex = 0;  // Jeśli osiągnięto ostatni slajd, przejdź z powrotem na pierwszy
+            currentIndex = 0;
         }
         updateSlider();
     }
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (currentIndex > 0) {
             currentIndex--;
         } else {
-            currentIndex = slides.length - 1;  // Jeśli jesteśmy na pierwszym slajdzie, przejdź do ostatniego
+            currentIndex = slides.length - 1;
         }
         updateSlider();
     }

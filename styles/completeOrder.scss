@@ -1,0 +1,20 @@
+@import 'helpers.scss';
+
+
+.orderContainer{
+  @include pageTemplate;
+  @include columnAlignCenter;
+}
+
+.confirmedIcon{
+margin: 20px 0;
+}
+
+.communicate{
+  @include flexCenterCenter;
+  text-align: center;
+  color: black;
+  width: 700px;
+  height: 100px;
+  font-size: 30px;
+}

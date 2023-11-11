@@ -110,6 +110,22 @@ function addAddressToDB($conn, $userId, $city, $zipCode, $street, $streetNumber)
     $addAddress = "INSERT INTO addresses(idUser,city,zipCode,street,streetNumber) values($userId,'$city','$zipCode','$street','$streetNumber');";
     mysqli_query($conn, $addAddress);
 }
+function addOrderToDB($conn,$idPayment,$idStatus,$name,$surname,$email,$cost){
+    $date= date("Y-m-d H:i:s");
+    $addOrder = "INSERT INTO orders(idPayment,idStatus,name,surname,email,dateOrder,cost) values($idPayment,$idStatus,'$name','$surname','$email','$date','$cost')";
+    mysqli_query($conn, $addOrder);
+    return mysqli_insert_id($conn);
+}
+
+function setOrderTotalCost($conn,$idOrder,$totalValue){
+    $setOrder = "UPDATE orders SET cost=$totalValue WHERE idOrder=$idOrder";
+    mysqli_query($conn, $setOrder);
+}
+
+function addOrderDetailsToDB($conn,$idOrder,$nameProduct,$amount,$price,$size){
+    $addOrderDetails = "INSERT INTO orderdetails(idOrder,nameProduct,amount,price,size) values($idOrder,'$nameProduct',$amount,$price,'$size')";
+    mysqli_query($conn, $addOrderDetails);
+}
 
 function editAddressInDB($conn, $idAddress, $city, $zipCode, $street, $streetNumber)
 {
