@@ -1,5 +1,7 @@
-<?php include_once('settings.php') ?>
-<?php include('navbar.php');
+<?php include_once('settings.php');
+include('navbar.php');
+include('functions.php');
+
 ?>
 <div>
     <div class="mainPhoto">
@@ -12,21 +14,36 @@
         <h2 class="redText">ZNIŻKA NAWET DO 25%</h2>
         <h2>WYGLĄDAJ JAK CHCESZ</h2>
     </div>
+
     <div class="productContainer">
-        <a href="product.php">
+        <?php
+
+            $values = [];
+            for ($i = 0; $i < 6; $i++) {
+                while (true) {
+                    $value = mt_rand(0, 10);
+
+                    if (!in_array($value, $values) && isProductExist($conn, $value)) {
+                        $values[] = $value;
+                        break;
+                    }
+                }
+            $product = getProductById($conn,$value);
+            echo'
+            <a href="product.php?id=' . $product['id'] . '">
             <div class="productLayout">
-                <img src="images/dame8.jpg" alt="airForce">
+                <div class="photoProductContainer">
+                <img src="images/' . $product['image'] . '" alt="' . $product['name'] . '">
+               </div>
                 <div class="productInfo">
-                    <h3 class="productName">Air Force</h3>
-                    <h3 class="productPrice">260,00zł</h3>
+                    <h3 class="productName">' . $product['name'] . '</h3>
+                    <h3 class="productPrice">' . $product['price'] . ' zł</h3>
                 </div>
             </div>
         </a>
-        <div class="productLayout">2</div>
-        <div class="productLayout">3</div>
-        <div class="productLayout">4</div>
-        <div class="productLayout">5</div>
-        <div class="productLayout">6</div>
+        ';
+        }
+        ?>
     </div>
 </div>
 <?php include('footer.php'); ?>
