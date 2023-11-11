@@ -4,11 +4,42 @@ include('functions.php');
 
 ?>
 <div>
-    <div class="mainPhoto">
-        <a href="content.php">
-            <img src="images/mainPhoto.jpg" alt="mainPhoto">
-        </a>
+    <div class="slider">
+        <div class="slides">
+            <div class="slide">
+                <div class="photo">
+                    <a href="content.php?store=footwear">
+                        <img src="images/mainPhoto.jpg" alt="mainPhoto">
+                    </a>
+                </div>
+            </div>
+            <div class="slide">
+                <a href="content.php?store=clothes">
+                    <img src="images/nikeBanner.jpg" alt="nikeBanner">
+                </a>
+            </div>
+            <div class="slide">
+                <a href="content.php?store=footwear">
+                    <img src="images/adidasBanner.jpg" alt="adidasBanner">
+                </a>
+            </div>
+            <div class="slide">
+                <a href="content.php?store=accessories">
+                    <img src="images/justDoIt.jpg" alt="justDoIt">
+                </a>
+            </div>
+            <div class="slide">
+                <a href="content.php?store=clothes">
+                    <img src="images/newB2.jpg" alt="newB2">
+                </a>
+            </div>
+        </div>
+        <div class="sliderButtons">
+            <button class="sliderButton" id="prev" ><</button>
+            <button class="sliderButton" id="next" >></button>
+        </div>
     </div>
+
     <div class="discountText">
         <h2>KUPUJ CO CHCESZ</h2>
         <h2 class="redText">ZNIŻKA NAWET DO 25%</h2>
@@ -17,7 +48,6 @@ include('functions.php');
 
     <div class="productContainer">
         <?php
-
             $values = [];
             for ($i = 0; $i < 6; $i++) {
                 while (true) {
@@ -46,4 +76,7 @@ include('functions.php');
         ?>
     </div>
 </div>
+
+<script src="slider.js"></script>
+
 <?php include('footer.php'); ?>

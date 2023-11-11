@@ -60,6 +60,52 @@ a{
   scale: 1.05;
   border: deeppink solid 1px;
 }
+.slider {
+  width: 100%;
+  overflow: hidden;
+  margin: 20px auto;
+  @include columnAlignCenter
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slide img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.sliderButtons{
+  width: 300px;
+  @include flexCenterCenter;
+  margin: 30px 0;
+}
+.sliderButton {
+  margin: 0 5px;
+  @include basicButton;
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 100 ;
+  cursor: pointer;
+}
+.sliderButton:hover{
+  @include basicButtonHover;
+}
 
 @media screen and (max-width: 1300px) {
   .productContainer{
