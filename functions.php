@@ -75,6 +75,10 @@ function deleteProductFromDB($conn, $user_id, $idProduct, $size)
     mysqli_query($conn, $deleteProductFromDB);
 }
 
+function deleteAllFromBasketInDB($conn,$user_id){
+    $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=$user_id";
+    mysqli_query($conn, $deleteAllFromDB);
+}
 function deleteAllFromDB($conn, $user_id)
 {
     $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=$user_id";

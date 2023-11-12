@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $totalValue+=$delivery;
         setOrderTotalCost($conn,$idOrder,$totalValue);
         unset($_SESSION['basket']);
+        deleteAllFromBasketInDB($conn,$idUser);
         $_SESSION['basket'] = array();
 
     } else {
