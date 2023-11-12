@@ -15,7 +15,7 @@ $user_id = $_SESSION['users'];
             <a class="buttonLink" href="logout.php">
                 <button class="buttonAccount">Logout</button>
             </a>
-            <a class="buttonLink" href="login.php">
+            <a class="buttonLink" href="historyOfOrders.php">
                 <button class="buttonAccount">Historia Zamówień</button>
             </a>
         </div>

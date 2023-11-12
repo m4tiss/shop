@@ -1,0 +1,27 @@
+@import 'helpers.scss';
+
+.ordersContainer{
+  @include pageTemplate;
+  @include flexJustifyCenter;
+}
+.orders{
+  width: 80%;
+  @include columnAlignCenter;
+}
+.order{
+  height: 150px;
+  width: 100%;
+  border: black 1px solid;
+  margin: 30px 0;
+  border-radius: 30px;
+  @include flexCenterCenter;
+  justify-content: space-evenly;
+}
+.historyButton{
+  width: 200px;
+  height: 60px;
+  @include basicButton;
+}
+.historyButton:hover{
+  @include basicButtonHover;
+}
