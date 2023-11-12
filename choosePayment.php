@@ -2,6 +2,12 @@
 <?php include('navbar.php');
 include('functions.php');
 session_start();
+
+if (empty($_SESSION['users'])) {
+    header("Location: login.php");
+    exit();
+}
+
 ?>
 
 <div class="paymentsContainer">

@@ -256,6 +256,49 @@ function getAllPaymentMethods($conn)
     return $paymentMethods;
 }
 
+function getAllOrdersByEmail($conn,$email){
+    $getOrders = "SELECT * FROM orders Where email='$email'";
+    $orders = array();
+    if ($ordersResult = mysqli_query($conn, $getOrders)) {
+        if (mysqli_num_rows($ordersResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($ordersResult)) {
+                $order = array();
+                $order['idOrder'] = $row['idOrder'];
+                $order['idPayment'] = $row['idPayment'];
+                $order['idStatus'] = $row['idStatus'];
+                $order['name'] = $row['surname'];
+                $order['surname'] = $row['surname'];
+                $order['email'] = $row['email'];
+                $order['dateOrder'] = $row['dateOrder'];
+                $order['cost'] = $row['cost'];
+                $orders[$i] = $order;
+                $i += 1;
+            }
+            usort($orders, function ($a, $b) {
+                return $b['idOrder'] - $a['idOrder'];
+            });
+        } else {
+            echo "Nie zrealizowałeś jeszcze żadnego zamówienia!";
+        }
+    }
+    return $orders;
+}
+function getStatus($conn,$idStatus){
+    $getStatus = "SELECT * FROM statuses WHERE idStatus=$idStatus";
+    if ($statusResult = mysqli_query($conn, $getStatus)) {
+        if (mysqli_num_rows($statusResult) > 0) {
+            $row = mysqli_fetch_assoc($statusResult);
+            $status = array();
+            $status['idStatus'] = $row['idStatus'];
+            $status['nameStatus'] = $row['nameStatus'];
+        } else {
+            echo "Nie ma takiego statusu w bazie!";
+        }
+    }
+    return $status;
+
+}
 function getPhoneNumberFromMail($conn, $email)
 {
     $getPhoneNumber = "SELECT phoneNumber FROM contacts WHERE email='$email'";

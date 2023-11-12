@@ -5,6 +5,10 @@ include('navbar.php');
 include_once 'functions.php';
 session_start();
 
+if (empty($_SESSION['users'])) {
+    header("Location: login.php");
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['selectedPayment'])) {
