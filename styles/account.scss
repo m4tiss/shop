@@ -26,6 +26,11 @@
   height: 100%;
   display: flex;
 }
+.formDisplay{
+  width: 100%;
+  height: 100%;
+  @include columnAlignCenter;
+}
 
 .contactsAndAddressesContainer {
   width: 50%;
@@ -116,4 +121,7 @@
 }
 .buttonAccount:hover{
     @include basicButtonHover;
+}
+.inputDiv{
+  @include flexCenterCenter;
 }
