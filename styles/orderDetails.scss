@@ -17,15 +17,17 @@
   @include flexCenterCenter;
   justify-content: space-evenly;
 }
-.paymentDiv{
-  width: 300px;
+.paymentAndStatusDiv{
+  width: 1200px;
   @include flexCenterCenter;
   justify-content: space-evenly;
   margin: 40px 0;
 }
-.statusDiv{
-  width: 300px;
-  @include flexCenterCenter;
-  justify-content: space-evenly;
-  margin: 40px 0;
+.deliveryDiv{
+  @include columnAlignCenter;
+  height:200px;
+}
+.totalCostDiv{
+  @include columnAlignCenter;
+  height:200px;
 }

@@ -63,6 +63,16 @@
   background: black;
   color: white;
   box-shadow: 2px 2px 8px gray;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.addToBasket:hover {
+  background: #151515;
+}
+
+.addToBasket.moveUpDown {
+  transform: translateY(-30px);
 }
 
 .sizes {

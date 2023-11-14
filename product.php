@@ -7,7 +7,7 @@
     session_start();
 
 
-    if (isset($_GET['id']) && !empty($_GET['id'])) {
+    if (!empty($_GET['id'])) {
         $productId = $_GET['id'];
         $product = getProductById($conn, $productId);
         echo '    
@@ -47,7 +47,7 @@
             echo ' </div>
             <h2 class="rightPanelInfo"> Cena: ' . $product['price'] . ' zł</h2>';
 
-            echo '<button class="addToBasket"  onclick="addToBasketSession(' . $product['id'] . ') ">Dodaj do koszyka</button>'
+            echo '<button id="addToBasket" class="addToBasket"  onclick="changeColor();addToBasketSession(' . $product['id'] . ') ">Dodaj do koszyka</button>'
             ?>
         </div>
     </div>

@@ -27,18 +27,13 @@ if(isset($_GET['idOrder'])){
         $delivery = 9.99;
 
         echo '
-        <div class="paymentDiv">
+        <div class="paymentAndStatusDiv">
         <h3>Metoda płatności:</h3><img src="icons/'.$paymentMethod['icon'].'" width="100px">
+          <h3>Status Zamówienia:</h3><h3>'.$status['nameStatus'].'</h3>
         </div>
         ';
 
-        echo'
-        <div class="statusDiv">
-        <h3>Status Zamówienia:</h3><h3>'.$status['nameStatus'].'</h3>
-        </div>
-        ';
-
-
+        echo '<h3>Zakupione produkty:</h3>';
         foreach ($products as $product){
             echo '
       <div class="orderDetails">
@@ -53,8 +48,14 @@ if(isset($_GET['idOrder'])){
         }
         $totalSum+=$delivery;
         echo'
+        <div class="deliveryDiv">
+        <img src="icons/delivery.png" width="80px">
         <h3>Dostawa: '.$delivery.'</h3>
-         <h3>Łączny koszt zamówienia: '.$totalSum.'</h3>
+        </div>
+        <div class="totalCostDiv">
+        <img src="icons/totalCost.png" width="80px">
+         <h3>Łączny koszt zamówienia: '.$totalSum.'</h3>      
+        </div>
         ';
         ?>
     </div>

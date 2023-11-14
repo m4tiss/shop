@@ -17,6 +17,12 @@
   @include flexCenterCenter;
   justify-content: space-evenly;
 }
+
+.order:hover{
+  scale: 1.05;
+  border:deeppink 1px solid;
+}
+
 .historyButton{
   width: 200px;
   height: 60px;
