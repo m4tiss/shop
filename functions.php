@@ -126,8 +126,8 @@ function setOrderTotalCost($conn,$idOrder,$totalValue){
     mysqli_query($conn, $setOrder);
 }
 
-function addOrderDetailsToDB($conn,$idOrder,$nameProduct,$amount,$price,$size){
-    $addOrderDetails = "INSERT INTO orderdetails(idOrder,nameProduct,amount,price,size) values($idOrder,'$nameProduct',$amount,$price,'$size')";
+function addOrderDetailsToDB($conn,$idOrder,$nameProduct,$amount,$price,$size,$image){
+    $addOrderDetails = "INSERT INTO orderdetails(idOrder,nameProduct,amount,price,size,image) values($idOrder,'$nameProduct',$amount,$price,'$size','$image')";
     mysqli_query($conn, $addOrderDetails);
 }
 
@@ -287,6 +287,70 @@ function getAllOrdersByEmail($conn,$email){
         }
     }
     return $orders;
+}
+
+function getOrderById($conn,$idOrder){
+    $getOrder = "SELECT * FROM orders Where idOrder=$idOrder";
+    if ($orderResult = mysqli_query($conn, $getOrder)) {
+        if (mysqli_num_rows($orderResult) > 0) {
+            while ($row = mysqli_fetch_assoc($orderResult)) {
+                $order = array();
+                $order['idOrder'] = $row['idOrder'];
+                $order['idPayment'] = $row['idPayment'];
+                $order['idStatus'] = $row['idStatus'];
+                $order['name'] = $row['surname'];
+                $order['surname'] = $row['surname'];
+                $order['email'] = $row['email'];
+                $order['dateOrder'] = $row['dateOrder'];
+                $order['cost'] = $row['cost'];
+            }
+        } else {
+            echo "Nie ma zamówienia z takim ID!";
+        }
+    }
+    return $order;
+}
+
+function getPaymentMethod($conn,$idPayment){
+    $getPayment = "SELECT * FROM payments Where idPayment=$idPayment";
+    if ($paymentResult = mysqli_query($conn, $getPayment)) {
+        if (mysqli_num_rows($paymentResult) > 0) {
+            while ($row = mysqli_fetch_assoc($paymentResult)) {
+                $payment = array();
+                $payment['idPayment'] = $row['idPayment'];
+                $payment['namePayment'] = $row['namePayment'];
+                $payment['icon'] = $row['icon'];
+            }
+        } else {
+            echo "Nie ma metody z takim ID!";
+        }
+    }
+    return $payment;
+}
+
+function getProductsFromOrder($conn,$idOrder){
+    $getProducts = "SELECT * FROM orderdetails Where idOrder = $idOrder";
+    $products = array();
+    if ($productsResult = mysqli_query($conn, $getProducts)) {
+        if (mysqli_num_rows($productsResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($productsResult)) {
+                $product = array();
+                $product['idOrderDetail'] = $row['idOrderDetail'];
+                $product['idOrder'] = $row['idOrder'];
+                $product['name'] = $row['nameProduct'];
+                $product['amount'] = $row['amount'];
+                $product['price'] = $row['price'];
+                $product['size'] = $row['size'];
+                $product['image'] = $row['image'];
+                $products[$i] = $product;
+                $i += 1;
+            }
+        } else {
+            echo "To zamówienie było puste!";
+        }
+    }
+    return $products;
 }
 function getStatus($conn,$idStatus){
     $getStatus = "SELECT * FROM statuses WHERE idStatus=$idStatus";

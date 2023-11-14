@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($products as $product){
             $productDetails = getProductById($conn,$product['idProduct']);
             $totalValue+=($product['amount']*$productDetails['price']);
-            addOrderDetailsToDB($conn,$idOrder,$productDetails['name'],$product['amount'],$productDetails['price'],$product['sizee']);
+            addOrderDetailsToDB($conn,$idOrder,$productDetails['name'],$product['amount'],$productDetails['price'],$product['sizee'],$productDetails['image']);
         }
         $totalValue+=$delivery;
         setOrderTotalCost($conn,$idOrder,$totalValue);

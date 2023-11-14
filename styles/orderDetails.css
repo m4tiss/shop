@@ -1,0 +1,51 @@
+.hidden {
+  display: none;
+}
+
+.ordersDetailsContainer {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.ordersDetails {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orderDetails {
+  height: 150px;
+  width: 100%;
+  border: black 1px solid;
+  margin: 30px 0;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.paymentDiv {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 40px 0;
+}
+
+.statusDiv {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 40px 0;
+}
+
+/*# sourceMappingURL=orderDetails.css.map */
