@@ -72,6 +72,9 @@ function getAllSizes($conn){
                 $sizes[$i] = $size;
                 $i += 1;
             }
+            usort($sizes, function ($a, $b) {
+                return strcmp($a['storeDepartament'], $b['storeDepartament']);
+            });
         } else {
             echo "Nie ma żadnego rozmiaru w bazie!";
         }
@@ -97,6 +100,11 @@ function deleteProductFromDB($conn, $user_id, $idProduct, $size)
     mysqli_query($conn, $deleteProductFromDB);
 }
 
+function deleteSizeFromDB($conn,$idSize){
+    $deleteSizeFromDB = "DELETE FROM sizees WHERE idSizee=$idSize";
+    mysqli_query($conn, $deleteSizeFromDB);
+}
+
 function deleteAllFromBasketInDB($conn,$user_id){
     $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=$user_id";
     mysqli_query($conn, $deleteAllFromDB);
@@ -111,6 +119,11 @@ function editContactInDB($conn, $contactId, $userId, $email, $phoneNumber)
 {
     $editContact = "UPDATE contacts SET email='$email', phoneNumber='$phoneNumber' WHERE idUser=$userId AND idContact=$contactId";
     mysqli_query($conn, $editContact);
+}
+
+function addSizeToDB($conn,$storeDepartament,$nameSize){
+    $addSize = "INSERT INTO sizees(storeDepartament,nameSizee) values('$storeDepartament','$nameSize');";
+    mysqli_query($conn, $addSize);
 }
 
 function addContactToDB($conn, $userId, $email, $phoneNumber)

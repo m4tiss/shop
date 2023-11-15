@@ -3,4 +3,21 @@
 .addSizeContainer{
   @include pageTemplate;
   @include columnAlignCenter;
+  gap: 20px;
+}
+.sizes{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 100px;
+  grid-row-gap: 50px;
+  margin:40px 0;
+}
+.sizePanel{
+  @include flexCenterCenter;
+  width: 200px;
+  gap: 10px;
+}
+.addSizeForm{
+  @include columnAlignCenter;
+  gap:10px;
 }
