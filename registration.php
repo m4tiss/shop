@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $surname = $_POST['surname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $role = 'user';
 
     if (empty($name)) {
         echo '<script>showNameErrorMessage()</script>';
@@ -26,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $insertUser = "INSERT INTO users (name, surname,password) VALUES ('$name', '$surname','$hashedPassword')";
+        $insertUser = "INSERT INTO users (name, surname,password,role) VALUES ('$name', '$surname','$hashedPassword','$role')";
 
         $getId = "SELECT idUser FROM users WHERE name='$name' AND surname='$surname' AND password='$hashedPassword'";
 

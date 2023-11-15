@@ -1,0 +1,29 @@
+@import "helpers.scss";
+.adminAccountContainer{
+  @include pageTemplate;
+  @include columnAlignCenter;
+  gap:20px;
+}
+.addToDB{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 300px;
+  grid-row-gap: 50px;
+  margin:40px 0;
+  height: 400px;
+}
+
+.panelDiv{
+  height: 300px;
+  width: 300px;
+  background: $grayGradient;
+  border-radius: 30px;
+  @include columnAlignCenter;
+  justify-content: center;
+  cursor: pointer;
+  gap:20px
+}
+.panelDiv:hover{
+  scale: 1.1;
+}

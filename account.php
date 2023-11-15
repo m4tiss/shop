@@ -7,7 +7,14 @@ if (empty($_SESSION['users'])) {
     header("Location: login.php");
     exit();
 }
+
 $user_id = $_SESSION['users'];
+
+$user = getUserById($conn,$user_id);
+if($user['role']==='admin'){
+    header("Location: accountAdmin.php");
+    exit();
+}
 ?>
 
     <div class="contentAccountContainer">

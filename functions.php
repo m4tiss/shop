@@ -57,6 +57,28 @@ function getProductsFromBasket($conn, $userId)
     return $productsData;
 }
 
+function getAllSizes($conn){
+    $getSizes = "SELECT * FROM sizees";
+    $sizes = array();
+
+    if ($sizesResult = mysqli_query($conn, $getSizes)) {
+        if (mysqli_num_rows($sizesResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($sizesResult)) {
+                $size = array();
+                $size['idSize'] = $row['idSizee'];
+                $size['storeDepartament'] = $row['storeDepartament'];
+                $size['nameSize'] = $row['nameSizee'];
+                $sizes[$i] = $size;
+                $i += 1;
+            }
+        } else {
+            echo "Nie ma żadnego rozmiaru w bazie!";
+        }
+    }
+    return $sizes;
+}
+
 function updateProductInDB($conn, $amount, $user_id, $idProduct, $size)
 {
     $updateProductInDB = "UPDATE baskets SET amount=$amount WHERE idUser=$user_id and  idProduct=$idProduct and sizee=$size";
@@ -163,6 +185,7 @@ function getUserById($conn, $user_id)
                 $user['name'] = $row['name'];
                 $user['surname'] = $row['surname'];
                 $user['password'] = $row['password'];
+                $user['role'] = $row['role'];
             }
         } else {
             echo "Taki użytkownik nie istnieje";

@@ -1,0 +1,43 @@
+.hidden {
+  display: none;
+}
+
+.adminAccountContainer {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.addToDB {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 300px;
+  grid-row-gap: 50px;
+  margin: 40px 0;
+  height: 400px;
+}
+
+.panelDiv {
+  height: 300px;
+  width: 300px;
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 20px;
+}
+
+.panelDiv:hover {
+  scale: 1.1;
+}
+
+/*# sourceMappingURL=accountAdmin.css.map */
