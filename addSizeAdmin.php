@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $sizes = getAllSizes($conn);
 
-echo '<div class="addSizeContainer">';
+echo '<div class="addContainer">';
 
 echo '<h2>Dostępne rozmiary w STEP IN STYLE</h2>
        <div class="sizes">
@@ -59,9 +59,9 @@ echo '
     
     <label for="productType">Wybierz dział produktu:</label>
     <select name="productType" id="productType" required>
-        <option value="footwear">Footwear</option>
-        <option value="clothes">Clothes</option>
-        <option value="accessories">Accessories</option>
+        <option value="footwear">Obuwie</option>
+        <option value="clothes">Odzież</option>
+        <option value="accessories">Akcesoria</option>
     </select>
     <button type="submit">Dodaj rozmiar</button>
     </form>

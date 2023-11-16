@@ -15,9 +15,9 @@ session_start();
                 <img src="icons/category.png" width="100px">
             </div>
         </a>
-        <a>
+        <a href="addProductAdmin.php">
             <div class="panelDiv">
-                <h2>Dodaj produkt</h2>
+                <h2>Zarządzaj produktami</h2>
                 <img src="icons/product.png" width="100px">
             </div>
         </a>
@@ -30,7 +30,7 @@ session_start();
 
         <a href="addSizeAdmin.php">
             <div class="panelDiv">
-                <h2>Dodaj rozmiar</h2>
+                <h2>Zarządzaj rozmiarem</h2>
                 <img src="icons/size.png" width="100px">
             </div>
         </a>

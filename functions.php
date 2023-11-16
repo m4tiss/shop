@@ -57,6 +57,83 @@ function getProductsFromBasket($conn, $userId)
     return $productsData;
 }
 
+function getCategoryById($conn,$idCategory){
+    $getCategory = "SELECT * FROM categories WHERE idCategory=$idCategory";
+    if ($categoryResult = mysqli_query($conn, $getCategory)) {
+        if (mysqli_num_rows($categoryResult) > 0) {
+            $row = mysqli_fetch_assoc($categoryResult);
+            $category = array();
+            $category['idCategory'] = $row['idCategory'];
+            $category['nameCategory'] = $row['nameCategory'];
+            $category['storeDepartament'] = $row['storeDepartament'];
+        } else {
+            echo "Nie ma kategorii z takim ID!";
+        }
+    }
+    return $category;
+}
+
+function getCategoriesByStore($conn,$store){
+    $getCategories = "SELECT * FROM categories where storeDepartament='$store'";
+    $categories = array();
+    if ($categoriesResult = mysqli_query($conn, $getCategories)) {
+        if (mysqli_num_rows($categoriesResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($categoriesResult)) {
+                $category = array();
+                $category['idCategory'] = $row['idCategory'];
+                $category['nameCategory'] = $row['nameCategory'];
+                $category['storeDepartament'] = $row['storeDepartament'];
+                $categories[$i] = $category;
+                $i += 1;
+            }
+        } else {
+            echo "Nie ma żadnego produktu w bazie!";
+        }
+    }
+    return $categories;
+
+}
+function getProducerById($conn,$idProducer){
+$getProducer = "SELECT * FROM producers WHERE idProducer=$idProducer";
+if ($producerResult = mysqli_query($conn, $getProducer)) {
+    if (mysqli_num_rows($producerResult) > 0) {
+        $row = mysqli_fetch_assoc($producerResult);
+        $producer = array();
+        $producer['idProducer'] = $row['idProducer'];
+        $producer['nameProducer'] = $row['nameProducer'];
+        $producer['storeDepartament'] = $row['storeDepartament'];
+    } else {
+        echo "Nie ma producenta z takim ID!";
+    }
+}
+return $producer;
+}
+function getAllProducts($conn){
+    $getProducts = "SELECT * FROM products";
+    $products = array();
+    if ($productResult = mysqli_query($conn, $getProducts)) {
+        if (mysqli_num_rows($productResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($productResult)) {
+                $product = array();
+                $product['idProduct'] = $row['idProduct'];
+                $product['idCategory'] = $row['idCategory'];
+                $product['idProducer'] = $row['idProducer'];
+                $product['price'] = $row['price'];
+                $product['image'] = $row['image'];
+                $product['description'] = $row['description'];
+                $product['nameProduct'] = $row['nameProduct'];
+                $products[$i] = $product;
+                $i += 1;
+            }
+        } else {
+            echo "Nie ma żadnego produktu w bazie!";
+        }
+    }
+    return $products;
+}
+
 function getAllSizes($conn){
     $getSizes = "SELECT * FROM sizees";
     $sizes = array();
@@ -98,6 +175,11 @@ function deleteProductFromDB($conn, $user_id, $idProduct, $size)
 {
     $deleteProductFromDB = "DELETE FROM baskets WHERE idUser=$user_id and  idProduct=$idProduct and sizee='$size' ";
     mysqli_query($conn, $deleteProductFromDB);
+}
+
+function deleteProductFromDbAdmin($conn, $idProduct){
+    $deleteProductFromDBAdmin = "DELETE FROM products WHERE idProduct=$idProduct";
+    mysqli_query($conn, $deleteProductFromDBAdmin);
 }
 
 function deleteSizeFromDB($conn,$idSize){

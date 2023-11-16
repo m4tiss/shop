@@ -1,6 +1,6 @@
 @import 'helpers.scss';
 
-.addSizeContainer{
+.addContainer{
   @include pageTemplate;
   @include columnAlignCenter;
   gap: 20px;
@@ -20,4 +20,15 @@
 .addSizeForm{
   @include columnAlignCenter;
   gap:10px;
+}
+.product{
+  @include flexCenterCenter;
+  width:800px;
+  justify-content: space-evenly;
+  gap:60px;
+}
+.forms{
+  @include flexCenterCenter;
+  width: 100%;
+  justify-content: space-evenly;
 }
