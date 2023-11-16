@@ -88,11 +88,31 @@ function getCategoriesByStore($conn,$store){
                 $i += 1;
             }
         } else {
-            echo "Nie ma żadnego produktu w bazie!";
+            echo "Nie ma kategorii w tym dziale!";
         }
     }
     return $categories;
+}
 
+function getProducersByStore($conn,$store){
+    $getProducers = "SELECT * FROM producers where storeDepartament='$store'";
+    $producers = array();
+    if ($producersResult = mysqli_query($conn, $getProducers)) {
+        if (mysqli_num_rows($producersResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($producersResult)) {
+                $producer = array();
+                $producer['idProducer'] = $row['idProducer'];
+                $producer['nameProducer'] = $row['nameProducer'];
+                $producer['storeDepartament'] = $row['storeDepartament'];
+                $producers[$i] = $producer;
+                $i += 1;
+            }
+        } else {
+            echo "Nie ma producentów w tym dziale!";
+        }
+    }
+    return $producers;
 }
 function getProducerById($conn,$idProducer){
 $getProducer = "SELECT * FROM producers WHERE idProducer=$idProducer";
@@ -230,6 +250,11 @@ function addAddressToDB($conn, $userId, $city, $zipCode, $street, $streetNumber)
 {
     $addAddress = "INSERT INTO addresses(idUser,city,zipCode,street,streetNumber) values($userId,'$city','$zipCode','$street','$streetNumber');";
     mysqli_query($conn, $addAddress);
+}
+
+function addProductToDBAdmin($conn,$productName,$IdCategory,$IdProducer,$productDescription,$productPrice,$photoName,$discount){
+    $addProduct = "INSERT INTO products(idCategory,idProducer,price,image,description,discount,nameProduct) values($IdCategory,$IdProducer,$productPrice,'$photoName','$productDescription',$discount,'$productName')";
+    mysqli_query($conn, $addProduct);
 }
 function addOrderToDB($conn,$idPayment,$idStatus,$name,$surname,$email,$cost){
     $date= date("Y-m-d H:i:s");

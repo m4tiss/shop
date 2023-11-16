@@ -11,26 +11,37 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//    $nameSize = $_POST['size'];
-//    $productType = $_POST['productType'];
-//    addSizeToDB($conn,$productType,$nameSize);
-//    header("Location: addSizeAdmin.php");
-//    exit();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $productName = $_POST["name"];
+    $store = $_POST["productType"];
+    $IdCategory = $_POST["productCategory"];
+    $IdProducer = $_POST["productProducer"];
+    $productDescription = $_POST["productDescription"];
+    $productPrice = $_POST["productPrice"];
+    $discount = 0;
+
+    $photoName = $_FILES["productPhoto"]["name"];
+    $photoTmpName = $_FILES["productPhoto"]["tmp_name"];
+    $photoSize = $_FILES["productPhoto"]["size"];
+    $photoError = $_FILES["productPhoto"]["error"];
+
+    if ($photoError === 0) {
+        $targetDirectory = "images/";
+        $targetPath = $targetDirectory . $photoName;
+
+        move_uploaded_file($photoTmpName, $targetPath);
+        addProductToDBAdmin($conn,$productName,$IdCategory,$IdProducer,$productDescription,$productPrice,$photoName,$discount);
+        header("Location: addProductAdmin.php");
+        exit();
+    } else {
+        echo "Błąd przesyłania pliku.";
+    }
 }
 
 $products = getAllProducts($conn);
 
 echo '<div class="addContainer" >';
 foreach ($products as $product) {
-//                   $product['idProduct'] = $row['idProduct'];
-//                $product['idCategory'] = $row['idCategory'];
-//                $product['idProducer'] = $row['idProducer'];
-//                $product['price'] = $row['price'];
-//                $product['image'] = $row['image'];
-//                $product['description'] = $row['description'];
-//                $product['nameProduct'] = $row['nameProduct'];
-//                $products[$i] = $product;
     $category = getCategoryById($conn, $product['idCategory']);
     $producer = getProducerById($conn, $product['idProducer']);
 
@@ -46,7 +57,8 @@ foreach ($products as $product) {
 
 echo '
 <div class="forms">
-<form class="addSizeForm" action="addProductAdmin.php" method="post">
+<form class="addSizeForm" action="addProductAdmin.php" method="post" enctype="multipart/form-data">
+    <h2>Obuwie</h2>
     <label for="name">Wpisz nazwę:</label>
     <input type="text" name="name" id="name" placeholder="Wpisz nazwę" required>
 
@@ -61,11 +73,24 @@ foreach ($categories as $category) {
     echo '<option value="' . $category['idCategory'] . '">' . $category['nameCategory'] . '</option>';
 }
 echo '</select>
-
-    <button type="submit">Dodaj rozmiar</button>
+    <label for="productProducer">Wybierz producenta produktu:</label>
+    <select name="productProducer" id="productProducer" required>';
+$producers = getProducersByStore($conn,'footwear');
+foreach ($producers as $producer) {
+    echo '<option value="' . $producer['idProducer'] . '">' . $producer['nameProducer'] . '</option>';
+}
+echo '</select>
+    <label for="productPhoto">Dodaj zdjęcie produktu:</label>
+    <input type="file" name="productPhoto" id="productPhoto" accept="image/*" required>
+    <label for="productDescription">Dodaj opis produktu:</label>
+    <textarea name="productDescription" id="productDescription" placeholder="Wpisz opis produktu" rows="4" required></textarea>
+     <label for="productPrice">Podaj cenę produktu:</label>
+    <input type="number" name="productPrice" id="productPrice" placeholder="Podaj cenę" step="0.01" required>
+    <button type="submit">Dodaj produkt</button>
 </form>
 
-<form class="addSizeForm" action="addProductAdmin.php" method="post">
+<form class="addSizeForm" action="addProductAdmin.php" method="post" enctype="multipart/form-data">
+    <h2>Odzież</h2>
     <label for="name">Wpisz nazwę:</label>
     <input type="text" name="name" id="name" placeholder="Wpisz nazwę" required>
 
@@ -82,11 +107,24 @@ foreach ($categories as $category) {
 }
 echo '
     </select>
-
-    <button type="submit">Dodaj rozmiar</button>
+    <label for="productProducer">Wybierz producenta produktu:</label>
+    <select name="productProducer" id="productProducer" required>';
+$producers = getProducersByStore($conn,'clothes');
+foreach ($producers as $producer) {
+    echo '<option value="' . $producer['idProducer'] . '">' . $producer['nameProducer'] . '</option>';
+}
+echo '</select>
+    <label for="productPhoto">Dodaj zdjęcie produktu:</label>
+    <input type="file" name="productPhoto" id="productPhoto" accept="image/*" required>
+    <label for="productDescription">Dodaj opis produktu:</label>
+    <textarea name="productDescription" id="productDescription" placeholder="Wpisz opis produktu" rows="4" required></textarea>
+     <label for="productPrice">Podaj cenę produktu:</label>
+    <input type="number" name="productPrice" id="productPrice" placeholder="Podaj cenę" step="0.01" required>
+    <button type="submit">Dodaj produkt</button>
 </form>
 
-<form class="addSizeForm" action="addProductAdmin.php" method="post">
+<form class="addSizeForm" action="addProductAdmin.php" method="post" enctype="multipart/form-data">
+    <h2>Akcesoria</h2>
     <label for="name">Wpisz nazwę:</label>
     <input type="text" name="name" id="name" placeholder="Wpisz nazwę" required>
 
@@ -103,8 +141,23 @@ foreach ($categories as $category){
 }
 echo'
     </select>
-
-    <button type="submit">Dodaj rozmiar</button>
+    <label for="productProducer">Wybierz producenta produktu:</label>
+    <select name="productProducer" id="productProducer" required>';
+$producers = getProducersByStore($conn,'accessories');
+foreach ($producers as $producer) {
+    echo '<option value="' . $producer['idProducer'] . '">' . $producer['nameProducer'] . '</option>';
+}
+echo '</select>
+    <label for="productPhoto">Dodaj zdjęcie produktu:</label>
+    <input type="file" name="productPhoto" id="productPhoto" accept="image/*" required>
+    
+    <label for="productDescription">Dodaj opis produktu:</label>
+    <textarea name="productDescription" id="productDescription" placeholder="Wpisz opis produktu" rows="4" required></textarea>
+    
+     <label for="productPrice">Podaj cenę produktu:</label>
+    <input type="number" name="productPrice" id="productPrice" placeholder="Podaj cenę" step="0.01" required>
+    
+    <button type="submit">Dodaj produkt</button>
 </form>
 </div>
     </div>
