@@ -44,8 +44,9 @@
                     <input id="idPrzyciskuRadio" type="radio" name="selectedSize" value="' . $size . '"> ' . $size . '
                 </label>';
             }
+            $price = number_format($product['price'],2);
             echo ' </div>
-            <h2 class="rightPanelInfo"> Cena: ' . $product['price'] . ' zł</h2>';
+            <h2 class="rightPanelInfo"> Cena: ' . $price . ' zł</h2>';
 
             echo '<button id="addToBasket" class="addToBasket"  onclick="changeColor();addToBasketSession(' . $product['id'] . ') ">Dodaj do koszyka</button>'
             ?>

@@ -113,7 +113,8 @@
                         echo '</div>';
                         echo '<div class="productInfo">';
                         echo '<h3 class="productName">' . $productName . '</h3>';
-                        echo '<h3 class="productPrice">' . $productPrice . 'zł</h3>';
+                        $price = number_format($productPrice,2);
+                        echo '<h3 class="productPrice">' .$price. ' zł</h3>';
                         echo '</div>';
                         echo '</a>';
                         echo '</div>';

@@ -15,13 +15,13 @@ session_start();
                 $size = $productInfo['size'];
                 $quantity = $productInfo['quantity'];
                 $product = getProductById($conn, $idProduct);
-
+                $priceQuantity = number_format(($product['price'] * $quantity),2);
                 echo '  <div class="elementBasket">
                             <div class="photoContainerBasket">
                                 <img src="images/' . $product['image'] . '" width="100px" />
                             </div>
                             <h2>' . $product['name'] . '</h2>
-                            <h2>Cena:' . ($product['price'] * $quantity) . ' zł</h2>
+                            <h2>Cena:' . $priceQuantity . ' zł</h2>
                             <h2>Rozmiar: ' . $size . '</h2>
                             <h2>Ilość:' . $quantity . '</h2>
                             <a href="deleteFromBasketSession.php?index='.$product['id'].''.$size.'">
@@ -31,6 +31,7 @@ session_start();
                 $totalSum += $product['price'] * $quantity;
             }
             if($totalSum > 0){
+                $totalSum = number_format(($product['price'] * $quantity),2);
                 echo '<div class="paymentSummary">
                 <h2>Podsumowanie Zamówienia</h2>
                 <h3>Produkty: ' . $totalSum . ' zł</h3>

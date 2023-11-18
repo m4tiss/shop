@@ -1,6 +1,6 @@
-<?php include_once('settings.php');
-include('navbar.php');
-include('functions.php');
+<?php include_once('../settings.php');
+include('../navbar.php');
+include('../functions.php');
 session_start();
 
 
@@ -32,22 +32,22 @@ foreach ($sizes as $size) {
 
     if ($size['storeDepartament'] === 'footwear') {
         echo '<div class="sizePanel">
-                <img src="icons/shoe.png" width="80px">
+                <img src="../icons/shoe.png" width="80px">
                 <h3>' . $size['nameSize'] . '</h3>
-                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img src="images/xIcon.png" width="40px"></a>
+                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img src="../images/xIcon.png" width="40px"></a>
             </div>';
     } elseif ($size['storeDepartament'] === 'clothes') {
         echo '<div class="sizePanel">
-                <img src="icons/product.jpg" width="100px">
+                <img src="../icons/product.jpg" width="100px">
                 <h3>' . $size['nameSize'] . '</h3>
-                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img src="images/xIcon.png" width="40px"></a>
+                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img src="../images/xIcon.png" width="40px"></a>
             </div>';
     }
     elseif ($size['storeDepartament'] === 'accessories') {
         echo '<div class="sizePanel">
-                <img src="icons/socks.jpg" width="100px">
+                <img src="../icons/socks.jpg" width="100px">
                 <h3>' . $size['nameSize'] . '</h3>
-                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img src="images/xIcon.png" width="40px"></a>
+                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img src="../images/xIcon.png" width="40px"></a>
             </div>';
     }
 }
@@ -67,5 +67,5 @@ echo '
     </form>
 </div>';
 
-include('footer.php'); ?>
+include('../footer.php'); ?>
 

@@ -35,8 +35,8 @@ include('functions.php');
             </div>
         </div>
         <div class="sliderButtons">
-            <button class="sliderButton" id="prev" ><</button>
-            <button class="sliderButton" id="next" >></button>
+            <button class="sliderButton" id="prev"><</button>
+            <button class="sliderButton" id="next">></button>
         </div>
     </div>
 
@@ -48,18 +48,19 @@ include('functions.php');
 
     <div class="productContainer">
         <?php
-            $values = [];
-            for ($i = 0; $i < 6; $i++) {
-                while (true) {
-                    $value = mt_rand(0, 10);
+        $values = [];
+        for ($i = 0; $i < 6; $i++) {
+            while (true) {
+                $value = mt_rand(0, 10);
 
-                    if (!in_array($value, $values) && isProductExist($conn, $value)) {
-                        $values[] = $value;
-                        break;
-                    }
+                if (!in_array($value, $values) && isProductExist($conn, $value)) {
+                    $values[] = $value;
+                    break;
                 }
-            $product = getProductById($conn,$value);
-            echo'
+            }
+            $product = getProductById($conn, $value);
+            $price = number_format($product['price'], 2);
+            echo '
             <a href="product.php?id=' . $product['id'] . '">
             <div class="productLayout">
                 <div class="photoProductContainer">
@@ -67,7 +68,7 @@ include('functions.php');
                </div>
                 <div class="productInfo">
                     <h3 class="productName">' . $product['name'] . '</h3>
-                    <h3 class="productPrice">' . $product['price'] . ' zł</h3>
+                    <h3 class="productPrice">' . $price . ' zł</h3>
                 </div>
             </div>
         </a>
