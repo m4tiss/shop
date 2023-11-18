@@ -179,6 +179,26 @@ function getAllSizes($conn){
     return $sizes;
 }
 
+function getAllStatuses($conn){
+    $getStatuses = "SELECT * FROM statuses";
+    $statuses = array();
+
+    if ($statusesResult = mysqli_query($conn, $getStatuses)) {
+        if (mysqli_num_rows($statusesResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($statusesResult)) {
+                $status = array();
+                $status['idStatus'] = $row['idStatus'];
+                $status['nameStatus'] = $row['nameStatus'];
+                $statuses[$i] = $status;
+                $i += 1;
+            }
+        } else {
+            echo "Nie ma żadnego statusu w bazie!";
+        }
+    }
+    return $statuses;
+}
 function getAllProducers($conn){
     $getProducers= "SELECT * FROM producers";
     $producers = array();
@@ -271,6 +291,12 @@ function editContactInDB($conn, $contactId, $userId, $email, $phoneNumber)
 {
     $editContact = "UPDATE contacts SET email='$email', phoneNumber='$phoneNumber' WHERE idUser=$userId AND idContact=$contactId";
     mysqli_query($conn, $editContact);
+}
+
+function setNewOrderStatus($conn,$idOrder,$idStatus){
+
+    $updateStatus = "UPDATE orders SET idStatus = $idStatus Where idOrder=$idOrder";
+    mysqli_query($conn, $updateStatus);
 }
 
 function addSizeToDB($conn,$storeDepartament,$nameSize){
@@ -486,6 +512,35 @@ function getAllOrdersByEmail($conn,$email){
             });
         } else {
             echo "Nie zrealizowałeś jeszcze żadnego zamówienia!";
+        }
+    }
+    return $orders;
+}
+
+function getAllOrders($conn){
+    $getOrders = "SELECT * FROM orders";
+    $orders = array();
+    if ($ordersResult = mysqli_query($conn, $getOrders)) {
+        if (mysqli_num_rows($ordersResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($ordersResult)) {
+                $order = array();
+                $order['idOrder'] = $row['idOrder'];
+                $order['idPayment'] = $row['idPayment'];
+                $order['idStatus'] = $row['idStatus'];
+                $order['name'] = $row['surname'];
+                $order['surname'] = $row['surname'];
+                $order['email'] = $row['email'];
+                $order['dateOrder'] = $row['dateOrder'];
+                $order['cost'] = $row['cost'];
+                $orders[$i] = $order;
+                $i += 1;
+            }
+            usort($orders, function ($a, $b) {
+                return $b['idOrder'] - $a['idOrder'];
+            });
+        } else {
+            echo "Nie ma żadnych zamówień!";
         }
     }
     return $orders;

@@ -35,7 +35,7 @@ session_start();
             </div>
         </a>
 
-        <a>
+        <a href="adminActions/changeStatusesAdmin.php">
             <div class="panelDiv">
                 <h2>Zmień statusy zamówień</h2>
                 <img src="icons/status.png" width="100px">

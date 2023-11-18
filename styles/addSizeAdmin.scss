@@ -32,3 +32,8 @@
   width: 100%;
   justify-content: space-evenly;
 }
+.statusPanel{
+  @include flexCenterCenter;
+  width: 800px;
+  gap: 10px;
+}
