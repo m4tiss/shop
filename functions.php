@@ -179,6 +179,31 @@ function getAllSizes($conn){
     return $sizes;
 }
 
+function getAllProducers($conn){
+    $getProducers= "SELECT * FROM producers";
+    $producers = array();
+
+    if ($producersResult = mysqli_query($conn, $getProducers)) {
+        if (mysqli_num_rows($producersResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($producersResult)) {
+                $producer = array();
+                $producer['idProducer'] = $row['idProducer'];
+                $producer['nameProducer'] = $row['nameProducer'];
+                $producer['storeDepartament'] = $row['storeDepartament'];
+                $producers[$i] = $producer;
+                $i += 1;
+            }
+            usort($producers, function ($a, $b) {
+                return strcmp($a['storeDepartament'], $b['storeDepartament']);
+            });
+        } else {
+            echo "Nie ma żadnego producenta w bazie!";
+        }
+    }
+    return $producers;
+}
+
 function updateProductInDB($conn, $amount, $user_id, $idProduct, $size)
 {
     $updateProductInDB = "UPDATE baskets SET amount=$amount WHERE idUser=$user_id and  idProduct=$idProduct and sizee=$size";
@@ -254,6 +279,11 @@ function addAddressToDB($conn, $userId, $city, $zipCode, $street, $streetNumber)
 
 function addProductToDBAdmin($conn,$productName,$IdCategory,$IdProducer,$productDescription,$productPrice,$photoName,$discount){
     $addProduct = "INSERT INTO products(idCategory,idProducer,price,image,description,discount,nameProduct) values($IdCategory,$IdProducer,$productPrice,'$photoName','$productDescription',$discount,'$productName')";
+    mysqli_query($conn, $addProduct);
+}
+
+function addProducerToDB($conn,$productType,$nameProducer){
+    $addProduct = "INSERT INTO producers(nameProducer, storeDepartament) values('$nameProducer','$productType')";
     mysqli_query($conn, $addProduct);
 }
 function addOrderToDB($conn,$idPayment,$idStatus,$name,$surname,$email,$cost){

@@ -21,7 +21,7 @@ session_start();
                 <img src="icons/product.png" width="100px">
             </div>
         </a>
-        <a>
+        <a href="adminActions/addProducerAdmin.php">
             <div class="panelDiv">
                 <h2>Dodaj producenta</h2>
                 <img src="icons/producer.png" width="100px">
