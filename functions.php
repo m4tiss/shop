@@ -204,6 +204,31 @@ function getAllProducers($conn){
     return $producers;
 }
 
+function getAllCategories($conn){
+    $getCategories= "SELECT * FROM categories";
+    $categories = array();
+
+    if ($categoriesResult = mysqli_query($conn, $getCategories)) {
+        if (mysqli_num_rows($categoriesResult) > 0) {
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($categoriesResult)) {
+                $category = array();
+                $category['idCategory'] = $row['idCategory'];
+                $category['nameCategory'] = $row['nameCategory'];
+                $category['storeDepartament'] = $row['storeDepartament'];
+                $categories[$i] = $category;
+                $i += 1;
+            }
+            usort($categories, function ($a, $b) {
+                return strcmp($a['storeDepartament'], $b['storeDepartament']);
+            });
+        } else {
+            echo "Nie ma żadnej kategorii w bazie!";
+        }
+    }
+    return $categories;
+}
+
 function updateProductInDB($conn, $amount, $user_id, $idProduct, $size)
 {
     $updateProductInDB = "UPDATE baskets SET amount=$amount WHERE idUser=$user_id and  idProduct=$idProduct and sizee=$size";
@@ -283,8 +308,12 @@ function addProductToDBAdmin($conn,$productName,$IdCategory,$IdProducer,$product
 }
 
 function addProducerToDB($conn,$productType,$nameProducer){
-    $addProduct = "INSERT INTO producers(nameProducer, storeDepartament) values('$nameProducer','$productType')";
-    mysqli_query($conn, $addProduct);
+    $addProducer = "INSERT INTO producers(nameProducer, storeDepartament) values('$nameProducer','$productType')";
+    mysqli_query($conn, $addProducer);
+}
+function addCategoryToDB($conn,$productType,$nameCategory){
+    $addCategory = "INSERT INTO categories(nameCategory, storeDepartament) values('$nameCategory','$productType')";
+    mysqli_query($conn, $addCategory);
 }
 function addOrderToDB($conn,$idPayment,$idStatus,$name,$surname,$email,$cost){
     $date= date("Y-m-d H:i:s");

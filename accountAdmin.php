@@ -9,7 +9,7 @@ session_start();
     <h2>Panel administratora w sklepie STEP IN STYLE</h2>
     <div class="addToDB">
 
-        <a>
+        <a href="adminActions/addCategoryAdmin.php">
             <div class="panelDiv">
                 <h2>Dodaj kategorię</h2>
                 <img src="icons/category.png" width="100px">
