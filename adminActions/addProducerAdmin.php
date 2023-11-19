@@ -3,6 +3,9 @@ include('../navbar.php');
 include('../functions/functionsAdmin.php');
 session_start();
 
+checkUserRoleAndRedirect($conn);
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nameProducer = $_POST['producer'];
     $productType = $_POST['productType'];

@@ -10,6 +10,13 @@ if (empty($_SESSION['users'])) {
     exit();
 }
 
+if (empty($_SESSION['order_completed']) || $_SESSION['order_completed'] !== true) {
+    header("Location: basket.php");
+    exit();
+}
+
+$_SESSION['order_completed']=false;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['selectedPayment'])) {
         $selectedPayment = $_POST['selectedPayment'];

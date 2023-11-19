@@ -14,9 +14,10 @@ function changeColor() {
 
 async function addToBasketSession(productId) {
 
-    console.log(productId);
+
     const selectedSizeInput = document.querySelector('input[name="selectedSize"]:checked');
     const selectedSizeValue = selectedSizeInput.value;
+    console.log(selectedSizeValue);
     try {
         const response = await fetch("addToBasketSession.php", {
             method: "POST",

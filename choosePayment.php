@@ -7,7 +7,7 @@ if (empty($_SESSION['users'])) {
     header("Location: login.php");
     exit();
 }
-
+$_SESSION['order_completed']=true;
 ?>
 
 <div class="paymentsContainer">

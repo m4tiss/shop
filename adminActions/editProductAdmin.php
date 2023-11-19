@@ -3,6 +3,7 @@ include('../navbar.php');
 include('../functions/functionsAdmin.php');
 session_start();
 
+checkUserRoleAndRedirect($conn);
 
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $idProduct = $_GET['id'];

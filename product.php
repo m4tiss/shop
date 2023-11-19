@@ -27,7 +27,7 @@
             $category = getCategoryById($conn,$product['category']);
             $producer = getProducerById($conn,$product['idProducer']);
             echo '<h2 class="rightPanelInfo"> ' . $product['name'] . '</h2>
-                    <h2>Kategoria: '.$category['nameCategory'].' </h2>
+                    <h2 class="infoProduct">Kategoria: '.$category['nameCategory'].' </h2>
                     <h2>Producent: '.$producer['nameProducer'].' </h2>
                     <h2 class="rightPanelInfo"> Rozmiary:</h2>
                  <div class="sizesInProduct">';

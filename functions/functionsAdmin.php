@@ -442,3 +442,40 @@ function getAllStatuses($conn): array
     }
     return $statuses;
 }
+function getUserById($conn, $user_id): array
+{
+    $getUser = "SELECT * FROM users WHERE idUser=?";
+    $stmt = mysqli_prepare($conn, $getUser);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $id, $name, $surname, $password, $role);
+        if (mysqli_stmt_fetch($stmt)) {
+            mysqli_stmt_close($stmt);
+            return [
+                'id' => $id,
+                'name' => $name,
+                'surname' => $surname,
+                'password' => $password,
+                'role' => $role
+            ];
+        }
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
+    return [];
+}
+
+function checkUserRoleAndRedirect($conn) {
+    if (empty($_SESSION['users'])) {
+        header("Location: ../login.php");
+        exit();
+    }
+    $user_id = $_SESSION['users'];
+    $user = getUserById($conn, $user_id);
+    if ($user['role'] === 'user') {
+        header("Location: ../account.php");
+        exit();
+    }
+}

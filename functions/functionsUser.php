@@ -50,7 +50,7 @@ function addProductToDB($conn, $amount, $user_id, $idProduct, $size)
     $insertProductToDB = "INSERT INTO baskets (idUser, idProduct, amount, sizee) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $insertProductToDB);
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "iiii", $user_id, $idProduct, $amount, $size);
+        mysqli_stmt_bind_param($stmt, "iiis", $user_id, $idProduct, $amount, $size);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     } else {

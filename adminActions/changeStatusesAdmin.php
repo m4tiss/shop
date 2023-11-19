@@ -3,6 +3,7 @@ include('../navbar.php');
 include('../functions/functionsAdmin.php');
 session_start();
 
+checkUserRoleAndRedirect($conn);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idOrder = $_POST['idOrder'];
