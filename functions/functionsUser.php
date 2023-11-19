@@ -1,10 +1,14 @@
 <?php
 include_once('config.php');
-function getProductsByCategoryCondition($conn,$categoryCondition){
+function getProductsByCategoryCondition($conn, $categoryCondition): array
+{
     $getProducts = "SELECT * FROM products WHERE idCategory IN ($categoryCondition)";
     $products = array();
-    if ($productsResult = mysqli_query($conn, $getProducts)) {
-        if (mysqli_num_rows($productsResult) > 0) {
+    $stmt = mysqli_prepare($conn, $getProducts);
+    if ($stmt) {
+        mysqli_stmt_execute($stmt);
+        $productsResult = mysqli_stmt_get_result($stmt);
+        if ($productsResult && mysqli_num_rows($productsResult) > 0) {
             $i = 0;
             while ($row = mysqli_fetch_assoc($productsResult)) {
                 $product = array();
@@ -21,445 +25,673 @@ function getProductsByCategoryCondition($conn,$categoryCondition){
         } else {
             echo "Nie ma produktów w tym dziale!";
         }
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
     return $products;
 }
+
 function updateProductInDB($conn, $amount, $user_id, $idProduct, $size)
 {
-    $updateProductInDB = "UPDATE baskets SET amount=$amount WHERE idUser=$user_id and  idProduct=$idProduct and sizee=$size";
-    mysqli_query($conn, $updateProductInDB);
+    $updateProductInDB = "UPDATE baskets SET amount=? WHERE idUser=? and idProduct=? and sizee=?";
+    $stmt = mysqli_prepare($conn, $updateProductInDB);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "iiii", $amount, $user_id, $idProduct, $size);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function addProductToDB($conn, $amount, $user_id, $idProduct, $size)
 {
-    $insertProductToDB = "INSERT INTO baskets (idUser, idProduct,amount,sizee) VALUES ('$user_id', '$idProduct','$amount','$size')";
-    mysqli_query($conn, $insertProductToDB);
+    $insertProductToDB = "INSERT INTO baskets (idUser, idProduct, amount, sizee) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $insertProductToDB);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "iiii", $user_id, $idProduct, $amount, $size);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function deleteProductFromDB($conn, $user_id, $idProduct, $size)
 {
-    $deleteProductFromDB = "DELETE FROM baskets WHERE idUser=$user_id and  idProduct=$idProduct and sizee='$size' ";
-    mysqli_query($conn, $deleteProductFromDB);
+    $deleteProductFromDB = "DELETE FROM baskets WHERE idUser=? AND idProduct=? AND sizee=?";
+    $stmt = mysqli_prepare($conn, $deleteProductFromDB);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "iii", $user_id, $idProduct, $size);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
-function deleteAllFromBasketInDB($conn,$user_id){
-    $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=$user_id";
-    mysqli_query($conn, $deleteAllFromDB);
+
+function deleteAllFromBasketInDB($conn, $user_id)
+{
+    $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=?";
+    $stmt = mysqli_prepare($conn, $deleteAllFromDB);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function deleteAllFromDB($conn, $user_id)
 {
-    $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=$user_id";
-    mysqli_query($conn, $deleteAllFromDB);
+    $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=?";
+    $stmt = mysqli_prepare($conn, $deleteAllFromDB);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function editContactInDB($conn, $contactId, $userId, $email, $phoneNumber)
 {
-    $editContact = "UPDATE contacts SET email='$email', phoneNumber='$phoneNumber' WHERE idUser=$userId AND idContact=$contactId";
-    mysqli_query($conn, $editContact);
+    $editContact = "UPDATE contacts SET email=?, phoneNumber=? WHERE idUser=? AND idContact=?";
+    $stmt = mysqli_prepare($conn, $editContact);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "ssii", $email, $phoneNumber, $userId, $contactId);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function addContactToDB($conn, $userId, $email, $phoneNumber)
 {
-    $addContact = "INSERT INTO contacts(idUser,email,phoneNumber) values($userId,'$email','$phoneNumber');";
-    mysqli_query($conn, $addContact);
+    $addContact = "INSERT INTO contacts(idUser, email, phoneNumber) VALUES (?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $addContact);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "iss", $userId, $email, $phoneNumber);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function deleteContactFromDB($conn, $contactId)
 {
-    $deleteContact = "DELETE FROM contacts WHERE idContact=$contactId";
-    mysqli_query($conn, $deleteContact);
+    $deleteContact = "DELETE FROM contacts WHERE idContact = ?";
+    $stmt = mysqli_prepare($conn, $deleteContact);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $contactId);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function deleteAddressFromDB($conn, $addressId)
 {
-    $deleteAddress = "DELETE FROM addresses WHERE idAddress=$addressId";
-    mysqli_query($conn, $deleteAddress);
+    $deleteAddress = "DELETE FROM addresses WHERE idAddress = ?";
+    $stmt = mysqli_prepare($conn, $deleteAddress);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $addressId);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function addAddressToDB($conn, $userId, $city, $zipCode, $street, $streetNumber)
 {
-    $addAddress = "INSERT INTO addresses(idUser,city,zipCode,street,streetNumber) values($userId,'$city','$zipCode','$street','$streetNumber');";
-    mysqli_query($conn, $addAddress);
+    $addAddress = "INSERT INTO addresses(idUser, city, zipCode, street, streetNumber) VALUES (?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $addAddress);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "issss", $userId, $city, $zipCode, $street, $streetNumber);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
-function addOrderToDB($conn,$idPayment,$idStatus,$name,$surname,$email,$cost){
-    $date= date("Y-m-d H:i:s");
-    $addOrder = "INSERT INTO orders(idPayment,idStatus,name,surname,email,dateOrder,cost) values($idPayment,$idStatus,'$name','$surname','$email','$date','$cost')";
-    mysqli_query($conn, $addOrder);
-    return mysqli_insert_id($conn);
+
+function addOrderToDB($conn, $idPayment, $idStatus, $name, $surname, $email, $cost)
+{
+    $addOrder = "INSERT INTO orders (idPayment, idStatus, name, surname, email, dateOrder, cost) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $addOrder);
+    if ($stmt) {
+        $date = date("Y-m-d H:i:s");
+        mysqli_stmt_bind_param($stmt, "iissssd", $idPayment, $idStatus, $name, $surname, $email, $date, $cost);
+        mysqli_stmt_execute($stmt);
+        $orderId = mysqli_insert_id($conn);
+        mysqli_stmt_close($stmt);
+        return $orderId;
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+        return false;
+    }
 }
-function setOrderTotalCost($conn,$idOrder,$totalValue){
-    $setOrder = "UPDATE orders SET cost=$totalValue WHERE idOrder=$idOrder";
-    mysqli_query($conn, $setOrder);
+
+function setOrderTotalCost($conn, $idOrder, $totalValue)
+{
+    $setOrder = "UPDATE orders SET cost=? WHERE idOrder=?";
+    $stmt = mysqli_prepare($conn, $setOrder);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "di", $totalValue, $idOrder);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
-function addOrderDetailsToDB($conn,$idOrder,$nameProduct,$amount,$price,$size,$image){
-    $addOrderDetails = "INSERT INTO orderdetails(idOrder,nameProduct,amount,price,size,image) values($idOrder,'$nameProduct',$amount,$price,'$size','$image')";
-    mysqli_query($conn, $addOrderDetails);
+
+function addOrderDetailsToDB($conn, $idOrder, $nameProduct, $amount, $price, $size, $image)
+{
+    $addOrderDetails = "INSERT INTO orderdetails(idOrder, nameProduct, amount, price, size, image) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $addOrderDetails);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "issdss", $idOrder, $nameProduct, $amount, $price, $size, $image);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function editAddressInDB($conn, $idAddress, $city, $zipCode, $street, $streetNumber)
 {
-    $editAddress = "UPDATE addresses SET city='$city', zipCode='$zipCode',street='$street',streetNumber='$streetNumber' WHERE idAddress=$idAddress";
-    mysqli_query($conn, $editAddress);
+    $editAddress = "UPDATE addresses SET city=?, zipCode=?, street=?, streetNumber=? WHERE idAddress=?";
+    $stmt = mysqli_prepare($conn, $editAddress);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "sssii", $city, $zipCode, $street, $streetNumber, $idAddress);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
 }
+
 function isEmailExists($conn, $email)
 {
-    $getAllEmails = "SELECT * FROM contacts";
-    if ($emailResult = mysqli_query($conn, $getAllEmails)) {
-        if (mysqli_num_rows($emailResult) > 0) {
-            while ($row = mysqli_fetch_assoc($emailResult)) {
-                if ($email === $row['email']) return $row['idContact'];
-            }
-        } else {
-            echo "Nie ma żadnego maila w bazie";
+    $getEmail = "SELECT idContact FROM contacts WHERE email = ?";
+    $stmt = mysqli_prepare($conn, $getEmail);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $idContact);
+        if (mysqli_stmt_fetch($stmt)) {
+            mysqli_stmt_close($stmt);
+            return $idContact;
         }
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
     return false;
 }
-function getUserById($conn, $user_id)
+
+function getUserById($conn, $user_id): array
 {
-    $getUser = "SELECT * FROM users WHERE idUser=$user_id";
-    $user = array();
-    if ($userResult = mysqli_query($conn, $getUser)) {
-        if (mysqli_num_rows($userResult) > 0) {
-            while ($row = mysqli_fetch_assoc($userResult)) {
-                $user['id'] = $row['idUser'];
-                $user['name'] = $row['name'];
-                $user['surname'] = $row['surname'];
-                $user['password'] = $row['password'];
-                $user['role'] = $row['role'];
-            }
-        } else {
-            echo "Taki użytkownik nie istnieje";
-            exit();
+    $getUser = "SELECT * FROM users WHERE idUser=?";
+    $stmt = mysqli_prepare($conn, $getUser);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $id, $name, $surname, $password, $role);
+        if (mysqli_stmt_fetch($stmt)) {
+            mysqli_stmt_close($stmt);
+            return [
+                'id' => $id,
+                'name' => $name,
+                'surname' => $surname,
+                'password' => $password,
+                'role' => $role
+            ];
         }
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
-    return $user;
+    return [];
 }
-function getContactsById($conn, $user_id)
+
+function getContactsById($conn, $user_id): array
 {
-    $getContacts = "SELECT * FROM contacts WHERE idUser=$user_id";
-    $contacts = array();
-    if ($contactsResult = mysqli_query($conn, $getContacts)) {
-        if (mysqli_num_rows($contactsResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($contactsResult)) {
-                $contact = array();
-                $contact['email'] = $row['email'];
-                $contact['phoneNumber'] = $row['phoneNumber'];
-                $contacts[$i] = $contact;
-                $i += 1;
-            }
-        } else {
-            echo "Nie masz żadnego konatktu! Dodaj nowy";
-            exit();
+    $getContacts = "SELECT email, phoneNumber FROM contacts WHERE idUser=?";
+    $stmt = mysqli_prepare($conn, $getContacts);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $email, $phoneNumber);
+        $contacts = [];
+        while (mysqli_stmt_fetch($stmt)) {
+            $contact = [
+                'email' => $email,
+                'phoneNumber' => $phoneNumber,
+            ];
+            $contacts[] = $contact;
         }
+        mysqli_stmt_close($stmt);
+        return $contacts;
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
-    return $contacts;
+    return [];
 }
-function getAddressById($conn, $idAddress)
+
+function getAddressById($conn, $idAddress): array
 {
-    $getAddress = "SELECT * FROM addresses WHERE idAddress=$idAddress";
-    if ($addressResult = mysqli_query($conn, $getAddress)) {
-        if (mysqli_num_rows($addressResult) > 0) {
-            $row = mysqli_fetch_assoc($addressResult);
-            $address = array();
-            $address['idAddress'] = $row['idAddress'];
-            $address['city'] = $row['city'];
-            $address['zipCode'] = $row['zipCode'];
-            $address['street'] = $row['street'];
-            $address['streetNumber'] = $row['streetNumber'];
+    $getAddress = "SELECT * FROM addresses WHERE idAddress=?";
+    $stmt = mysqli_prepare($conn, $getAddress);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $idAddress);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if ($row = mysqli_fetch_assoc($result)) {
+            $address = [
+                'idAddress' => $row['idAddress'],
+                'city' => $row['city'],
+                'zipCode' => $row['zipCode'],
+                'street' => $row['street'],
+                'streetNumber' => $row['streetNumber'],
+            ];
+            mysqli_stmt_close($stmt);
+            return $address;
         } else {
             echo "Nie ma takiego adresu w bazie!";
         }
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
-    return $address;
+    return [];
+}
 
-}
-function getAddressesById($conn, $user_id)
+
+function getAddressesById($conn, $user_id): array
 {
-    $getAddresses = "SELECT * FROM addresses WHERE idUser=$user_id";
-    $addresses = array();
-    if ($addressesResult = mysqli_query($conn, $getAddresses)) {
-        if (mysqli_num_rows($addressesResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($addressesResult)) {
-                $address = array();
-                $address['idAddress'] = $row['idAddress'];
-                $address['city'] = $row['city'];
-                $address['zipCode'] = $row['zipCode'];
-                $address['street'] = $row['street'];
-                $address['streetNumber'] = $row['streetNumber'];
-                $addresses[$i] = $address;
-                $i += 1;
-            }
-        } else {
-            echo "Nie masz żadnego adresu! Dodaj nowy";
+    $getAddresses = "SELECT * FROM addresses WHERE idUser=?";
+    $stmt = mysqli_prepare($conn, $getAddresses);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $addresses = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $address = [
+                'idAddress' => $row['idAddress'],
+                'city' => $row['city'],
+                'zipCode' => $row['zipCode'],
+                'street' => $row['street'],
+                'streetNumber' => $row['streetNumber'],
+            ];
+            $addresses[] = $address;
         }
+        mysqli_stmt_close($stmt);
+        return $addresses;
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
-    return $addresses;
+    return [];
 }
-function getAllPaymentMethods($conn)
+
+function getAllPaymentMethods($conn): array
 {
     $getPaymentMethods = "SELECT * FROM payments";
-    $paymentMethods = array();
-    if ($paymentMethodsResult = mysqli_query($conn, $getPaymentMethods)) {
-        if (mysqli_num_rows($paymentMethodsResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($paymentMethodsResult)) {
-                $paymentMethod = array();
-                $paymentMethod['idPayment'] = $row['idPayment'];
-                $paymentMethod['namePayment'] = $row['namePayment'];
-                $paymentMethod['icon'] = $row['icon'];
-                $paymentMethods[$i] = $paymentMethod;
-                $i += 1;
-            }
-        } else {
-            echo "Nie ma żadnych dostępnych metod płatności!";
+    $stmt = mysqli_prepare($conn, $getPaymentMethods);
+    if ($stmt) {
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $paymentMethods = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $paymentMethod = [
+                'idPayment' => $row['idPayment'],
+                'namePayment' => $row['namePayment'],
+                'icon' => $row['icon'],
+            ];
+            $paymentMethods[] = $paymentMethod;
         }
+        mysqli_stmt_close($stmt);
+        return $paymentMethods;
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
-    return $paymentMethods;
+    return [];
 }
-function getAllOrdersByEmail($conn,$email){
-    $getOrders = "SELECT * FROM orders Where email='$email'";
-    $orders = array();
-    if ($ordersResult = mysqli_query($conn, $getOrders)) {
-        if (mysqli_num_rows($ordersResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($ordersResult)) {
-                $order = array();
-                $order['idOrder'] = $row['idOrder'];
-                $order['idPayment'] = $row['idPayment'];
-                $order['idStatus'] = $row['idStatus'];
-                $order['name'] = $row['surname'];
-                $order['surname'] = $row['surname'];
-                $order['email'] = $row['email'];
-                $order['dateOrder'] = $row['dateOrder'];
-                $order['cost'] = $row['cost'];
-                $orders[$i] = $order;
-                $i += 1;
-            }
-            usort($orders, function ($a, $b) {
-                return $b['idOrder'] - $a['idOrder'];
-            });
-        } else {
-            echo "Nie zrealizowałeś jeszcze żadnego zamówienia!";
+
+function getAllOrdersByEmail($conn, $email): array
+{
+    $getOrders = "SELECT * FROM orders WHERE email=?";
+    $stmt = mysqli_prepare($conn, $getOrders);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $orders = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $order = [
+                'idOrder' => $row['idOrder'],
+                'idPayment' => $row['idPayment'],
+                'idStatus' => $row['idStatus'],
+                'name' => $row['name'],
+                'surname' => $row['surname'],
+                'email' => $row['email'],
+                'dateOrder' => $row['dateOrder'],
+                'cost' => $row['cost'],
+            ];
+            $orders[] = $order;
         }
+        mysqli_stmt_close($stmt);
+        usort($orders, function ($a, $b) {
+            return $b['idOrder'] - $a['idOrder'];
+        });
+        return $orders;
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
-    return $orders;
+    return [];
 }
-function getOrderById($conn,$idOrder){
-    $getOrder = "SELECT * FROM orders Where idOrder=$idOrder";
-    if ($orderResult = mysqli_query($conn, $getOrder)) {
-        if (mysqli_num_rows($orderResult) > 0) {
-            while ($row = mysqli_fetch_assoc($orderResult)) {
-                $order = array();
-                $order['idOrder'] = $row['idOrder'];
-                $order['idPayment'] = $row['idPayment'];
-                $order['idStatus'] = $row['idStatus'];
-                $order['name'] = $row['surname'];
-                $order['surname'] = $row['surname'];
-                $order['email'] = $row['email'];
-                $order['dateOrder'] = $row['dateOrder'];
-                $order['cost'] = $row['cost'];
-            }
+
+function getOrderById($conn, $idOrder): array
+{
+    $getOrder = "SELECT * FROM orders WHERE idOrder=?";
+    $stmt = mysqli_prepare($conn, $getOrder);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $idOrder);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $order = [
+                'idOrder' => $row['idOrder'],
+                'idPayment' => $row['idPayment'],
+                'idStatus' => $row['idStatus'],
+                'name' => $row['name'],
+                'surname' => $row['surname'],
+                'email' => $row['email'],
+                'dateOrder' => $row['dateOrder'],
+                'cost' => $row['cost'],
+            ];
+            mysqli_stmt_close($stmt);
+            return $order;
         } else {
             echo "Nie ma zamówienia z takim ID!";
         }
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
-    return $order;
+    return [];
 }
-function getPaymentMethod($conn,$idPayment){
-    $getPayment = "SELECT * FROM payments Where idPayment=$idPayment";
-    if ($paymentResult = mysqli_query($conn, $getPayment)) {
-        if (mysqli_num_rows($paymentResult) > 0) {
-            while ($row = mysqli_fetch_assoc($paymentResult)) {
-                $payment = array();
-                $payment['idPayment'] = $row['idPayment'];
-                $payment['namePayment'] = $row['namePayment'];
-                $payment['icon'] = $row['icon'];
-            }
+
+function getPaymentMethod($conn, $idPayment): array
+{
+    $getPayment = "SELECT * FROM payments WHERE idPayment=?";
+    $stmt = mysqli_prepare($conn, $getPayment);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $idPayment);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $payment = [
+                'idPayment' => $row['idPayment'],
+                'namePayment' => $row['namePayment'],
+                'icon' => $row['icon'],
+            ];
+            mysqli_stmt_close($stmt);
+            return $payment;
         } else {
             echo "Nie ma metody z takim ID!";
         }
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
-    return $payment;
+    return [];
 }
-function getProductsFromOrder($conn,$idOrder){
-    $getProducts = "SELECT * FROM orderdetails Where idOrder = $idOrder";
-    $products = array();
-    if ($productsResult = mysqli_query($conn, $getProducts)) {
-        if (mysqli_num_rows($productsResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($productsResult)) {
-                $product = array();
-                $product['idOrderDetail'] = $row['idOrderDetail'];
-                $product['idOrder'] = $row['idOrder'];
-                $product['name'] = $row['nameProduct'];
-                $product['amount'] = $row['amount'];
-                $product['price'] = $row['price'];
-                $product['size'] = $row['size'];
-                $product['image'] = $row['image'];
-                $products[$i] = $product;
-                $i += 1;
+
+function getProductsFromOrder($conn, $idOrder): array
+{
+    $getProducts = "SELECT * FROM orderdetails WHERE idOrder = ?";
+    $stmt = mysqli_prepare($conn, $getProducts);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $idOrder);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if (mysqli_num_rows($result) > 0) {
+            $products = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $product = [
+                    'idOrderDetail' => $row['idOrderDetail'],
+                    'idOrder' => $row['idOrder'],
+                    'name' => $row['nameProduct'],
+                    'amount' => $row['amount'],
+                    'price' => $row['price'],
+                    'size' => $row['size'],
+                    'image' => $row['image'],
+                ];
+                $products[] = $product;
             }
+            mysqli_stmt_close($stmt);
+            return $products;
         } else {
             echo "To zamówienie było puste!";
         }
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
     }
-    return $products;
+    return [];
 }
-function getStatus($conn,$idStatus){
-    $getStatus = "SELECT * FROM statuses WHERE idStatus=$idStatus";
-    if ($statusResult = mysqli_query($conn, $getStatus)) {
-        if (mysqli_num_rows($statusResult) > 0) {
-            $row = mysqli_fetch_assoc($statusResult);
-            $status = array();
-            $status['idStatus'] = $row['idStatus'];
-            $status['nameStatus'] = $row['nameStatus'];
-        } else {
-            echo "Nie ma takiego statusu w bazie!";
-        }
-    }
-    return $status;
 
+function getStatus($conn, $idStatus): array
+{
+    $getStatus = "SELECT * FROM statuses WHERE idStatus = ?";
+    $stmt = mysqli_prepare($conn, $getStatus);
+    mysqli_stmt_bind_param($stmt, "i", $idStatus);
+    mysqli_stmt_execute($stmt);
+    $statusResult = mysqli_stmt_get_result($stmt);
+    if ($statusResult && mysqli_num_rows($statusResult) > 0) {
+        $row = mysqli_fetch_assoc($statusResult);
+        $status = array(
+            'idStatus' => $row['idStatus'],
+            'nameStatus' => $row['nameStatus']
+        );
+    } else {
+        echo "Nie ma takiego statusu w bazie!";
+    }
+    mysqli_stmt_close($stmt);
+    return $status;
 }
+
 function getPhoneNumberFromMail($conn, $email)
 {
-    $getPhoneNumber = "SELECT phoneNumber FROM contacts WHERE email='$email'";
-    if ($phoneNumberResult = mysqli_query($conn, $getPhoneNumber)) {
-        if (mysqli_num_rows($phoneNumberResult) > 0) {
-            $row = mysqli_fetch_assoc($phoneNumberResult);
-            $phoneNumber = $row['phoneNumber'];
-        } else {
-            echo "Nie znaleziono numeru dla tego emaila!";
-        }
+    $getPhoneNumber = "SELECT phoneNumber FROM contacts WHERE email=?";
+    $stmt = mysqli_prepare($conn, $getPhoneNumber);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $phoneNumberResult = mysqli_stmt_get_result($stmt);
+    if ($phoneNumberResult && mysqli_num_rows($phoneNumberResult) > 0) {
+        $row = mysqli_fetch_assoc($phoneNumberResult);
+        $phoneNumber = $row['phoneNumber'];
+    } else {
+        echo "Nie znaleziono numeru dla tego emaila!";
     }
+    mysqli_stmt_close($stmt);
     return $phoneNumber;
 }
+
 function getContactIdFromMail($conn, $email)
 {
-    $getId = "SELECT idContact FROM contacts WHERE email='$email'";
-    if ($idResult = mysqli_query($conn, $getId)) {
-        if (mysqli_num_rows($idResult) > 0) {
-            $row = mysqli_fetch_assoc($idResult);
-            $contactId = $row['idContact'];
-        } else {
-            echo "Nie znaleziono id dla tego emaila!";
-        }
+    $getId = "SELECT idContact FROM contacts WHERE email=?";
+    $stmt = mysqli_prepare($conn, $getId);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $idResult = mysqli_stmt_get_result($stmt);
+    if ($idResult && mysqli_num_rows($idResult) > 0) {
+        $row = mysqli_fetch_assoc($idResult);
+        $contactId = $row['idContact'];
+    } else {
+        echo "Nie znaleziono id dla tego emaila!";
     }
+    mysqli_stmt_close($stmt);
     return $contactId;
 }
+
 function getProductById($conn, $productId)
 {
-    $getProduct = "SELECT * FROM products WHERE idProduct=$productId";
+    $getProduct = "SELECT * FROM products WHERE idProduct=?";
     $productData = array();
-
-    if ($productResult = mysqli_query($conn, $getProduct)) {
-        if (mysqli_num_rows($productResult) > 0) {
-            while ($row = mysqli_fetch_assoc($productResult)) {
-                $productData['name'] = $row['nameProduct'];
-                $productData['description'] = $row['description'];
-                $productData['price'] = $row['price'];
-                $productData['image'] = $row['image'];
-                $productData['id'] = $row['idProduct'];
-                $productData['category'] = $row['idCategory'];
-            }
-        } else {
-            echo "Produkt już nie istnieje";
-            exit();
+    $stmt = mysqli_prepare($conn, $getProduct);
+    mysqli_stmt_bind_param($stmt, "i", $productId);
+    mysqli_stmt_execute($stmt);
+    $productResult = mysqli_stmt_get_result($stmt);
+    if ($productResult && mysqli_num_rows($productResult) > 0) {
+        while ($row = mysqli_fetch_assoc($productResult)) {
+            $productData['name'] = $row['nameProduct'];
+            $productData['description'] = $row['description'];
+            $productData['price'] = $row['price'];
+            $productData['image'] = $row['image'];
+            $productData['id'] = $row['idProduct'];
+            $productData['category'] = $row['idCategory'];
         }
+    } else {
+        echo "Produkt już nie istnieje";
+        exit();
     }
+    mysqli_stmt_close($stmt);
     return $productData;
 }
-function isProductExist($conn, $productId)
-{
-    $getProduct = "SELECT * FROM products WHERE idProduct=$productId";
-    if ($productResult = mysqli_query($conn, $getProduct)) {
-        if (mysqli_num_rows($productResult) > 0) return true;
-        else return false;
-    }
-}
-function getProductsFromBasket($conn, $userId)
-{
-    $getProducts = "SELECT * FROM baskets WHERE idUser=$userId";
-    $productsData = array();
 
-    if ($productResult = mysqli_query($conn, $getProducts)) {
-        if (mysqli_num_rows($productResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($productResult)) {
-                $productData = array();
-                $productData['idUser'] = $row['idUser'];
-                $productData['idProduct'] = $row['idProduct'];
-                $productData['amount'] = $row['amount'];
-                $productData['sizee'] = $row['sizee'];
-                $productsData[$i] = $productData;
-                $i += 1;
-            }
-        } else {
-            echo "Produkt już nie istnieje";
+function isProductExist($conn, $productId): bool
+{
+    $getProduct = "SELECT * FROM products WHERE idProduct=?";
+    $stmt = mysqli_prepare($conn, $getProduct);
+    mysqli_stmt_bind_param($stmt, "i", $productId);
+    mysqli_stmt_execute($stmt);
+    $productResult = mysqli_stmt_get_result($stmt);
+    $exists = mysqli_num_rows($productResult) > 0;
+    mysqli_stmt_close($stmt);
+    return $exists;
+}
+
+function getProductsFromBasket($conn, $userId): array
+{
+    $getProducts = "SELECT * FROM baskets WHERE idUser=?";
+    $stmt = mysqli_prepare($conn, $getProducts);
+    mysqli_stmt_bind_param($stmt, "i", $userId);
+    mysqli_stmt_execute($stmt);
+    $productResult = mysqli_stmt_get_result($stmt);
+    $productsData = array();
+    if (mysqli_num_rows($productResult) > 0) {
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($productResult)) {
+            $productData = array();
+            $productData['idUser'] = $row['idUser'];
+            $productData['idProduct'] = $row['idProduct'];
+            $productData['amount'] = $row['amount'];
+            $productData['sizee'] = $row['sizee'];
+            $productsData[$i] = $productData;
+            $i += 1;
         }
+    } else {
+        echo "Brak produktów w koszyku";
     }
+    mysqli_stmt_close($stmt);
     return $productsData;
 }
-function getCategoryById($conn,$idCategory){
-    $getCategory = "SELECT * FROM categories WHERE idCategory=$idCategory";
-    if ($categoryResult = mysqli_query($conn, $getCategory)) {
-        if (mysqli_num_rows($categoryResult) > 0) {
-            $row = mysqli_fetch_assoc($categoryResult);
+
+function getCategoryById($conn, $idCategory): array
+{
+    $getCategory = "SELECT * FROM categories WHERE idCategory=?";
+    $stmt = mysqli_prepare($conn, $getCategory);
+    mysqli_stmt_bind_param($stmt, "i", $idCategory);
+    mysqli_stmt_execute($stmt);
+    $categoryResult = mysqli_stmt_get_result($stmt);
+    $category = array();
+    if (mysqli_num_rows($categoryResult) > 0) {
+        $row = mysqli_fetch_assoc($categoryResult);
+        $category['idCategory'] = $row['idCategory'];
+        $category['nameCategory'] = $row['nameCategory'];
+        $category['storeDepartament'] = $row['storeDepartament'];
+    } else {
+        echo "Nie ma kategorii z takim ID!";
+    }
+    mysqli_stmt_close($stmt);
+    return $category;
+}
+
+function getCategoriesByStore($conn, $store): array
+{
+    $getCategories = "SELECT * FROM categories WHERE storeDepartament=?";
+    $stmt = mysqli_prepare($conn, $getCategories);
+    mysqli_stmt_bind_param($stmt, "s", $store);
+    mysqli_stmt_execute($stmt);
+    $categoriesResult = mysqli_stmt_get_result($stmt);
+    $categories = array();
+    if (mysqli_num_rows($categoriesResult) > 0) {
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($categoriesResult)) {
             $category = array();
             $category['idCategory'] = $row['idCategory'];
             $category['nameCategory'] = $row['nameCategory'];
             $category['storeDepartament'] = $row['storeDepartament'];
-        } else {
-            echo "Nie ma kategorii z takim ID!";
+            $categories[$i] = $category;
+            $i += 1;
         }
+    } else {
+        echo "Nie ma kategorii w tym dziale!";
     }
-    return $category;
-}
-function getCategoriesByStore($conn,$store){
-    $getCategories = "SELECT * FROM categories where storeDepartament='$store'";
-    $categories = array();
-    if ($categoriesResult = mysqli_query($conn, $getCategories)) {
-        if (mysqli_num_rows($categoriesResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($categoriesResult)) {
-                $category = array();
-                $category['idCategory'] = $row['idCategory'];
-                $category['nameCategory'] = $row['nameCategory'];
-                $category['storeDepartament'] = $row['storeDepartament'];
-                $categories[$i] = $category;
-                $i += 1;
-            }
-        } else {
-            echo "Nie ma kategorii w tym dziale!";
-        }
-    }
+    mysqli_stmt_close($stmt);
     return $categories;
 }
-function getProducersByStore($conn,$store){
-    $getProducers = "SELECT * FROM producers where storeDepartament='$store'";
+
+function getProducersByStore($conn, $store): array
+{
+    $getProducers = "SELECT * FROM producers WHERE storeDepartament=?";
+    $stmt = mysqli_prepare($conn, $getProducers);
+    mysqli_stmt_bind_param($stmt, "s", $store);
+    mysqli_stmt_execute($stmt);
+    $producersResult = mysqli_stmt_get_result($stmt);
     $producers = array();
-    if ($producersResult = mysqli_query($conn, $getProducers)) {
-        if (mysqli_num_rows($producersResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($producersResult)) {
-                $producer = array();
-                $producer['idProducer'] = $row['idProducer'];
-                $producer['nameProducer'] = $row['nameProducer'];
-                $producer['storeDepartament'] = $row['storeDepartament'];
-                $producers[$i] = $producer;
-                $i += 1;
-            }
-        } else {
-            echo "Nie ma producentów w tym dziale!";
-        }
-    }
-    return $producers;
-}
-function getProducerById($conn,$idProducer){
-    $getProducer = "SELECT * FROM producers WHERE idProducer=$idProducer";
-    if ($producerResult = mysqli_query($conn, $getProducer)) {
-        if (mysqli_num_rows($producerResult) > 0) {
-            $row = mysqli_fetch_assoc($producerResult);
+    if (mysqli_num_rows($producersResult) > 0) {
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($producersResult)) {
             $producer = array();
             $producer['idProducer'] = $row['idProducer'];
             $producer['nameProducer'] = $row['nameProducer'];
             $producer['storeDepartament'] = $row['storeDepartament'];
-        } else {
-            echo "Nie ma producenta z takim ID!";
+            $producers[$i] = $producer;
+            $i += 1;
         }
+    } else {
+        echo "Nie ma producentów w tym dziale!";
     }
+    mysqli_stmt_close($stmt);
+    return $producers;
+}
+
+function getProducerById($conn, $idProducer): array
+{
+    $getProducer = "SELECT * FROM producers WHERE idProducer=?";
+    $stmt = mysqli_prepare($conn, $getProducer);
+    mysqli_stmt_bind_param($stmt, "i", $idProducer);
+    mysqli_stmt_execute($stmt);
+    $producerResult = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($producerResult) > 0) {
+        $row = mysqli_fetch_assoc($producerResult);
+        $producer = array();
+        $producer['idProducer'] = $row['idProducer'];
+        $producer['nameProducer'] = $row['nameProducer'];
+        $producer['storeDepartament'] = $row['storeDepartament'];
+    } else {
+        echo "Nie ma producenta z takim ID!";
+    }
+    mysqli_stmt_close($stmt);
     return $producer;
 }
+
