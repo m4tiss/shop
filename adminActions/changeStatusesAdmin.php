@@ -29,9 +29,9 @@ foreach ($orders as $order){
                 <h3>'.$order['email'].'</h3>
                 <h3>'. $order['dateOrder'].'</h3>
                 <h3>'.$orderPrice.' zł</h3>
-                <form action="changeStatusesAdmin.php" method="post">
+                <form class="orderForm" action="changeStatusesAdmin.php" method="post">
                 <input type="text" name="idOrder" id="idOrder" value="'.$order['idOrder'].'" hidden>
-                 <select name="idStatus" id="idStatus" required>';
+                 <select class="selectAdmin" name="idStatus" id="idStatus" required>';
     foreach($statuses as $statusOption){
         if($status['idStatus']==$statusOption['idStatus']){
             echo'<option value="'.$statusOption['idStatus'].'" selected>'.$statusOption['nameStatus'].'</option>';
@@ -43,7 +43,7 @@ foreach ($orders as $order){
     }
     echo'
                 </select>
-                <button type="submit">Zmień status</button>
+                <button class="adminButton" type="submit">Zmień status</button>
                 </form>
             </div>';
 }

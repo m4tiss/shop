@@ -255,6 +255,10 @@ function updateProductInDB($conn, $amount, $user_id, $idProduct, $size)
     mysqli_query($conn, $updateProductInDB);
 }
 
+function updateProductAdmin($conn,$idProduct,$productName,$productDescription,$productPrice){
+    $updateProductAdmin = "UPDATE products SET nameProduct='$productName', description = '$productDescription', price = $productPrice  WHERE idProduct=$idProduct";
+    mysqli_query($conn, $updateProductAdmin);
+}
 function addProductToDB($conn, $amount, $user_id, $idProduct, $size)
 {
     $insertProductToDB = "INSERT INTO baskets (idUser, idProduct,amount,sizee) VALUES ('$user_id', '$idProduct','$amount','$size')";

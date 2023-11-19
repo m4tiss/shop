@@ -41,15 +41,15 @@ echo '
     </div>
     <form class="addSizeForm" action="addProducerAdmin.php" method="post">
     <label for="producer">Wpisz producenta:</label>
-   <input type="text" name="producer" id="producer" placeholder="Wpisz producenta" required>
+   <input class = "addInput" type="text" name="producer" id="producer" placeholder="Wpisz producenta" required>
     
     <label for="productType">Wybierz dział produktu:</label>
-    <select name="productType" id="productType" required>
+    <select class="selectAdmin" name="productType" id="productType" required>
         <option value="footwear">Obuwie</option>
        <option value="clothes">Odzież</option>
        <option value="accessories">Akcesoria</option>
     </select>
-    <button type="submit">Dodaj producenta</button>
+    <button  class="adminButton" type="submit">Dodaj producenta</button>
    </form>
 </div>';
 

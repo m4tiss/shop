@@ -61,4 +61,57 @@
   gap: 10px;
 }
 
-/*# sourceMappingURL=addSizeAdmin.css.map */
+.addInput {
+  height: 50px;
+  width: 400px;
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+}
+
+.adminButton {
+  height: 50px;
+  width: 130px;
+  border-radius: 30px;
+  cursor: pointer;
+  background: black;
+  color: white;
+  box-shadow: 2px 2px 8px gray;
+}
+
+.adminButton:hover {
+  background: #151515;
+}
+
+.selectAdmin {
+  height: 60px;
+  width: 150px;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.orderForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.textAreaAdmin {
+  height: 300px;
+  width: 500px;
+  padding: 10px;
+}
+
+.inputPriceAdmin {
+  height: 30px;
+  width: 150px;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=stylesAdmin.css.map */

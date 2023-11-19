@@ -37,3 +37,37 @@
   width: 800px;
   gap: 10px;
 }
+.addInput{
+  @include basicInput;
+}
+.adminButton{
+  height: 50px;
+  width: 130px;
+  @include basicButton;
+}
+.adminButton:hover{
+  @include basicButtonHover;
+}
+.selectAdmin{
+  height: 60px;
+  width: 150px;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 15px;
+}
+.orderForm{
+  @include flexCenterCenter;
+  gap:20px;
+}
+.textAreaAdmin{
+  height: 300px;
+  width: 500px;
+  padding: 10px;
+}
+.inputPriceAdmin{
+  height: 30px;
+  width: 150px;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 20px;
+}

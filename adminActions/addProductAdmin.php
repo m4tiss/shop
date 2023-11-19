@@ -41,9 +41,9 @@ echo '
 <form class="addSizeForm" action="addProductAdmin.php" method="post" enctype="multipart/form-data">
     <h2>Obuwie</h2>
     <label for="name">Wpisz nazwę:</label>
-    <input type="text" name="name" id="name" placeholder="Wpisz nazwę" required>
+    <input class ="addInput" type="text" name="name" id="name" placeholder="Wpisz nazwę" required>
 
-    <select  name="productType" id="productType" hidden>
+    <select class="selectAdmin" name="productType" id="productType" hidden>
         <option value="'.$store.'">'.$store.'</option>
     </select
     <label for="productCategory">Wybierz kategorię produktu:</label>
@@ -66,7 +66,7 @@ echo '</select>
     <textarea name="productDescription" id="productDescription" placeholder="Wpisz opis produktu" rows="4" required></textarea>
      <label for="productPrice">Podaj cenę produktu:</label>
     <input type="number" name="productPrice" id="productPrice" placeholder="Podaj cenę" step="0.01" required>
-    <button type="submit">Dodaj produkt</button>
+    <button  class="adminButton" type="submit">Dodaj produkt</button>
 </form>
         </div>
     </div>

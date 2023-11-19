@@ -30,6 +30,7 @@ foreach ($products as $product) {
             <h3>' . $category['nameCategory'] . '</h3>
             <h3>' . $product['nameProduct'] . '</h3>
             <h3>' . $product['price'] . ' zł</h3>
+            <a href="editProductAdmin.php?id=' . $product['idProduct'] . '"><img src="../images/editIcon.jpg" width="40px"></a>
             <a href="manageProductAdmin.php?id=' . $product['idProduct'] . '"><img src="../images/xIcon.png" width="40px"></a>
         </div>';
 }
@@ -38,12 +39,12 @@ echo '
 <div class="forms">
 <form class="addSizeForm" action="manageProductAdmin.php" method="post">
     <label for="productType">Wybierz dział produktu:</label>
-    <select name="productType" id="productType" required>
+    <select class="selectAdmin" name="productType" id="productType" required>
         <option value="footwear">Obuwie</option>
         <option value="clothes">Odzież</option>
         <option value="accessories">Akcesoria</option>
     </select>
-   <button type="submit" >Dodaj produkt</button>
+   <button  class="adminButton" type="submit" >Dodaj produkt</button>
 </form>
         </div>
     </div>
