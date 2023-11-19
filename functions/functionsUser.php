@@ -313,7 +313,6 @@ function getAddressById($conn, $idAddress): array
     return [];
 }
 
-
 function getAddressesById($conn, $user_id): array
 {
     $getAddresses = "SELECT * FROM addresses WHERE idUser=?";
@@ -558,6 +557,7 @@ function getProductById($conn, $productId)
             $productData['image'] = $row['image'];
             $productData['id'] = $row['idProduct'];
             $productData['category'] = $row['idCategory'];
+            $productData['idProducer'] = $row['idProducer'];
         }
     } else {
         echo "Produkt już nie istnieje";
@@ -694,4 +694,41 @@ function getProducerById($conn, $idProducer): array
     mysqli_stmt_close($stmt);
     return $producer;
 }
+
+function getSizesFromStore($conn,$departament): array
+{
+    $getSizes = "SELECT * FROM sizees WHERE storeDepartament=?";
+    $stmt = mysqli_prepare($conn, $getSizes);
+    mysqli_stmt_bind_param($stmt, "s", $departament);
+    mysqli_stmt_execute($stmt);
+    $sizesResult = mysqli_stmt_get_result($stmt);
+    $sizes = array();
+    if (mysqli_num_rows($sizesResult) > 0) {
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($sizesResult)) {
+            $size = array();
+            $size['idSizee'] = $row['idSizee'];
+            $size['storeDepartament'] = $row['storeDepartament'];
+            $size['nameSizee'] = $row['nameSizee'];
+            $sizes[$i] = $size;
+            $i += 1;
+        }
+    } else {
+        echo "Nie ma rozmiarów w tym dziale!";
+    }
+    mysqli_stmt_close($stmt);
+    return $sizes;
+}
+
+function getStoreFromCategory($conn, $idCategory){
+    $getStoreDepartament = "SELECT storeDepartament FROM categories WHERE idCategory=?";
+    $stmt = mysqli_prepare($conn, $getStoreDepartament);
+    mysqli_stmt_bind_param($stmt, "i", $idCategory);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $departament);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+    return $departament;
+}
+
 

@@ -5,8 +5,6 @@
     include_once('config.php');
     include_once('functions/functionsUser.php');
     session_start();
-
-
     if (!empty($_GET['id'])) {
         $productId = $_GET['id'];
         $product = getProductById($conn, $productId);
@@ -26,24 +24,23 @@
     <div class="rightPanel">
         <div class="rightPanelDetails">
             <?php
+            $category = getCategoryById($conn,$product['category']);
+            $producer = getProducerById($conn,$product['idProducer']);
             echo '<h2 class="rightPanelInfo"> ' . $product['name'] . '</h2>
+                    <h2>Kategoria: '.$category['nameCategory'].' </h2>
+                    <h2>Producent: '.$producer['nameProducer'].' </h2>
                     <h2 class="rightPanelInfo"> Rozmiary:</h2>
-                 <div class="sizes">';
+                 <div class="sizesInProduct">';
 
 
-            $getStoreDepartament = "SELECT storeDepartament FROM categories WHERE idCategory={$product['category']}";
-
-            $departamentResult = mysqli_query($conn, $getStoreDepartament);
-            $rows = mysqli_fetch_assoc($departamentResult);
-            $departament = $rows['storeDepartament'];
-            $getSizes = "SELECT nameSizee FROM sizees WHERE storeDepartament='$departament'";
-            $sizeesResult = mysqli_query($conn, $getSizes);
-            while ($sizeRows = mysqli_fetch_assoc($sizeesResult)) {
-                $size = $sizeRows['nameSizee'];
+            $departament = getStoreFromCategory($conn,$product['category']);
+            $sizes = getSizesFromStore($conn,$departament);
+            foreach ($sizes as $size){
                 echo '<label>
-                    <input id="idPrzyciskuRadio" type="radio" name="selectedSize" value="' . $size . '"> ' . $size . '
+                    <input id="idPrzyciskuRadio" type="radio" name="selectedSize" value="' . $size['nameSizee'] . '"> ' . $size['nameSizee'] . '
                 </label>';
             }
+
             $price = number_format($product['price'],2);
             echo ' </div>
             <h2 class="rightPanelInfo"> Cena: ' . $price . ' zł</h2>';
