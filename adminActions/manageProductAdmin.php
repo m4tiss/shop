@@ -30,8 +30,8 @@ foreach ($products as $product) {
             <h3>' . $category['nameCategory'] . '</h3>
             <h3>' . $product['nameProduct'] . '</h3>
             <h3>' . $product['price'] . ' zł</h3>
-            <a href="editProductAdmin.php?id=' . $product['idProduct'] . '"><img src="../images/editIcon.jpg" width="40px"></a>
-            <a href="manageProductAdmin.php?id=' . $product['idProduct'] . '"><img src="../images/xIcon.png" width="40px"></a>
+            <a href="editProductAdmin.php?id=' . $product['idProduct'] . '"><img class="manageIcon" src="../images/editIcon.jpg" width="40px"></a>
+            <a href="manageProductAdmin.php?id=' . $product['idProduct'] . '"><img class="manageIcon" src="../images/xIcon.png" width="40px"></a>
         </div>';
 }
 

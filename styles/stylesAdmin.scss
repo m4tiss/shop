@@ -34,7 +34,6 @@
 }
 .statusPanel{
   @include flexCenterCenter;
-  width: 800px;
   gap: 10px;
 }
 .addInput{
@@ -70,4 +69,12 @@
   border-radius: 30px;
   padding: 10px;
   font-size: 20px;
+}
+.manageIcon{
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.manageIcon:hover{
+  transform: rotateZ(30deg);
 }

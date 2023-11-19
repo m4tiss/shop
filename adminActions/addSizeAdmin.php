@@ -34,20 +34,20 @@ foreach ($sizes as $size) {
         echo '<div class="sizePanel">
                 <img src="../icons/shoe.png" width="80px">
                 <h3>' . $size['nameSize'] . '</h3>
-                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img src="../images/xIcon.png" width="40px"></a>
+                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img class="manageIcon" src="../images/xIcon.png" width="40px"></a>
             </div>';
     } elseif ($size['storeDepartament'] === 'clothes') {
         echo '<div class="sizePanel">
                 <img src="../icons/product.jpg" width="100px">
                 <h3>' . $size['nameSize'] . '</h3>
-                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img src="../images/xIcon.png" width="40px"></a>
+                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img class="manageIcon" src="../images/xIcon.png" width="40px"></a>
             </div>';
     }
     elseif ($size['storeDepartament'] === 'accessories') {
         echo '<div class="sizePanel">
                 <img src="../icons/socks.jpg" width="100px">
                 <h3>' . $size['nameSize'] . '</h3>
-                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img src="../images/xIcon.png" width="40px"></a>
+                <a href="addSizeAdmin.php?id=' . $size['idSize'] . '"><img class="manageIcon" src="../images/xIcon.png" width="40px"></a>
             </div>';
     }
 }
@@ -55,7 +55,7 @@ echo '
     </div>
     <form class="addSizeForm" action="addSizeAdmin.php" method="post">
     <label for="size">Wpisz rozmiar:</label>
-    <input type="text" name="size" id="size" placeholder="Wpisz rozmiar" required>
+    <input class="addInput" type="text" name="size" id="size" placeholder="Wpisz rozmiar" required>
     
     <label for="productType">Wybierz dział produktu:</label>
     <select class="selectAdmin" name="productType" id="productType" required>

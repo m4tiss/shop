@@ -55,12 +55,12 @@ if($user['role']==='admin'){
                     echo '
                     </div>
                     <div class="editIconContactAndAddresses">
-                        <a href="editContact.php?email=' . $contact['email'] . '&number=' . $numberOfContact . '"><img src="images/editIcon.jpg" width="50px"></a>
+                        <a href="editContact.php?email=' . $contact['email'] . '&number=' . $numberOfContact . '"><img class="manageIcon" src="images/editIcon.jpg" width="50px"></a>
                     </div>';
                     if ($numberOfContact != 1) {
                         $contactId = getContactIdFromMail($conn,$contact['email']);
                         echo '<div class="removeIconContactAndAddresses">
-                                 <a href="deleteContact.php?idContact=' .$contactId. '"><img class="XIcon" src="images/xIcon.png" width="50px"/></a>
+                                 <a href="deleteContact.php?idContact=' .$contactId. '"><img class="manageIcon" class="XIcon" src="images/xIcon.png" width="50px"/></a>
                               </div>';
                     }
                     echo '</div>';
@@ -90,10 +90,10 @@ if($user['role']==='admin'){
                     echo '
                     </div>
                     <div class="editIconContactAndAddresses">
-                        <a href="editAddresses.php?id=' .$address['idAddress'].'"><img src="images/editIcon.jpg" width="50px"></a>
+                        <a href="editAddresses.php?id=' .$address['idAddress'].'"><img class="manageIcon" src="images/editIcon.jpg" width="50px"></a>
                     </div>
                     <div class="removeIconContactAndAddresses">
-                         <a href="deleteAddress.php?id=' .$address['idAddress'].'"><img class="XIcon" src="images/xIcon.png" width="50px"/></a>
+                         <a href="deleteAddress.php?id=' .$address['idAddress'].'"><img class="manageIcon" src="images/xIcon.png" width="50px"/></a>
                     </div>
                 </div>';
                 }

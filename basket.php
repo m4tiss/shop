@@ -25,7 +25,7 @@ session_start();
                             <h2>Rozmiar: ' . $size . '</h2>
                             <h2>Ilość:' . $quantity . '</h2>
                             <a href="deleteFromBasketSession.php?index='.$product['id'].''.$size.'">
-                            <img class="XIcon" src="images/xIcon.png" width="50px"/>
+                            <img class="manageIcon" src="images/xIcon.png" width="50px"/>
                             </a>
                            </div>';
                 $totalSum += $product['price'] * $quantity;
@@ -40,7 +40,8 @@ session_start();
                 <a href="chooseContactAndAddress.php"><button class="button">Wybierz kontakt i adres</button></a>
              </div>';
             }else{
-                echo '<h2>Koszyk jest pusty</h2>';
+                echo ' <img src="icons/empty.png" width="1000px">
+                        <h2 class="basketInfo">Koszyk jest pusty</h2>';
             }
         } else {
             echo '<h2>Koszyk jest pusty</h2>';

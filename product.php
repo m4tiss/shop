@@ -47,8 +47,15 @@
             $price = number_format($product['price'],2);
             echo ' </div>
             <h2 class="rightPanelInfo"> Cena: ' . $price . ' zł</h2>';
-
-            echo '<button id="addToBasket" class="addToBasket"  onclick="changeColor();addToBasketSession(' . $product['id'] . ') ">Dodaj do koszyka</button>'
+            if (!empty($_SESSION['users'])) {
+                $user_id = $_SESSION['users'];
+                $user = getUserById($conn,$user_id);
+                if($user['role']!=='admin'){
+                    echo '<button id="addToBasket" class="addToBasket"  onclick="changeColor();addToBasketSession(' . $product['id'] . ') ">Dodaj do koszyka</button>';
+                }
+            }else{
+                echo '<button id="addToBasket" class="addToBasket"  onclick="changeColor();addToBasketSession(' . $product['id'] . ') ">Dodaj do koszyka</button>';
+            }
             ?>
         </div>
     </div>
