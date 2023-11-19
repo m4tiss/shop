@@ -24,12 +24,13 @@ foreach ($products as $product) {
     $category = getCategoryById($conn, $product['idCategory']);
     $producer = getProducerById($conn, $product['idProducer']);
 
+    $price = number_format($product['price'],2);
     echo '<div class="product">
             <img src="../images/' . $product['image'] . '" width="80px">
             <h3>' . $producer['nameProducer'] . '</h3>
             <h3>' . $category['nameCategory'] . '</h3>
             <h3>' . $product['nameProduct'] . '</h3>
-            <h3>' . $product['price'] . ' zł</h3>
+            <h3>' . $price . ' zł</h3>
             <a href="editProductAdmin.php?id=' . $product['idProduct'] . '"><img class="manageIcon" src="../images/editIcon.jpg" width="40px"></a>
             <a href="manageProductAdmin.php?id=' . $product['idProduct'] . '"><img class="manageIcon" src="../images/xIcon.png" width="40px"></a>
         </div>';

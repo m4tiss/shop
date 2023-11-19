@@ -50,7 +50,7 @@ include('functions/functionsUser.php');
         $values = [];
         for ($i = 0; $i < 6; $i++) {
             while (true) {
-                $value = mt_rand(0, 10);
+                $value = mt_rand(0, 12);
 
                 if (!in_array($value, $values) && isProductExist($conn, $value)) {
                     $values[] = $value;
