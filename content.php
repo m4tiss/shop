@@ -1,5 +1,5 @@
 <?php include_once('settings.php');
-include ('functions.php');
+include('functions/functionsUser.php');
 include('navbar.php'); ?>
 <div class="mainContainer">
     <div class="filtrationAndSort">
@@ -8,9 +8,9 @@ include('navbar.php'); ?>
         <ul>
             <?php include_once('config.php');
             $storeDepartament = $_GET['store'] ?? '';
-            $producers = getProducersByStore($conn,$storeDepartament);
+            $producers = getProducersByStore($conn, $storeDepartament);
             echo '<ul class=producersFiltration>';
-            foreach ($producers as $producer){
+            foreach ($producers as $producer) {
                 echo '<li class="producerContainer">
                 <input class="checkboxProducer" type="checkbox" id="' . $producer['nameProducer'] . '" name="' . $producer['nameProducer'] . '" value="' . $producer['nameProducer'] . '">
                   <label class="producerNameLabel" for="' . $producer['nameProducer'] . '">' . $producer['nameProducer'] . '</label><br>
@@ -24,11 +24,11 @@ include('navbar.php'); ?>
         <h2 class="filtrationAndSortingSubtitle">Kategoria</h2>
         <ul>
             <?php
-            $categoriesFromStore = getCategoriesByStore($conn,$storeDepartament);
+            $categoriesFromStore = getCategoriesByStore($conn, $storeDepartament);
             echo '<ul class=producersFiltration>';
-            foreach ($categoriesFromStore as $category){
+            foreach ($categoriesFromStore as $category) {
                 $categorySplitName = str_replace(array(' ', '\t', '\n', '\r'), '', $category['nameCategory']);
-                        echo '<li class="categoryContainer">
+                echo '<li class="categoryContainer">
                     <input class="checkboxCategory" type="checkbox" id="' . $category['nameCategory'] . '" name="' . $category['nameCategory'] . '" value="' . $categorySplitName . '">
                     <label class="categoryNameLabel" for="' . $category['nameCategory'] . '">' . $category['nameCategory'] . '</label><br>
                   </li>';
@@ -37,7 +37,6 @@ include('navbar.php'); ?>
 
             ?>
         </ul>
-
         <h1 class="filtrationAndSortingTitle">SORTUJ</h1>
         <select class="selectSorting" name="sort" id="sort">
             <option value="ascending">Rosnąco</option>
@@ -51,61 +50,33 @@ include('navbar.php'); ?>
 
         <?php
         $categories = [];
-        foreach($categoriesFromStore as $category){
+        foreach ($categoriesFromStore as $category) {
             $categories[] = $category['idCategory'];
         }
         $categoryCondition = implode(',', $categories);
-
-        $getProducts = "SELECT * FROM products WHERE idCategory IN ($categoryCondition)";
-
-//        getProductsBy
-
+        $products = getProductsByCategoryCondition($conn, $categoryCondition);
         if (!empty($categories)) {
-            if ($products_Result = mysqli_query($conn, $getProducts)) {
-                if (mysqli_num_rows($products_Result) > 0) {
-                    while ($row = mysqli_fetch_assoc($products_Result)) {
-                        $productName = $row['nameProduct'];
-                        $productPrice = $row['price'];
-                        $productImage = $row['image'];
-                        $productId = $row['idProduct'];
-                        $productCategory = $row['idCategory'];
-                        $productProducerId = $row['idProducer'];
-
-                        $getCategoryName = "SELECT nameCategory FROM categories WHERE idCategory=$productCategory";
-                        $category_Result = mysqli_query($conn, $getCategoryName);
-                        $row_with_categoryName = mysqli_fetch_assoc($category_Result);
-
-                        $categoryProductName = $row_with_categoryName['nameCategory'];
-                        $categoryProductName = str_replace(array(' ', '\t', '\n', '\r'), '', $categoryProductName);
-
-                        $getProducerName = "SELECT nameProducer FROM producers WHERE idProducer=$productProducerId";
-                        $producer_Result = mysqli_query($conn, $getProducerName);
-                        $row_with_producerName = mysqli_fetch_assoc($producer_Result);
-
-                        $producerProductName = $row_with_producerName['nameProducer'];
-                        $producerProductName = str_replace(array(' ', '\t', '\n', '\r'), '', $producerProductName);
-
-                        echo '<div class="productLayout ' . $categoryProductName . ' ' . $producerProductName . '">';
-                        echo '<a class="linkToPageProduct" href="product.php?id=' . $productId . '">';
-                        echo '<div class="photoProductContainer">';
-                        echo '<img src="images/' . $productImage . '" alt="' . $productName . '">';
-                        echo '</div>';
-                        echo '<div class="productInfo">';
-                        echo '<h3 class="productName">' . $productName . '</h3>';
-                        $price = number_format($productPrice,2);
-                        echo '<h3 class="productPrice">' .$price. ' zł</h3>';
-                        echo '</div>';
-                        echo '</a>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo "Brak dostępnych produktów.";
-                }
+            foreach ($products as $product) {
+                $category = getCategoryById($conn, $product['idCategory']);
+                $categoryProductName = $category['nameCategory'];
+                $categoryProductName = str_replace(array(' ', '\t', '\n', '\r'), '', $categoryProductName);
+                $producer = getProducerById($conn, $product['idProducer']);
+                $producerProductName = $producer['nameProducer'];
+                $producerProductName = str_replace(array(' ', '\t', '\n', '\r'), '', $producerProductName);
+                echo '<div class="productLayout ' . $categoryProductName . ' ' . $producerProductName . '">';
+                echo '<a class="linkToPageProduct" href="product.php?id=' . $product['idProduct'] . '">';
+                echo '<div class="photoProductContainer">';
+                echo '<img src="images/' . $product['image'] . '" alt="' . $product['nameProduct'] . '">';
+                echo '</div>';
+                echo '<div class="productInfo">';
+                echo '<h3 class="productName">' . $product['nameProduct'] . '</h3>';
+                $price = number_format($product['price'], 2);
+                echo '<h3 class="productPrice">' . $price . ' zł</h3>';
+                echo '</div>';
+                echo '</a>';
+                echo '</div>';
             }
-        } else {
-            echo "Brak dostępnych produktów.";
         }
-
         ?>
     </div>
 </div>

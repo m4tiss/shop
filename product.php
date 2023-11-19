@@ -3,7 +3,7 @@
 <div class="contentContainer">
     <?php
     include_once('config.php');
-    include_once('functions.php');
+    include_once('functions/functionsUser.php');
     session_start();
 
 

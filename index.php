@@ -1,6 +1,6 @@
 <?php include_once('settings.php');
 include('navbar.php');
-include('functions.php');
+include('functions/functionsUser.php');
 ?>
 <div>
     <div class="slider">

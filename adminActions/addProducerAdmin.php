@@ -1,6 +1,6 @@
 <?php include_once('../settings.php');
 include('../navbar.php');
-include('../functions.php');
+include('../functions/functionsAdmin.php');
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

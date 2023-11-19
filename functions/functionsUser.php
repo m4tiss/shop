@@ -129,13 +129,13 @@ if ($producerResult = mysqli_query($conn, $getProducer)) {
 }
 return $producer;
 }
-function getAllProducts($conn){
-    $getProducts = "SELECT * FROM products";
+function getProductsByCategoryCondition($conn,$categoryCondition){
+$getProducts = "SELECT * FROM products WHERE idCategory IN ($categoryCondition)";
     $products = array();
-    if ($productResult = mysqli_query($conn, $getProducts)) {
-        if (mysqli_num_rows($productResult) > 0) {
+    if ($productsResult = mysqli_query($conn, $getProducts)) {
+        if (mysqli_num_rows($productsResult) > 0) {
             $i = 0;
-            while ($row = mysqli_fetch_assoc($productResult)) {
+            while ($row = mysqli_fetch_assoc($productsResult)) {
                 $product = array();
                 $product['idProduct'] = $row['idProduct'];
                 $product['idCategory'] = $row['idCategory'];
@@ -148,105 +148,10 @@ function getAllProducts($conn){
                 $i += 1;
             }
         } else {
-            echo "Nie ma żadnego produktu w bazie!";
+            echo "Nie ma produktów w tym dziale!";
         }
     }
     return $products;
-}
-
-function getAllSizes($conn){
-    $getSizes = "SELECT * FROM sizees";
-    $sizes = array();
-
-    if ($sizesResult = mysqli_query($conn, $getSizes)) {
-        if (mysqli_num_rows($sizesResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($sizesResult)) {
-                $size = array();
-                $size['idSize'] = $row['idSizee'];
-                $size['storeDepartament'] = $row['storeDepartament'];
-                $size['nameSize'] = $row['nameSizee'];
-                $sizes[$i] = $size;
-                $i += 1;
-            }
-            usort($sizes, function ($a, $b) {
-                return strcmp($a['storeDepartament'], $b['storeDepartament']);
-            });
-        } else {
-            echo "Nie ma żadnego rozmiaru w bazie!";
-        }
-    }
-    return $sizes;
-}
-
-function getAllStatuses($conn){
-    $getStatuses = "SELECT * FROM statuses";
-    $statuses = array();
-
-    if ($statusesResult = mysqli_query($conn, $getStatuses)) {
-        if (mysqli_num_rows($statusesResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($statusesResult)) {
-                $status = array();
-                $status['idStatus'] = $row['idStatus'];
-                $status['nameStatus'] = $row['nameStatus'];
-                $statuses[$i] = $status;
-                $i += 1;
-            }
-        } else {
-            echo "Nie ma żadnego statusu w bazie!";
-        }
-    }
-    return $statuses;
-}
-function getAllProducers($conn){
-    $getProducers= "SELECT * FROM producers";
-    $producers = array();
-
-    if ($producersResult = mysqli_query($conn, $getProducers)) {
-        if (mysqli_num_rows($producersResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($producersResult)) {
-                $producer = array();
-                $producer['idProducer'] = $row['idProducer'];
-                $producer['nameProducer'] = $row['nameProducer'];
-                $producer['storeDepartament'] = $row['storeDepartament'];
-                $producers[$i] = $producer;
-                $i += 1;
-            }
-            usort($producers, function ($a, $b) {
-                return strcmp($a['storeDepartament'], $b['storeDepartament']);
-            });
-        } else {
-            echo "Nie ma żadnego producenta w bazie!";
-        }
-    }
-    return $producers;
-}
-
-function getAllCategories($conn){
-    $getCategories= "SELECT * FROM categories";
-    $categories = array();
-
-    if ($categoriesResult = mysqli_query($conn, $getCategories)) {
-        if (mysqli_num_rows($categoriesResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($categoriesResult)) {
-                $category = array();
-                $category['idCategory'] = $row['idCategory'];
-                $category['nameCategory'] = $row['nameCategory'];
-                $category['storeDepartament'] = $row['storeDepartament'];
-                $categories[$i] = $category;
-                $i += 1;
-            }
-            usort($categories, function ($a, $b) {
-                return strcmp($a['storeDepartament'], $b['storeDepartament']);
-            });
-        } else {
-            echo "Nie ma żadnej kategorii w bazie!";
-        }
-    }
-    return $categories;
 }
 
 function updateProductInDB($conn, $amount, $user_id, $idProduct, $size)
@@ -255,10 +160,7 @@ function updateProductInDB($conn, $amount, $user_id, $idProduct, $size)
     mysqli_query($conn, $updateProductInDB);
 }
 
-function updateProductAdmin($conn,$idProduct,$productName,$productDescription,$productPrice){
-    $updateProductAdmin = "UPDATE products SET nameProduct='$productName', description = '$productDescription', price = $productPrice  WHERE idProduct=$idProduct";
-    mysqli_query($conn, $updateProductAdmin);
-}
+
 function addProductToDB($conn, $amount, $user_id, $idProduct, $size)
 {
     $insertProductToDB = "INSERT INTO baskets (idUser, idProduct,amount,sizee) VALUES ('$user_id', '$idProduct','$amount','$size')";
@@ -271,15 +173,9 @@ function deleteProductFromDB($conn, $user_id, $idProduct, $size)
     mysqli_query($conn, $deleteProductFromDB);
 }
 
-function deleteProductFromDbAdmin($conn, $idProduct){
-    $deleteProductFromDBAdmin = "DELETE FROM products WHERE idProduct=$idProduct";
-    mysqli_query($conn, $deleteProductFromDBAdmin);
-}
 
-function deleteSizeFromDB($conn,$idSize){
-    $deleteSizeFromDB = "DELETE FROM sizees WHERE idSizee=$idSize";
-    mysqli_query($conn, $deleteSizeFromDB);
-}
+
+
 
 function deleteAllFromBasketInDB($conn,$user_id){
     $deleteAllFromDB = "DELETE FROM baskets WHERE idUser=$user_id";
@@ -297,16 +193,7 @@ function editContactInDB($conn, $contactId, $userId, $email, $phoneNumber)
     mysqli_query($conn, $editContact);
 }
 
-function setNewOrderStatus($conn,$idOrder,$idStatus){
 
-    $updateStatus = "UPDATE orders SET idStatus = $idStatus Where idOrder=$idOrder";
-    mysqli_query($conn, $updateStatus);
-}
-
-function addSizeToDB($conn,$storeDepartament,$nameSize){
-    $addSize = "INSERT INTO sizees(storeDepartament,nameSizee) values('$storeDepartament','$nameSize');";
-    mysqli_query($conn, $addSize);
-}
 
 function addContactToDB($conn, $userId, $email, $phoneNumber)
 {
@@ -332,19 +219,8 @@ function addAddressToDB($conn, $userId, $city, $zipCode, $street, $streetNumber)
     mysqli_query($conn, $addAddress);
 }
 
-function addProductToDBAdmin($conn,$productName,$IdCategory,$IdProducer,$productDescription,$productPrice,$photoName,$discount){
-    $addProduct = "INSERT INTO products(idCategory,idProducer,price,image,description,discount,nameProduct) values($IdCategory,$IdProducer,$productPrice,'$photoName','$productDescription',$discount,'$productName')";
-    mysqli_query($conn, $addProduct);
-}
 
-function addProducerToDB($conn,$productType,$nameProducer){
-    $addProducer = "INSERT INTO producers(nameProducer, storeDepartament) values('$nameProducer','$productType')";
-    mysqli_query($conn, $addProducer);
-}
-function addCategoryToDB($conn,$productType,$nameCategory){
-    $addCategory = "INSERT INTO categories(nameCategory, storeDepartament) values('$nameCategory','$productType')";
-    mysqli_query($conn, $addCategory);
-}
+
 function addOrderToDB($conn,$idPayment,$idStatus,$name,$surname,$email,$cost){
     $date= date("Y-m-d H:i:s");
     $addOrder = "INSERT INTO orders(idPayment,idStatus,name,surname,email,dateOrder,cost) values($idPayment,$idStatus,'$name','$surname','$email','$date','$cost')";
@@ -521,34 +397,7 @@ function getAllOrdersByEmail($conn,$email){
     return $orders;
 }
 
-function getAllOrders($conn){
-    $getOrders = "SELECT * FROM orders";
-    $orders = array();
-    if ($ordersResult = mysqli_query($conn, $getOrders)) {
-        if (mysqli_num_rows($ordersResult) > 0) {
-            $i = 0;
-            while ($row = mysqli_fetch_assoc($ordersResult)) {
-                $order = array();
-                $order['idOrder'] = $row['idOrder'];
-                $order['idPayment'] = $row['idPayment'];
-                $order['idStatus'] = $row['idStatus'];
-                $order['name'] = $row['surname'];
-                $order['surname'] = $row['surname'];
-                $order['email'] = $row['email'];
-                $order['dateOrder'] = $row['dateOrder'];
-                $order['cost'] = $row['cost'];
-                $orders[$i] = $order;
-                $i += 1;
-            }
-            usort($orders, function ($a, $b) {
-                return $b['idOrder'] - $a['idOrder'];
-            });
-        } else {
-            echo "Nie ma żadnych zamówień!";
-        }
-    }
-    return $orders;
-}
+
 
 function getOrderById($conn,$idOrder){
     $getOrder = "SELECT * FROM orders Where idOrder=$idOrder";

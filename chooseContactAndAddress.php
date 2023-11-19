@@ -1,7 +1,7 @@
 
 <?php include_once('settings.php');
 include('navbar.php');
-include('functions.php');
+include('functions/functionsUser.php');
 session_start();
 if (empty($_SESSION['users'])) {
     header("Location: login.php");

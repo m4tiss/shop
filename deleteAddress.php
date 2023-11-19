@@ -1,7 +1,7 @@
 <?php
 include_once('settings.php');
 include('config.php');
-include('functions.php');
+include('functions/functionsUser.php');
 session_start();
 
 if (isset($_GET['id'])) {

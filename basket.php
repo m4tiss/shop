@@ -1,7 +1,7 @@
 <?php include_once('settings.php') ?>
 <?php include('navbar.php');
 include_once('config.php');
-include_once('functions.php');
+include_once('functions/functionsUser.php');
 session_start();
 ?>
 <div class="mainBasketContainer">
