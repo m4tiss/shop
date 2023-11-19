@@ -23,7 +23,7 @@ echo '
             <label class="editInfo" for="email">Email:</label>
              <input class="editInput" type="email" id="email" name="email" placeholder="Email" required><br><br>
             <label class="editInfo" for="phoneNumber">Numer telefonu:</label>
-            <input class="editInput" type="text" id="phoneNumber" name="phoneNumber" placeholder="Numer telefonu" required><br><br>
+            <input class="editInput" type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{9}" placeholder="Numer telefonu" required><br><br>
             <input class="button" type="submit" value="Dodaj">
         </form>
     </div>

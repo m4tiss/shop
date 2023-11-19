@@ -18,13 +18,13 @@ echo '
     <div class="editFormDiv">
         <form class="editForm" method="post" action="addAddress.php">
             <label class="editInfo" for="city">City:</label>
-             <input class="editInput" type="text" id="city" name="city" placeholder="Miasto" required><br><br>
+             <input class="editInput" type="text" id="city" name="city" pattern="[A-Z][a-z]*" placeholder="Miasto" required><br><br>
             <label class="editInfo" for="zipCode">Kod pocztowy:</label>
-            <input class="editInput" type="text" id="zipCode" name="zipCode" placeholder="Kod pocztowy:54-100" required><br><br>
+            <input class="editInput" type="text" id="zipCode" name="zipCode" pattern="\d{2}-\d{3}" placeholder="Kod pocztowy:54-100" required><br><br>
             <label class="editInfo" for="street">Ulica:</label>
-            <input class="editInput" type="text" id="street" name="street" placeholder="Ulica" required><br><br>
+            <input class="editInput" type="text" id="street" name="street" pattern="[A-Z][a-z]*" placeholder="Ulica" required><br><br>
             <label class="editInfo" for="streetNumber">Numer mieszkania</label>
-            <input class="editInput" type="text" id="streetNumber" name="streetNumber" placeholder="Numer mieszkania" required><br><br>
+            <input class="editInput" type="text" id="streetNumber" name="streetNumber" pattern="[0-9]*" placeholder="Numer mieszkania" required><br><br>
             <input class="button" type="submit" value="Dodaj">
             
         </form>

@@ -32,7 +32,7 @@ echo ($number == 1) ? '<input class="disabledInput" type="email" id="email" name
     '<input class="editInput" type="email" id="email" name="email" value="' . $email . '" required><br><br>';
 echo '
             <label class="editInfo" for="phoneNumber">Numer telefonu:</label>
-            <input class="editInput" type="text" id="phoneNumber" name="phoneNumber" value="' . $phoneNumber . '" required><br><br>
+            <input class="editInput" type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{9}" value="' . $phoneNumber . '" required><br><br>
              <input type="hidden" name="idContact" value="'.$contactId.'" />
             <input class="button" type="submit" value="Zapisz zmiany">
         </form>
