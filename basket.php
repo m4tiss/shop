@@ -50,5 +50,5 @@ session_start();
 
     </div>
 </div>
-<script src="basket.js"></script>
+<script src="scripts/basket.js"></script>
 <?php include('footer.php'); ?>

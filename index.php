@@ -1,7 +1,6 @@
 <?php include_once('settings.php');
 include('navbar.php');
 include('functions.php');
-
 ?>
 <div>
     <div class="slider">
@@ -77,7 +76,4 @@ include('functions.php');
         ?>
     </div>
 </div>
-
-<script src="slider.js"></script>
-
 <?php include('footer.php'); ?>

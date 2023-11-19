@@ -86,5 +86,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
         </div>
     </div>
-    <script src="registrationAndLogin.js"></script>
+    <script src="scripts/registrationAndLogin.js"></script>
 <?php include('footer.php'); ?>

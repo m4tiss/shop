@@ -1,5 +1,6 @@
-<?php include_once('settings.php') ?>
-<?php include('navbar.php'); ?>
+<?php include_once('settings.php');
+include ('functions.php');
+include('navbar.php'); ?>
 <div class="mainContainer">
     <div class="filtrationAndSort">
         <h1 class="filtrationAndSortingTitle">FILTRUJ</h1>
@@ -7,26 +8,15 @@
         <ul>
             <?php include_once('config.php');
             $storeDepartament = $_GET['store'] ?? '';
-
-            $getProducers = "SELECT nameProducer FROM producers WHERE storeDepartament='$storeDepartament' ";
-            if ($producers_Result = mysqli_query($conn, $getProducers)) {
-                if (mysqli_num_rows($producers_Result) > 0) {
-                    echo '<ul class=producersFiltration>';
-                    while ($row = mysqli_fetch_assoc($producers_Result)) {
-                        $producerName = $row['nameProducer'];
-                        echo '<li class="producerContainer">
-                    <input class="checkboxProducer" type="checkbox" id="' . $producerName . '" name="' . $producerName . '" value="' . $producerName . '">
-                    <label class="producerNameLabel" for="' . $producerName . '">' . $producerName . '</label><br>
-                  </li>';
-                    }
-                    echo '</ul>';
-                } else {
-                    echo "Brak dostępnych producentów.";
-                }
-            } else {
-                echo "Błąd zapytania do bazy danych: " . mysqli_error($conn);
+            $producers = getProducersByStore($conn,$storeDepartament);
+            echo '<ul class=producersFiltration>';
+            foreach ($producers as $producer){
+                echo '<li class="producerContainer">
+                <input class="checkboxProducer" type="checkbox" id="' . $producer['nameProducer'] . '" name="' . $producer['nameProducer'] . '" value="' . $producer['nameProducer'] . '">
+                  <label class="producerNameLabel" for="' . $producer['nameProducer'] . '">' . $producer['nameProducer'] . '</label><br>
+                 </li>';
             }
-
+            echo '</ul>';
             ?>
         </ul>
 
@@ -34,27 +24,16 @@
         <h2 class="filtrationAndSortingSubtitle">Kategoria</h2>
         <ul>
             <?php
-
-            $getCategories = "SELECT nameCategory FROM categories WHERE storeDepartament='$storeDepartament'";
-
-            if ($categories_Result = mysqli_query($conn, $getCategories)) {
-                if (mysqli_num_rows($categories_Result) > 0) {
-                    echo '<ul class=producersFiltration>';
-                    while ($row = mysqli_fetch_assoc($categories_Result)) {
-                        $categoryName = $row['nameCategory'];
-                        $categorySplitName = str_replace(array(' ', '\t', '\n', '\r'), '', $categoryName);
+            $categoriesFromStore = getCategoriesByStore($conn,$storeDepartament);
+            echo '<ul class=producersFiltration>';
+            foreach ($categoriesFromStore as $category){
+                $categorySplitName = str_replace(array(' ', '\t', '\n', '\r'), '', $category['nameCategory']);
                         echo '<li class="categoryContainer">
-                    <input class="checkboxCategory" type="checkbox" id="' . $categoryName . '" name="' . $categoryName . '" value="' . $categorySplitName . '">
-                    <label class="categoryNameLabel" for="' . $categoryName . '">' . $categoryName . '</label><br>
+                    <input class="checkboxCategory" type="checkbox" id="' . $category['nameCategory'] . '" name="' . $category['nameCategory'] . '" value="' . $categorySplitName . '">
+                    <label class="categoryNameLabel" for="' . $category['nameCategory'] . '">' . $category['nameCategory'] . '</label><br>
                   </li>';
-                    }
-                    echo '</ul>';
-                } else {
-                    echo "Brak dostępnych kategorii.";
-                }
-            } else {
-                echo "Błąd zapytania do bazy danych: " . mysqli_error($conn);
             }
+            echo '</ul>';
 
             ?>
         </ul>
@@ -71,15 +50,15 @@
     <div id="productsContainer" class="contentDiv">
 
         <?php
-        $getAllCategories = "SELECT idCategory FROM categories WHERE storeDepartament='$storeDepartament'";
-        $categoryAllResults = mysqli_query($conn, $getAllCategories);
         $categories = [];
-        while ($rowCategories = mysqli_fetch_assoc($categoryAllResults)) {
-            $categories[] = $rowCategories['idCategory'];
+        foreach($categoriesFromStore as $category){
+            $categories[] = $category['idCategory'];
         }
         $categoryCondition = implode(',', $categories);
+
         $getProducts = "SELECT * FROM products WHERE idCategory IN ($categoryCondition)";
 
+//        getProductsBy
 
         if (!empty($categories)) {
             if ($products_Result = mysqli_query($conn, $getProducts)) {
@@ -130,5 +109,5 @@
         ?>
     </div>
 </div>
-<script src="filtration.js"></script>
+<script src="scripts/filtration.js"></script>
 <?php include('footer.php'); ?>

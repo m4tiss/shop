@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Step in Style</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/navbar.css">
@@ -30,9 +28,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="registrationAndLogin.js"></script>
-    <script src="filtration.js"></script>
-    <script src="index.js"></script>
+    <script src="scripts/registrationAndLogin.js"></script>
+    <script src="scripts/filtration.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/basket.js"></script>
+    <script src="scripts/slider.js"></script>
 </head>
 <body>
 </body>
