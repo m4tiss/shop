@@ -1,11 +1,7 @@
-@mixin ColumnContent {
-  display: flex;
-  flex-direction: column;
-}
-$grayGradient: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+@import "helpers.scss";
 
 .registrationDiv{
-  @include ColumnContent;
+  @include flexColumn;
   justify-content: space-evenly;
   width: 500px;
   height: 800px;
@@ -13,22 +9,17 @@ $grayGradient: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
   background:$grayGradient;
 }
 .registrationForm{
-  @include ColumnContent;
+  @include flexColumn;
   height: 600px;
   justify-content: space-evenly;
 }
 .registrationButton {
-  width: 200px;
-  height: 50px;
-  border-radius: 30px;
+  @include w200h50;
+  @include basicButton;
   margin: 2px auto;
-  cursor: pointer;
-  background: black;
-  color: white;
-  box-shadow: 2px 2px 8px gray;
 }
 .registrationButton:hover{
-  background: #151515;
+  background: $buttonHoverColor;
 }
 #errorWarring{
   display: none;

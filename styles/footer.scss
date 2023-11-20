@@ -1,3 +1,5 @@
+@import 'helpers.scss';
+
 .footer {
   background-color: lightgray;
   color: black;
@@ -8,16 +10,12 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-evenly;
+  @include flexJustifyEvenly;
 }
 .footerElements{
   cursor: pointer;
 }
 .contentContainerFooter{
-  width: 100%;
-  min-height: 90vh;
-  display: flex;
-  margin: 20px 0;
+@include pageTemplate;
   justify-content: center;
 }

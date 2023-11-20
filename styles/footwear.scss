@@ -23,8 +23,7 @@
   align-items: baseline;
 }
 .button {
-  width: 200px;
-  height: 50px;
+  @include w200h50;
   @include basicButton;
   margin: 2px auto;
 }
@@ -44,23 +43,16 @@
 .producersFiltration{
   height: 200px;
 }
-.producerContainer{
+.producerContainer,.categoryContainer{
   width: 100%;
 }
-.categoryContainer{
-  width: 100%;
-}
-.producerNameLabel{
-  font-size: 20px;
-}
-.categoryNameLabel{
+.producerNameLabel,.categoryNameLabel{
   font-size: 20px;
 }
 .photoProductContainer{
   width: 100%;
   height: 300px;
-  display: flex;
-  justify-content: center;
+  @include flexJustifyCenter;
   align-items: end;
 }
 .selectSorting{

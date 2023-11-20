@@ -16,8 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     loginUser($conn, $email, $password);
 }
 ?>
-
-    ?>
     <div class="loginOrRegistrationContainer">
         <div class="loginDiv">
             <h2 class="inputTitle">LOGOWANIE</h2>

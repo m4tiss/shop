@@ -58,19 +58,11 @@
   height: 200px;
 }
 
-.producerContainer {
+.producerContainer, .categoryContainer {
   width: 100%;
 }
 
-.categoryContainer {
-  width: 100%;
-}
-
-.producerNameLabel {
-  font-size: 20px;
-}
-
-.categoryNameLabel {
+.producerNameLabel, .categoryNameLabel {
   font-size: 20px;
 }
 

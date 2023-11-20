@@ -2,12 +2,9 @@
 
 
 .contentAccountContainer {
-  width: 100%;
-  min-height: 90vh;
+  @include pageTemplate;
   @include columnAlignCenter;
-  margin: 20px 0;
 }
-
 
 .buttonsPanel {
   width: 100%;
@@ -22,13 +19,11 @@
 
 
 .contactsAndAddresses {
-  width: 100%;
-  height: 100%;
+  @include w100h100;
   display: flex;
 }
 .formDisplay{
-  width: 100%;
-  height: 100%;
+  @include w100h100;
   @include columnAlignCenter;
 }
 
@@ -73,19 +68,13 @@
   width: 30%;
   @include flexCenterCenter;
 }
-
-.contactAndInfo {
+.name,.surname,.contactAndInfo {
   font-size: 25px;
 }
 
-.contactEmail {
+.contactEmail,.contactNumber {
   font-size: 20px;
 }
-
-.contactNumber {
-  font-size: 20px;
-}
-
 .addIconContact {
   width: 100%;
   height: 80px;
@@ -97,25 +86,15 @@
   height: 80px;
   @include flexJustifyCenter;
 }
-
-.name {
-  font-size: 25px;
-}
 .warningInAccount{
   color: red;
   margin: 40px 0;
 }
-
-.surname {
-  font-size: 25px;
-}
-
 .addIcon {
   cursor: pointer;
 }
 .buttonAccount{
-  width: 200px;
-  height: 50px;
+  @include w200h50;
   @include basicButton;
   margin: 0 30px;
 }

@@ -12,8 +12,8 @@
   height: 150px;
   width: 100%;
   border: black 1px solid;
-  margin: 30px 0;
   border-radius: 30px;
+  margin: 30px 0;
   @include flexCenterCenter;
   justify-content: space-evenly;
 }
@@ -24,8 +24,7 @@
 }
 
 .historyButton{
-  width: 200px;
-  height: 60px;
+  @include w200h50;
   @include basicButton;
 }
 .historyButton:hover{

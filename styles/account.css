@@ -6,9 +6,10 @@
   width: 100%;
   min-height: 90vh;
   display: flex;
+  margin: 20px 0;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0;
 }
 
 .buttonsPanel {
@@ -91,15 +92,11 @@
   align-items: center;
 }
 
-.contactAndInfo {
+.name, .surname, .contactAndInfo {
   font-size: 25px;
 }
 
-.contactEmail {
-  font-size: 20px;
-}
-
-.contactNumber {
+.contactEmail, .contactNumber {
   font-size: 20px;
 }
 
@@ -117,17 +114,9 @@
   justify-content: center;
 }
 
-.name {
-  font-size: 25px;
-}
-
 .warningInAccount {
   color: red;
   margin: 40px 0;
-}
-
-.surname {
-  font-size: 25px;
 }
 
 .addIcon {

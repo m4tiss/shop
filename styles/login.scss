@@ -1,8 +1,7 @@
 @import "helpers.scss";
 
 .loginOrRegistrationContainer{
-  width: 100%;
-  min-height: 100vh;
+  @include pageTemplate;
   @include flexCenterCenter;
 }
 
@@ -44,8 +43,7 @@
  @include setInfoOrWarring
 }
 .loginButton {
-  width: 200px;
-  height: 50px;
+  @include w200h50;
   @include basicButton;
   margin: 2px auto;
 }

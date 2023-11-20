@@ -17,12 +17,8 @@ a{
   width:100%;
   cursor: pointer;
 }
-//.slide{
-//  width: 100%;
-//}
 .discountText{
-  display: flex;
-  justify-content:space-evenly;
+  @include flexJustifyEvenly;
   align-items: center;
   padding: 20px 0;
 }
