@@ -24,7 +24,7 @@ session_start();
                             <h2>Cena:' . $priceQuantity . ' zł</h2>
                             <h2>Rozmiar: ' . $size . '</h2>
                             <h2>Ilość:' . $quantity . '</h2>
-                            <a href="deleteFromBasketSession.php?index='.$product['id'].''.$size.'">
+                            <a href="serverActions/deleteFromBasketSession.php?index='.$product['id'].''.$size.'">
                             <img class="manageIcon" src="images/xIcon.png" width="50px"/>
                             </a>
                            </div>';
@@ -44,7 +44,8 @@ session_start();
                         <h2 class="basketInfo">Koszyk jest pusty</h2>';
             }
         } else {
-            echo '<h2>Koszyk jest pusty</h2>';
+            echo '<img src="icons/empty.png" width="1000px">
+                   <h2>Koszyk jest pusty</h2>';
         }
         ?>
 

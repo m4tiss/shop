@@ -19,7 +19,7 @@ async function addToBasketSession(productId) {
     const selectedSizeValue = selectedSizeInput.value;
     console.log(selectedSizeValue);
     try {
-        const response = await fetch("addToBasketSession.php", {
+        const response = await fetch("serverActions/addToBasketSession.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",

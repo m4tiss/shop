@@ -60,7 +60,7 @@ if($user['role']==='admin'){
                     if ($numberOfContact != 1) {
                         $contactId = getContactIdFromMail($conn,$contact['email']);
                         echo '<div class="removeIconContactAndAddresses">
-                                 <a href="deleteContact.php?idContact=' .$contactId. '"><img class="manageIcon" class="XIcon" src="images/xIcon.png" width="50px"/></a>
+                                 <a href="serverActions/deleteContact.php?idContact=' .$contactId. '"><img class="manageIcon" class="XIcon" src="images/xIcon.png" width="50px"/></a>
                               </div>';
                     }
                     echo '</div>';
@@ -93,7 +93,7 @@ if($user['role']==='admin'){
                         <a href="editAddresses.php?id=' .$address['idAddress'].'"><img class="manageIcon" src="images/editIcon.jpg" width="50px"></a>
                     </div>
                     <div class="removeIconContactAndAddresses">
-                         <a href="deleteAddress.php?id=' .$address['idAddress'].'"><img class="manageIcon" src="images/xIcon.png" width="50px"/></a>
+                         <a href="serverActions/deleteAddress.php?id=' .$address['idAddress'].'"><img class="manageIcon" src="images/xIcon.png" width="50px"/></a>
                     </div>
                 </div>';
                 }

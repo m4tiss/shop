@@ -23,8 +23,6 @@
                     <img src="icons/payu.png" width="200px">
                 </div>
             </div>
-
-
         </div>
     </div>
 <?php include('footer.php'); ?>
