@@ -793,3 +793,89 @@ function handleUserDetails($conn, $getId, $email)
     }
     $addEmailQuery->close();
 }
+function loginUser($conn, $email, $password)
+{
+    if (empty($email)) {
+        echo '<script>showEmailErrorMessage()</script>';
+        return;
+    } elseif (empty($password)) {
+        echo '<script>showPasswordErrorMessage()</script>';
+        return;
+    }
+    $userDetails = getUserDetailsByEmail($conn, $email);
+    if (!$userDetails) {
+        echo '<script>showNotExistEmailErrorMessage()</script>';
+        return;
+    }
+    $clientId = $userDetails['idUser'];
+    $passwordFromDB = getPasswordFromDB($conn, $clientId);
+
+    if ($passwordFromDB && password_verify($password, $passwordFromDB)) {
+        $_SESSION['users'] = $clientId;
+
+        handleBasketAfterLogin($conn);
+
+        header("Location: account.php");
+    } else {
+        echo '<script>showInvalidPasswordMessage()</script>';
+    }
+}
+function getUserDetailsByEmail($conn, $email)
+{
+    $stmt = $conn->prepare("SELECT idUser FROM contacts WHERE email=?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result && $result->num_rows > 0) {
+        return $result->fetch_assoc();
+    }
+
+    return null;
+}
+function getPasswordFromDB($conn, $clientId)
+{
+    $stmt = $conn->prepare("SELECT password FROM users WHERE idUser=?");
+    $stmt->bind_param("i", $clientId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result) {
+        $rowPassword = $result->fetch_assoc();
+        return $rowPassword['password'];
+    }
+
+    return null;
+}
+function handleBasketAfterLogin($conn)
+{
+    if (!empty($_SESSION['basket'])) {
+        $products = getProductsFromBasket($conn, $_SESSION['users']);
+        foreach ($products as $product) {
+            $index = $product['idProduct'] . $product['sizee'];
+            if (isset($_SESSION['basket'][$index])) {
+                $_SESSION['basket'][$index]['quantity']++;
+            } else {
+                $_SESSION['basket'][$index] = array(
+                    'idProduct' => $product['idProduct'],
+                    'size' => $product['sizee'],
+                    'quantity' => $product['amount']
+                );
+            }
+        }
+        deleteAllFromDB($conn, $_SESSION['users']);
+        foreach ($_SESSION['basket'] as $product) {
+            addProductToDB($conn, $product['quantity'], $_SESSION['users'], $product['idProduct'], $product['size']);
+        }
+    } else {
+        $products = getProductsFromBasket($conn, $_SESSION['users']);
+        foreach ($products as $product) {
+            $index = $product['idProduct'] . $product['sizee'];
+            $_SESSION['basket'][$index] = array(
+                'idProduct' => $product['idProduct'],
+                'size' => $product['sizee'],
+                'quantity' => $product['amount']
+            );
+        }
+    }
+}
