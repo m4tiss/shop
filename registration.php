@@ -24,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h2 class="inputTitle">REJESTRACJA</h2>
             <form id="registrationForm" class="registrationForm" action="registration.php" method="post">
                 <h3 class="inputInfo">Imię</h3><input class="input" type="text" pattern="[A-Z][a-z]*" name="name"><br>
-                <h3 class="inputInfo">Nazwisko</h3><input class="input" type="text" pattern="[A-Z][a-z]*" name="surname"><br>
+                <h3 class="inputInfo">Nazwisko</h3><input class="input" type="text" pattern="[A-Z][a-z]*"
+                                                          name="surname"><br>
                 <h3 class="inputInfo">Email</h3><input class="input" type="email" name="email"><br>
                 <h3 class="inputInfo">Hasło</h3> <input class="input" type="password" name="password"><br>
                 <input class="registrationButton" type="submit" value="Zarejestruj">

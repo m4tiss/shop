@@ -1,5 +1,5 @@
-<?php include_once('settings.php');
-include('navbar.php'); ?>
+<?php include_once('../settings.php');
+include('../navbar.php'); ?>
     <div class="contentContainerFooter">
        <div class="mainContentFooterElement">
            <h2  class="termsTitle">REGULAMIN KORZYSTANIA STEP IN STYLE</h2>
@@ -88,4 +88,4 @@ include('navbar.php'); ?>
                Możemy naliczać koszty dostawy. Koszty dostawy zmieniają się w zależności od Produktu i metody dostawy. Dodatkowe informacje znajdziesz w punkcie 2.12 lub w sekcji Dostawa w zakładce Pomoc dostępnej na Platformie. Wszelkie koszty dostawy zostaną wyszczególnione oddzielnie i dodane do całkowitej kwoty zamówienia.</p>
        </div>
     </div>
-<?php include('footer.php'); ?>
+<?php include('../footer.php'); ?>

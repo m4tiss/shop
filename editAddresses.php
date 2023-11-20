@@ -29,7 +29,7 @@ echo '
             <input class="editInput" type="text" id="street" name="street" pattern="[A-Z][a-z]*" value="' . $address['street'] . '" required><br><br>
             <label class="editInfo" for="streetNumber">Numer mieszkania</label>
             <input class="editInput" type="text" id="streetNumber" name="streetNumber" pattern="[0-9]*" value="' . $address['streetNumber'] . '" required><br><br>
-            <input type="hidden" name="idAddress" value="'.$idAddress.'" />
+            <input type="hidden" name="idAddress" value="' . $idAddress . '" />
             <input class="button" type="submit" value="Zapisz zmiany"> 
         </form>
     </div>

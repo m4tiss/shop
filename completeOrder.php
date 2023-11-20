@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "Nieprawidłowa metoda żądania.";
 }
-
 ?>
 
 <div class="orderContainer">
@@ -56,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="communicate">
         Zamówienie zostało zrealizowane!<br>Sprawdź jego status w historii zamówień
     </div>
-
 </div>
 
 <?php include('footer.php'); ?>

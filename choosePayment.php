@@ -7,7 +7,6 @@ if (empty($_SESSION['users'])) {
     header("Location: login.php");
     exit();
 }
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $idContact = $_POST['selectedContact'];
     $idAddress = $_POST['selectedAddress'];
@@ -17,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 }
-
 $_SESSION['order_completed']=true;
 ?>
 
@@ -28,10 +26,9 @@ $_SESSION['order_completed']=true;
             $paymentMethods = getAllPaymentMethods($conn);
             foreach ($paymentMethods as $paymentMethod) {
                 echo ' <div class="payment">
-                    <input type="radio" name="selectedPayment" value="' . $paymentMethod['idPayment'] . '">
-                    <img src="icons/' . $paymentMethod['icon'] . '" width="200px">
-                </div>
-        ';
+                           <input type="radio" name="selectedPayment" value="' . $paymentMethod['idPayment'] . '">
+                           <img src="icons/' . $paymentMethod['icon'] . '" width="200px">
+                        </div>';
             }
             ?>
             <button type="submit" class="button">Złóź zamówienie</button>

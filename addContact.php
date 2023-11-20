@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     else{
         header("Location:account.php?error=1");
     }
-
 }
 echo '
 <div class="contentContainer">

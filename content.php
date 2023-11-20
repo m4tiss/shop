@@ -12,15 +12,13 @@ include('navbar.php'); ?>
             echo '<ul class=producersFiltration>';
             foreach ($producers as $producer) {
                 echo '<li class="producerContainer">
-                <input class="checkboxProducer" type="checkbox" id="' . $producer['nameProducer'] . '" name="' . $producer['nameProducer'] . '" value="' . $producer['nameProducer'] . '">
-                  <label class="producerNameLabel" for="' . $producer['nameProducer'] . '">' . $producer['nameProducer'] . '</label><br>
-                 </li>';
+                        <input class="checkboxProducer" type="checkbox" id="' . $producer['nameProducer'] . '" name="' . $producer['nameProducer'] . '" value="' . $producer['nameProducer'] . '">
+                        <label class="producerNameLabel" for="' . $producer['nameProducer'] . '">' . $producer['nameProducer'] . '</label><br>
+                     </li>';
             }
             echo '</ul>';
             ?>
         </ul>
-
-
         <h2 class="filtrationAndSortingSubtitle">Kategoria</h2>
         <ul>
             <?php
@@ -29,12 +27,11 @@ include('navbar.php'); ?>
             foreach ($categoriesFromStore as $category) {
                 $categorySplitName = str_replace(array(' ', '\t', '\n', '\r'), '', $category['nameCategory']);
                 echo '<li class="categoryContainer">
-                    <input class="checkboxCategory" type="checkbox" id="' . $category['nameCategory'] . '" name="' . $category['nameCategory'] . '" value="' . $categorySplitName . '">
-                    <label class="categoryNameLabel" for="' . $category['nameCategory'] . '">' . $category['nameCategory'] . '</label><br>
-                  </li>';
+                        <input class="checkboxCategory" type="checkbox" id="' . $category['nameCategory'] . '" name="' . $category['nameCategory'] . '" value="' . $categorySplitName . '">
+                        <label class="categoryNameLabel" for="' . $category['nameCategory'] . '">' . $category['nameCategory'] . '</label><br>
+                      </li>';
             }
             echo '</ul>';
-
             ?>
         </ul>
         <h1 class="filtrationAndSortingTitle">SORTUJ</h1>
@@ -47,7 +44,6 @@ include('navbar.php'); ?>
         <button id="button" class="button" onclick="filterProducts()">Zastosuj</button>
     </div>
     <div id="productsContainer" class="contentDiv">
-
         <?php
         $categories = [];
         foreach ($categoriesFromStore as $category) {
@@ -63,18 +59,18 @@ include('navbar.php'); ?>
                 $producer = getProducerById($conn, $product['idProducer']);
                 $producerProductName = $producer['nameProducer'];
                 $producerProductName = str_replace(array(' ', '\t', '\n', '\r'), '', $producerProductName);
-                echo '<div class="productLayout ' . $categoryProductName . ' ' . $producerProductName . '">';
-                echo '<a class="linkToPageProduct" href="product.php?id=' . $product['idProduct'] . '">';
-                echo '<div class="photoProductContainer">';
-                echo '<img src="images/' . $product['image'] . '" alt="' . $product['nameProduct'] . '">';
-                echo '</div>';
-                echo '<div class="productInfo">';
-                echo '<h3 class="productName">' . $product['nameProduct'] . '</h3>';
+                echo '<div class="productLayout ' . $categoryProductName . ' ' . $producerProductName . '">
+                          <a class="linkToPageProduct" href="product.php?id=' . $product['idProduct'] . '">
+                            <div class="photoProductContainer">
+                                <img src="images/' . $product['image'] . '" alt="' . $product['nameProduct'] . '">
+                             </div>
+                             <div class="productInfo">
+                                <h3 class="productName">' . $product['nameProduct'] . '</h3>';
                 $price = number_format($product['price'], 2);
-                echo '<h3 class="productPrice">' . $price . ' zł</h3>';
-                echo '</div>';
-                echo '</a>';
-                echo '</div>';
+                echo '<h3 class="productPrice">' . $price . ' zł</h3>
+                            </div>
+                          </a>
+                      </div>';
             }
         }
         ?>

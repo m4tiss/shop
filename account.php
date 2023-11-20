@@ -7,16 +7,13 @@ if (empty($_SESSION['users'])) {
     header("Location: login.php");
     exit();
 }
-
 $user_id = $_SESSION['users'];
-
-$user = getUserById($conn,$user_id);
-if($user['role']==='admin'){
+$user = getUserById($conn, $user_id);
+if ($user['role'] === 'admin') {
     header("Location: accountAdmin.php");
     exit();
 }
 ?>
-
     <div class="contentAccountContainer">
         <div class="buttonsPanel">
             <a class="buttonLink" href="logout.php">
@@ -35,7 +32,7 @@ if($user['role']==='admin'){
              <p class="surname">' . $user['surname'] . '</p>';
 
         if (isset($_GET['error'])) {
-            echo'<h2 id="warningAccount" class="warningInAccount">Nie możesz dodać tego maila on już istnieje!</h2>';
+            echo '<h2 id="warningAccount" class="warningInAccount">Nie możesz dodać tego maila on już istnieje!</h2>';
         }
         ?>
         <div class="contactsAndAddresses">
@@ -58,9 +55,9 @@ if($user['role']==='admin'){
                         <a href="editContact.php?email=' . $contact['email'] . '&number=' . $numberOfContact . '"><img class="manageIcon" src="images/editIcon.jpg" width="50px"></a>
                     </div>';
                     if ($numberOfContact != 1) {
-                        $contactId = getContactIdFromMail($conn,$contact['email']);
+                        $contactId = getContactIdFromMail($conn, $contact['email']);
                         echo '<div class="removeIconContactAndAddresses">
-                                 <a href="serverActions/deleteContact.php?idContact=' .$contactId. '"><img class="manageIcon" class="XIcon" src="images/xIcon.png" width="50px"/></a>
+                                 <a href="serverActions/deleteContact.php?idContact=' . $contactId . '"><img class="manageIcon" class="XIcon" src="images/xIcon.png" width="50px"/></a>
                               </div>';
                     }
                     echo '</div>';
@@ -90,10 +87,10 @@ if($user['role']==='admin'){
                     echo '
                     </div>
                     <div class="editIconContactAndAddresses">
-                        <a href="editAddresses.php?id=' .$address['idAddress'].'"><img class="manageIcon" src="images/editIcon.jpg" width="50px"></a>
+                        <a href="editAddresses.php?id=' . $address['idAddress'] . '"><img class="manageIcon" src="images/editIcon.jpg" width="50px"></a>
                     </div>
                     <div class="removeIconContactAndAddresses">
-                         <a href="serverActions/deleteAddress.php?id=' .$address['idAddress'].'"><img class="manageIcon" src="images/xIcon.png" width="50px"/></a>
+                         <a href="serverActions/deleteAddress.php?id=' . $address['idAddress'] . '"><img class="manageIcon" src="images/xIcon.png" width="50px"/></a>
                     </div>
                 </div>';
                 }

@@ -1,5 +1,5 @@
-<?php include_once('settings.php');
-include('navbar.php'); ?>
+<?php include_once('../settings.php');
+include('../navbar.php'); ?>
     <div class="contentContainerFooter">
         <div class="mainContentFooterElement">
             <h2 class="returnsTitle">Zwroty w STEP IN STYLE</h2>
@@ -28,4 +28,4 @@ include('navbar.php'); ?>
             </p>
         </div>
     </div>
-<?php include('footer.php'); ?>
+<?php include('../footer.php'); ?>
