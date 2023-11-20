@@ -63,7 +63,7 @@ function deleteProductFromDB($conn, $user_id, $idProduct, $size)
     $deleteProductFromDB = "DELETE FROM baskets WHERE idUser=? AND idProduct=? AND sizee=?";
     $stmt = mysqli_prepare($conn, $deleteProductFromDB);
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "iii", $user_id, $idProduct, $size);
+        mysqli_stmt_bind_param($stmt, "iis", $user_id, $idProduct, $size);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
     } else {

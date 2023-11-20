@@ -44,7 +44,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 $_SESSION['users'] = $row['idUser'];
 
                                 if(!empty($_SESSION['basket'])){
-                                    // Jeśli koszyk bez logowania jest ma zawartość to z bazy usuwam poprzedni koszyk i pobieram nowy z sesji
+                                    // Łączenie koszyka starego i tego bez zalogowania
+                                    $products = getProductsFromBasket($conn,$_SESSION['users']);
+                                    foreach ($products as $product){
+                                        $index = $product['idProduct'] . $product['sizee'];
+                                        if (isset($_SESSION['basket'][$index])) {
+                                            $_SESSION['basket'][$index]['quantity']++;
+                                        } else {
+                                            $_SESSION['basket'][$index] = array(
+                                                'idProduct' => $product['idProduct'],
+                                                'size' => $product['sizee'],
+                                                'quantity' => $product['amount']
+                                            );
+                                        }
+                                    }
                                     deleteAllFromDB($conn,$_SESSION['users']);
                                     foreach ($_SESSION['basket'] as $product) {
                                         addProductToDB($conn,$product['quantity'],$_SESSION['users'],$product['idProduct'],$product['size']);
