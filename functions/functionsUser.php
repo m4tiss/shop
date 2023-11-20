@@ -578,7 +578,6 @@ function isProductExist($conn, $productId): bool
     mysqli_stmt_close($stmt);
     return $exists;
 }
-
 function getProductsFromBasket($conn, $userId): array
 {
     $getProducts = "SELECT * FROM baskets WHERE idUser=?";
@@ -604,7 +603,6 @@ function getProductsFromBasket($conn, $userId): array
     mysqli_stmt_close($stmt);
     return $productsData;
 }
-
 function getCategoryById($conn, $idCategory): array
 {
     $getCategory = "SELECT * FROM categories WHERE idCategory=?";
@@ -624,7 +622,6 @@ function getCategoryById($conn, $idCategory): array
     mysqli_stmt_close($stmt);
     return $category;
 }
-
 function getCategoriesByStore($conn, $store): array
 {
     $getCategories = "SELECT * FROM categories WHERE storeDepartament=?";
@@ -649,7 +646,6 @@ function getCategoriesByStore($conn, $store): array
     mysqli_stmt_close($stmt);
     return $categories;
 }
-
 function getProducersByStore($conn, $store): array
 {
     $getProducers = "SELECT * FROM producers WHERE storeDepartament=?";
@@ -674,7 +670,6 @@ function getProducersByStore($conn, $store): array
     mysqli_stmt_close($stmt);
     return $producers;
 }
-
 function getProducerById($conn, $idProducer): array
 {
     $getProducer = "SELECT * FROM producers WHERE idProducer=?";
@@ -694,7 +689,6 @@ function getProducerById($conn, $idProducer): array
     mysqli_stmt_close($stmt);
     return $producer;
 }
-
 function getSizesFromStore($conn,$departament): array
 {
     $getSizes = "SELECT * FROM sizees WHERE storeDepartament=?";
@@ -719,7 +713,6 @@ function getSizesFromStore($conn,$departament): array
     mysqli_stmt_close($stmt);
     return $sizes;
 }
-
 function getStoreFromCategory($conn, $idCategory){
     $getStoreDepartament = "SELECT storeDepartament FROM categories WHERE idCategory=?";
     $stmt = mysqli_prepare($conn, $getStoreDepartament);
@@ -730,5 +723,73 @@ function getStoreFromCategory($conn, $idCategory){
     mysqli_stmt_close($stmt);
     return $departament;
 }
+function registerUser($conn, $name, $surname, $email, $password)
+{
+    $role = 'user';
 
+    if (empty($name)) {
+        echo '<script>showNameErrorMessage()</script>';
+        return;
+    } elseif (empty($surname)) {
+        echo '<script>showSurnameErrorMessage()</script>';
+        return;
+    } elseif (empty($email)) {
+        echo '<script>showEmailErrorMessage()</script>';
+        return;
+    } elseif (empty($password)) {
+        echo '<script>showPasswordErrorMessage()</script>';
+        return;
+    }
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+    $insertUser = $conn->prepare("INSERT INTO users (name, surname, password, role) VALUES (?, ?, ?, ?)");
+    $insertUser->bind_param("ssss", $name, $surname, $hashedPassword, $role);
+
+    $getId = $conn->prepare("SELECT idUser FROM users WHERE name=? AND surname=? AND password=?");
+    $getId->bind_param("sss", $name, $surname, $hashedPassword);
+
+    $getEmails = $conn->prepare("SELECT email FROM contacts WHERE email=?");
+    $getEmails->bind_param("s", $email);
+
+    if ($getEmails->execute()) {
+        $getEmails->store_result();
+        if ($getEmails->num_rows > 0) {
+            echo '<script>showExistEmailErrorMessage()</script>';
+        } else {
+            if ($insertUser->execute()) {
+                echo '<script>InsertUserMessage()</script>';
+                handleUserDetails($conn, $getId, $email);
+            } else {
+                echo "Error: " . $conn->error;
+            }
+        }
+    }
+
+    $insertUser->close();
+    $getId->close();
+    $getEmails->close();
+}
+function handleUserDetails($conn, $getId, $email)
+{
+    if ($getId->execute()) {
+        $result = $getId->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $clientId = $row['idUser'];
+            }
+            $addEmailQuery = $conn->prepare("INSERT INTO contacts(idUser, email, phoneNumber) VALUES (?, ?, '000000000')");
+            $addEmailQuery->bind_param("is", $clientId, $email);
+
+            if ($addEmailQuery->execute()) {
+
+            } else {
+                echo "Problem z dodaniem emailu";
+            }
+        } else {
+            echo "Problem z pobraniem idUsera z bazy danych";
+        }
+    } else {
+        echo "Problem z pobraniem idUsera z bazy danych";
+    }
+    $addEmailQuery->close();
+}
