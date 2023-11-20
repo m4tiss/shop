@@ -7,6 +7,17 @@ if (empty($_SESSION['users'])) {
     header("Location: login.php");
     exit();
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $idContact = $_POST['selectedContact'];
+    $idAddress = $_POST['selectedAddress'];
+    $contactToCheck = getPhoneByIdContact($conn,$idContact);
+    if($contactToCheck['phoneNumber']==='000000000'){
+        header("Location: chooseContactAndAddress.php");
+        exit();
+    }
+}
+
 $_SESSION['order_completed']=true;
 ?>
 

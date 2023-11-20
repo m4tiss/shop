@@ -8,11 +8,16 @@ if (empty($_SESSION['users'])) {
     exit();
 }
 $user_id = $_SESSION['users'];
+$contacts = getContactsById($conn,$user_id);
+if(empty(getAddressesById($conn,$user_id)) || $contacts[0]['phoneNumber']==='000000000'){
+    header("Location: login.php");
+    exit();
+}
 ?>
 
 <div class="contentAccountContainer">
     <h1>Wybierz dane do wysyłki</h1>
-    <form class="formDisplay" action="choosePayment.php">
+    <form class="formDisplay" action="choosePayment.php" method="post">
     <div class="contactsAndAddresses">
         <div class="contactsAndAddressesContainer">
             <h2>Kontakty</h2>
@@ -29,7 +34,7 @@ $user_id = $_SESSION['users'];
                 echo '
                     </div>
                     <div class="inputDiv">
-                    <input type="radio" name="selectedContact" required>
+                    <input type="radio" name="selectedContact"  value="' . $contact['idContact'] . '" required>
                     </div>';
                 echo '</div>';
             }
@@ -54,7 +59,7 @@ $user_id = $_SESSION['users'];
                 echo '
                     </div>
                      <div class="inputDiv">
-                    <input type="radio" name="selectedAddress" required>
+                    <input type="radio" name="selectedAddress"  value="' . $address['idAddress'] . '" required>
                     </div>
                 </div>';
             }

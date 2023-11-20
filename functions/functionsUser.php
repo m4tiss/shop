@@ -264,15 +264,16 @@ function getUserById($conn, $user_id): array
 
 function getContactsById($conn, $user_id): array
 {
-    $getContacts = "SELECT email, phoneNumber FROM contacts WHERE idUser=?";
+    $getContacts = "SELECT idContact,email, phoneNumber FROM contacts WHERE idUser=?";
     $stmt = mysqli_prepare($conn, $getContacts);
     if ($stmt) {
         mysqli_stmt_bind_param($stmt, "i", $user_id);
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $email, $phoneNumber);
+        mysqli_stmt_bind_result($stmt, $idContact,$email, $phoneNumber);
         $contacts = [];
         while (mysqli_stmt_fetch($stmt)) {
             $contact = [
+                'idContact' => $idContact,
                 'email' => $email,
                 'phoneNumber' => $phoneNumber,
             ];
@@ -286,6 +287,26 @@ function getContactsById($conn, $user_id): array
     return [];
 }
 
+function getPhoneByIdContact($conn,$idContact): array
+{
+    $getContact = "SELECT phoneNumber FROM contacts WHERE idContact=?";
+    $stmt = mysqli_prepare($conn, $getContact);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $idContact);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $phoneNumber);
+        while (mysqli_stmt_fetch($stmt)) {
+            $contact = [
+                'phoneNumber' => $phoneNumber,
+            ];
+        }
+        mysqli_stmt_close($stmt);
+        return $contact;
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL";
+    }
+    return [];
+}
 function getAddressById($conn, $idAddress): array
 {
     $getAddress = "SELECT * FROM addresses WHERE idAddress=?";
