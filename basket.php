@@ -15,13 +15,12 @@ session_start();
                 $size = $productInfo['size'];
                 $quantity = $productInfo['quantity'];
                 $product = getProductById($conn, $idProduct);
-                $priceQuantity = number_format(($product['price'] * $quantity),2);
                 echo '  <div class="elementBasket">
                             <div class="photoContainerBasket">
                                 <img src="images/' . $product['image'] . '" alt="' . $product['image'] . '" width="100px" />
                             </div>
                             <h2>' . $product['name'] . '</h2>
-                            <h2>Cena:' . $priceQuantity . ' zł</h2>
+                            <h2>Cena:' . number_format(($product['price'] * $quantity),2) . ' zł</h2>
                             <h2>Rozmiar: ' . $size . '</h2>
                             <h2>Ilość:' . $quantity . '</h2>
                             <a href="serverActions/deleteFromBasketSession.php?index='.$product['id'].''.$size.'">
@@ -31,12 +30,11 @@ session_start();
                 $totalSum += $product['price'] * $quantity;
             }
             if($totalSum > 0){
-                $totalSum = number_format(($product['price'] * $quantity),2);
                 echo '<div class="paymentSummary">
                 <h2>Podsumowanie Zamówienia</h2>
-                <h3>Produkty: ' . $totalSum . ' zł</h3>
-                <h3>Dostawa: ' . $delivery . ' zł</h3>
-                <h3>Suma: ' . ($totalSum + $delivery) . '</h3>
+                <h3>Produkty: ' . number_format(($product['price'] * $quantity),2) . ' zł</h3>
+                <h3>Dostawa: ' .  number_format($delivery ,2)  . ' zł</h3>
+                <h3>Suma: ' . number_format(($totalSum + $delivery) ,2) . '</h3>
                 <a href="chooseContactAndAddress.php"><button class="button">Wybierz kontakt i adres</button></a>
              </div>';
             }else{

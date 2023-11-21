@@ -11,10 +11,12 @@ include('navbar.php'); ?>
             $producers = getProducersByStore($conn, $storeDepartament);
             echo '<ul class=producersFiltration>';
             foreach ($producers as $producer) {
-                echo '<li class="producerContainer">
+                if (checkProducerProducts($conn, $producer['idProducer'])) {
+                    echo '<li class="producerContainer">
                         <input class="checkboxProducer" type="checkbox" id="' . $producer['nameProducer'] . '" name="' . $producer['nameProducer'] . '" value="' . $producer['nameProducer'] . '">
                         <label class="producerNameLabel" for="' . $producer['nameProducer'] . '">' . $producer['nameProducer'] . '</label><br>
                      </li>';
+                }
             }
             echo '</ul>';
             ?>
@@ -26,10 +28,13 @@ include('navbar.php'); ?>
             echo '<ul class=producersFiltration>';
             foreach ($categoriesFromStore as $category) {
                 $categorySplitName = str_replace(array(' ', '\t', '\n', '\r'), '', $category['nameCategory']);
-                echo '<li class="categoryContainer">
+
+                if (checkCategoryProducts($conn, $category['idCategory'])) {
+                    echo '<li class="categoryContainer">
                         <input class="checkboxCategory" type="checkbox" id="' . $category['nameCategory'] . '" name="' . $category['nameCategory'] . '" value="' . $categorySplitName . '">
                         <label class="categoryNameLabel" for="' . $category['nameCategory'] . '">' . $category['nameCategory'] . '</label><br>
                       </li>';
+                }
             }
             echo '</ul>';
             ?>
@@ -66,8 +71,7 @@ include('navbar.php'); ?>
                              </div>
                              <div class="productInfo">
                                 <h3 class="productName">' . $product['nameProduct'] . '</h3>';
-                $price = number_format($product['price'], 2);
-                echo '<h3 class="productPrice">' . $price . ' zł</h3>
+                echo '<h3 class="productPrice">' . number_format($product['price'], 2) . ' zł</h3>
                             </div>
                           </a>
                       </div>';

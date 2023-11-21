@@ -58,7 +58,6 @@ include('functions/functionsUser.php');
                 }
             }
             $product = getProductById($conn, $value);
-            $price = number_format($product['price'], 2);
             echo '
             <a href="product.php?id=' . $product['id'] . '">
             <div class="productLayout">
@@ -67,7 +66,7 @@ include('functions/functionsUser.php');
                </div>
                 <div class="productInfo">
                     <h3 class="productName">' . $product['name'] . '</h3>
-                    <h3 class="productPrice">' . $price . ' zł</h3>
+                    <h3 class="productPrice">' . number_format($product['price'], 2) . ' zł</h3>
                 </div>
             </div>
         </a>

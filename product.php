@@ -39,9 +39,8 @@
                         <input id="idPrzyciskuRadio" type="radio" name="selectedSize" value="' . $size['nameSizee'] . '"> ' . $size['nameSizee'] . '
                        </label>';
             }
-            $price = number_format($product['price'],2);
             echo ' </div>
-            <h2 class="rightPanelInfo"> Cena: ' . $price . ' zł</h2>';
+            <h2 class="rightPanelInfo"> Cena: ' . number_format($product['price'],2) . ' zł</h2>';
             if (!empty($_SESSION['users'])) {
                 $user_id = $_SESSION['users'];
                 $user = getUserById($conn,$user_id);

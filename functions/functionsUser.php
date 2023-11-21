@@ -900,3 +900,27 @@ function handleBasketAfterLogin($conn)
         }
     }
 }
+
+function checkProducerProducts($conn,$producerId): bool
+{
+    $checkProducer = "SELECT * FROM products WHERE idProducer=?";
+    $stmt = mysqli_prepare($conn, $checkProducer);
+    mysqli_stmt_bind_param($stmt, "i", $producerId);
+    mysqli_stmt_execute($stmt);
+    $checkResult = mysqli_stmt_get_result($stmt);
+    if ($checkResult && mysqli_num_rows($checkResult) > 0) return true;
+    mysqli_stmt_close($stmt);
+    return false;
+}
+
+function checkCategoryProducts($conn, $categoryId): bool
+{
+    $checkCategory = "SELECT * FROM products WHERE idCategory=?";
+    $stmt = mysqli_prepare($conn, $checkCategory);
+    mysqli_stmt_bind_param($stmt, "i", $categoryId);
+    mysqli_stmt_execute($stmt);
+    $checkResult = mysqli_stmt_get_result($stmt);
+    if ($checkResult && mysqli_num_rows($checkResult) > 0) return true;
+    mysqli_stmt_close($stmt);
+    return false;
+}
