@@ -5,13 +5,14 @@
   gap:20px;
 }
 .addToDB{
+  min-height: 400px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 300px;
   grid-row-gap: 50px;
   margin:40px 0;
-  height: 400px;
+
 }
 
 .panelDiv{
@@ -22,8 +23,19 @@
   @include columnAlignCenter;
   justify-content: center;
   cursor: pointer;
-  gap:20px
+  gap:20px;
+  text-align: center;
 }
 .panelDiv:hover{
   scale: 1.1;
+}
+@media screen and (max-width: 1300px) {
+  .addToDB{
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .panelDiv{
+    height: 200px;
+    width: 200px;
+
+  }
 }

@@ -33,8 +33,12 @@
   justify-content: space-evenly;
 }
 .statusPanel{
-  @include flexCenterCenter;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  gap: 50px;
 }
 .addInput{
   @include basicInput;
@@ -77,4 +81,15 @@
 
 .manageIcon:hover{
   transform: rotateZ(30deg);
+}
+@media screen and (max-width: 1300px) {
+  .paymentAndStatusDiv{
+    width:600px;
+  }
+  .sizes{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .statusPanel{
+   scale: 0.75;
+  }
 }

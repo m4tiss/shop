@@ -31,3 +31,9 @@
   @include columnAlignCenter;
   height:200px;
 }
+
+@media screen and (max-width: 1300px) {
+  .paymentAndStatusDiv{
+    width:600px;
+  }
+}
