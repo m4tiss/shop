@@ -43,21 +43,21 @@ if ($user['role'] === 'admin') {
                 $numberOfContact = 1;
                 foreach ($contacts as $contact) {
                     echo '<div class="contactDiv">
-                    <div class="contactAndAddressesContent">
-                        <h3 class="contactInfo">Email</h3>
-                        <p class="contactEmail">' . $contact['email'] . '</p>
-                        <h3 class="contactInfo">Numer telefonu</h3>';
+                            <div class="contactAndAddressesContent">
+                                <h3 class="contactInfo">Email</h3>
+                                <p class="contactEmail">' . $contact['email'] . '</p>
+                                <h3 class="contactInfo">Numer telefonu</h3>';
                     echo ($contact['phoneNumber'] === '000000000') ? '<p style="color: red" class="contactNumber">UZUPEŁNIJ NUMER!</p>' :
                         '<p class="contactNumber">' . $contact['phoneNumber'] . '</p>';
                     echo '
-                    </div>
-                    <div class="editIconContactAndAddresses">
-                        <a href="editContact.php?email=' . $contact['email'] . '&number=' . $numberOfContact . '"><img class="manageIcon" src="images/editIcon.jpg" width="50px"></a>
-                    </div>';
+                           </div>
+                           <div class="editIconContactAndAddresses">
+                               <a href="editContact.php?email=' . $contact['email'] . '&number=' . $numberOfContact . '"><img class="manageIcon" src="images/editIcon.jpg" alt="editIcon" width="50px"></a>
+                           </div>';
                     if ($numberOfContact != 1) {
                         $contactId = getContactIdFromMail($conn, $contact['email']);
                         echo '<div class="removeIconContactAndAddresses">
-                                 <a href="serverActions/deleteContact.php?idContact=' . $contactId . '"><img class="manageIcon" class="XIcon" src="images/xIcon.png" width="50px"/></a>
+                                 <a href="serverActions/deleteContact.php?idContact=' . $contactId . '"><img class="manageIcon" class="XIcon" src="images/xIcon.png" alt="XIcon" width="50px"/></a>
                               </div>';
                     }
                     echo '</div>';
@@ -65,9 +65,8 @@ if ($user['role'] === 'admin') {
                 }
                 ?>
                 <div class="addIconContact">
-                    <a class="addIcon" href="addContact.php"><img src="images/addIcon.png" width="80px"></a>
+                    <a class="addIcon" href="addContact.php"><img src="images/addIcon.png" alt="addIcon" width="80px"></a>
                 </div>
-
             </div>
             <div class="contactsAndAddressesContainer">
                 <h2>Adresy</h2>
@@ -75,31 +74,29 @@ if ($user['role'] === 'admin') {
                 $addresses = getAddressesById($conn, $_SESSION['users']);
                 foreach ($addresses as $address) {
                     echo '<div class="addressDiv">
-                    <div class="contactAndAddressesContent">
-                        <h3>Miasto</h3>';
-                    echo ($address['city'] === '') ? '<p style="color: red" class="addressCity">UZUPEŁNIJ MIASTO!</p>' : '<p class="addressCity">' . $address['city'] . '</p>';
-                    echo ' <h3>Kod pocztowy</h3>';
-                    echo ($address['zipCode'] === '') ? '<p style="color: red" class="addressZipCode">UZUPEŁNIJ KOD POCZTOWY!</p>' : '<p class="addressZipCode">' . $address['zipCode'] . '</p>';
-                    echo ' <h3>Ulica</h3>';
-                    echo ($address['street'] === '') ? '<p style="color: red" class="addressStreet">UZUPEŁNIJ ULICE!</p>' : '<p class="addressStreet">' . $address['street'] . '</p>';
-                    echo ' <h3>Numer mieszkania</h3>';
-                    echo ($address['streetNumber'] === '') ? '<p style="color: red" class="addressStreetNumber">UZUPEŁNIJ NUMER MIESZKANIA!</p>' : '<p class="addressStreetNumber">' . $address['streetNumber'] . '</p>';
-                    echo '
-                    </div>
-                    <div class="editIconContactAndAddresses">
-                        <a href="editAddresses.php?id=' . $address['idAddress'] . '"><img class="manageIcon" src="images/editIcon.jpg" width="50px"></a>
-                    </div>
-                    <div class="removeIconContactAndAddresses">
-                         <a href="serverActions/deleteAddress.php?id=' . $address['idAddress'] . '"><img class="manageIcon" src="images/xIcon.png" width="50px"/></a>
-                    </div>
-                </div>';
+                            <div class="contactAndAddressesContent">
+                                <h3>Miasto</h3>
+                                <p class="addressCity">' . $address['city'] . '</p>
+                                <h3>Kod pocztowy</h3>
+                                <p class="addressZipCode">' . $address['zipCode'] . '</p>
+                                <h3>Ulica</h3>
+                                <p class="addressStreet">' . $address['street'] . '</p>
+                                <h3>Numer mieszkania</h3>
+                                <p class="addressStreetNumber">' . $address['streetNumber'] . '</p>
+                            </div>
+                             <div class="editIconContactAndAddresses">
+                                <a href="editAddresses.php?id=' . $address['idAddress'] . '"><img class="manageIcon" src="images/editIcon.jpg" alt="editIcon" width="50px"></a>
+                             </div>
+                            <div class="removeIconContactAndAddresses">
+                                <a href="serverActions/deleteAddress.php?id=' . $address['idAddress'] . '"><img class="manageIcon" src="images/xIcon.png" alt="XIcon" width="50px"/></a>
+                            </div>
+                          </div>';
                 }
                 ?>
                 <div class="addIconAddresses">
-                    <a class="addIcon" href="addAddress.php"><img src="images/addIcon.png" width="80px"></a>
+                    <a class="addIcon" href="addAddress.php"><img src="images/addIcon.png" alt="addIcon" width="80px"></a>
                 </div>
             </div>
-
         </div>
     </div>
 <?php include('footer.php'); ?>

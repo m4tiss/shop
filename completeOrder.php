@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="orderContainer">
     <div class="confirmedIcon">
-        <img src="images/confirmed.png" width="100px">
+        <img src="images/confirmed.png" alt="confirmedIcon" width="100px">
     </div>
     <div class="communicate">
         Zamówienie zostało zrealizowane!<br>Sprawdź jego status w historii zamówień

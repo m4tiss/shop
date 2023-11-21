@@ -18,16 +18,16 @@ session_start();
                 $priceQuantity = number_format(($product['price'] * $quantity),2);
                 echo '  <div class="elementBasket">
                             <div class="photoContainerBasket">
-                                <img src="images/' . $product['image'] . '" width="100px" />
+                                <img src="images/' . $product['image'] . '" alt="' . $product['image'] . '" width="100px" />
                             </div>
                             <h2>' . $product['name'] . '</h2>
                             <h2>Cena:' . $priceQuantity . ' zł</h2>
                             <h2>Rozmiar: ' . $size . '</h2>
                             <h2>Ilość:' . $quantity . '</h2>
                             <a href="serverActions/deleteFromBasketSession.php?index='.$product['id'].''.$size.'">
-                            <img class="manageIcon" src="images/xIcon.png" width="50px"/>
+                                <img class="manageIcon" src="images/xIcon.png" alt="XIcon" width="50px"/>
                             </a>
-                           </div>';
+                        </div>';
                 $totalSum += $product['price'] * $quantity;
             }
             if($totalSum > 0){
@@ -40,11 +40,11 @@ session_start();
                 <a href="chooseContactAndAddress.php"><button class="button">Wybierz kontakt i adres</button></a>
              </div>';
             }else{
-                echo ' <img src="icons/empty.png" width="1000px">
+                echo ' <img src="icons/empty.png" alt="emptyCart" width="1000px">
                         <h2 class="basketInfo">Koszyk jest pusty</h2>';
             }
         } else {
-            echo '<img src="icons/empty.png" width="1000px">
+            echo '<img src="icons/empty.png" alt="emptyCart" width="1000px">
                    <h2>Koszyk jest pusty</h2>';
         }
         ?>

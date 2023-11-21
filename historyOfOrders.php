@@ -23,7 +23,7 @@ if (empty($_SESSION['users'])) {
             echo '
                 <div class="order">
             <div class="iconContainer">
-                <img src="icons/historyOrderIcon.jpg" width="100px">
+                <img src="icons/historyOrderIcon.jpg" alt="historyOrderIcon" width="100px">
             </div>
             <h3> Data: ' . $order['dateOrder'] . '</h3>
             <h3> Koszt: ' . $order['cost'] . ' zł</h3>

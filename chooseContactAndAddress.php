@@ -48,15 +48,14 @@ if(empty(getAddressesById($conn,$user_id)) || $contacts[0]['phoneNumber']==='000
             foreach ($addresses as $address) {
                 echo '<div class="addressDiv">
                             <div class="contactAndAddressesContent">
-                                <h3>Miasto</h3>';
-                echo ($address['city'] === '') ? '<p style="color: red" class="addressCity">UZUPEŁNIJ MIASTO!</p>' : '<p class="addressCity">' . $address['city'] . '</p>';
-                echo ' <h3>Kod pocztowy</h3>';
-                echo ($address['zipCode'] === '') ? '<p style="color: red" class="addressZipCode">UZUPEŁNIJ KOD POCZTOWY!</p>' : '<p class="addressZipCode">' . $address['zipCode'] . '</p>';
-                echo ' <h3>Ulica</h3>';
-                echo ($address['street'] === '') ? '<p style="color: red" class="addressStreet">UZUPEŁNIJ ULICE!</p>' : '<p class="addressStreet">' . $address['street'] . '</p>';
-                echo ' <h3>Numer mieszkania</h3>';
-                echo ($address['streetNumber'] === '') ? '<p style="color: red" class="addressStreetNumber">UZUPEŁNIJ NUMER MIESZKANIA!</p>' : '<p class="addressStreetNumber">' . $address['streetNumber'] . '</p>';
-                echo '
+                                <h3>Miasto</h3>
+                                    <p class="addressCity">' . $address['city'] . '</p>
+                                <h3>Kod pocztowy</h3>
+                                <p class="addressZipCode">' . $address['zipCode'] . '</p>
+                                <h3>Ulica</h3>
+                                <p class="addressStreet">' . $address['street'] . '</p>
+                                <h3>Numer mieszkania</h3>
+                                <p class="addressStreetNumber">' . $address['streetNumber'] . '</p>
                             </div>
                             <div class="inputDiv">
                                 <input type="radio" name="selectedAddress"  value="' . $address['idAddress'] . '" required>
