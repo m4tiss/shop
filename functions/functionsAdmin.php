@@ -156,6 +156,17 @@ function getProducersByStore($conn, $store): array
 
 function deleteProductFromDbAdmin($conn, $idProduct)
 {
+    $deleteProductFromBaskets = "DELETE FROM baskets WHERE idProduct=?";
+    $stmtBaskets = mysqli_prepare($conn, $deleteProductFromBaskets);
+    if ($stmtBaskets) {
+        mysqli_stmt_bind_param($stmtBaskets, "i", $idProduct);
+        mysqli_stmt_execute($stmtBaskets);
+        mysqli_stmt_close($stmtBaskets);
+    } else {
+        echo "Błąd przy przygotowywaniu zapytania SQL dla tabeli 'baskets'";
+    }
+
+
     $deleteProductFromDBAdmin = "DELETE FROM products WHERE idProduct=?";
     $stmt = mysqli_prepare($conn, $deleteProductFromDBAdmin);
     if ($stmt) {
