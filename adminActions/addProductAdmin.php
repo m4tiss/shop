@@ -48,15 +48,15 @@ echo '
         <option value="'.$store.'">'.$store.'</option>
     </select
     <label for="productCategory">Wybierz kategorię produktu:</label>
-    <select name="productCategory" id="productCategory" required>';
-$categories = getCategoriesByStore($conn, 'footwear');
+    <select class="selectAdmin" name="productCategory" id="productCategory" required>';
+$categories = getCategoriesByStore($conn, $store);
 foreach ($categories as $category) {
     echo '<option value="' . $category['idCategory'] . '">' . $category['nameCategory'] . '</option>';
 }
 echo '</select>
     <label for="productProducer">Wybierz producenta produktu:</label>
-    <select name="productProducer" id="productProducer" required>';
-$producers = getProducersByStore($conn,'footwear');
+    <select class="selectAdmin" name="productProducer" id="productProducer" required>';
+$producers = getProducersByStore($conn,$store);
 foreach ($producers as $producer) {
     echo '<option value="' . $producer['idProducer'] . '">' . $producer['nameProducer'] . '</option>';
 }
@@ -64,7 +64,7 @@ echo '</select>
     <label for="productPhoto">Dodaj zdjęcie produktu:</label>
     <input type="file" name="productPhoto" id="productPhoto" accept="image/*" required>
     <label for="productDescription">Dodaj opis produktu:</label>
-    <textarea name="productDescription" id="productDescription" placeholder="Wpisz opis produktu" rows="4" required></textarea>
+    <textarea class="textAreaAdmin" name="productDescription" id="productDescription" placeholder="Wpisz opis produktu" rows="4" required></textarea>
      <label for="productPrice">Podaj cenę produktu:</label>
     <input type="number" name="productPrice" id="productPrice" placeholder="Podaj cenę" step="0.01" required>
     <button  class="adminButton" type="submit">Dodaj produkt</button>
