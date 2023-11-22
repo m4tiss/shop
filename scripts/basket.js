@@ -2,12 +2,12 @@
 function changeColor() {
     const button = document.getElementById('addToBasket');
     button.style.backgroundColor = 'green';
-    button.innerHTML = 'Dodano';
+    button.textContent = 'Dodano';
     button.classList.add('moveUpDown');
 
     setTimeout(function () {
         button.style.backgroundColor = '';
-        button.innerHTML = 'Dodaj do koszyka';
+        button.textContent = 'Dodaj do koszyka';
         button.classList.remove('moveUpDown');
     }, 1000);
 }
