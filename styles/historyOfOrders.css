@@ -49,4 +49,11 @@
   background: #151515;
 }
 
+.statusInfoIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 /*# sourceMappingURL=historyOfOrders.css.map */

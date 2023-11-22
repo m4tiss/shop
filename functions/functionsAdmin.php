@@ -406,7 +406,7 @@ function getAllOrders($conn): array
 
 function getStatus($conn, $idStatus): array
 {
-    $getStatus = "SELECT idStatus, nameStatus FROM statuses WHERE idStatus = ?";
+    $getStatus = "SELECT idStatus, nameStatus,icon FROM statuses WHERE idStatus = ?";
     $status = array();
     $stmt = mysqli_prepare($conn, $getStatus);
     if ($stmt) {
@@ -417,6 +417,7 @@ function getStatus($conn, $idStatus): array
             $row = mysqli_fetch_assoc($statusResult);
             $status['idStatus'] = $row['idStatus'];
             $status['nameStatus'] = $row['nameStatus'];
+            $status['icon'] = $row['icon'];
         } else {
             echo "Nie ma takiego statusu w bazie!";
         }
@@ -429,7 +430,7 @@ function getStatus($conn, $idStatus): array
 
 function getAllStatuses($conn): array
 {
-    $getStatuses = "SELECT idStatus, nameStatus FROM statuses";
+    $getStatuses = "SELECT idStatus, nameStatus,icon FROM statuses";
     $statuses = array();
     $stmt = mysqli_prepare($conn, $getStatuses);
     if ($stmt) {
@@ -441,6 +442,7 @@ function getAllStatuses($conn): array
                 $status = array();
                 $status['idStatus'] = $row['idStatus'];
                 $status['nameStatus'] = $row['nameStatus'];
+                $status['icon'] = $row['icon'];
                 $statuses[$i] = $status;
                 $i += 1;
             }

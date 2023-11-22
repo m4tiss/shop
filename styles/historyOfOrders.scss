@@ -30,3 +30,7 @@
 .historyButton:hover{
   @include basicButtonHover;
 }
+.statusInfoIcon{
+  @include flexCenterCenter;
+  gap:10px;
+}

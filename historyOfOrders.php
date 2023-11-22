@@ -27,7 +27,7 @@ if (empty($_SESSION['users'])) {
             </div>
             <h3> Data: ' . $order['dateOrder'] . '</h3>
             <h3> Koszt: ' . number_format($order['cost'],2) . ' zł</h3>
-            <h3>Status: ' . $status['nameStatus'] . '</h3> 
+            <h3 class="statusInfoIcon" >Status: ' . $status['nameStatus'] . '<img src="../icons/'.$status['icon'].'" width="40px"></h3> 
             <a href="orderdetails.php?idOrder=' . $order['idOrder'] . '"><button class="historyButton">Zobacz szczegóły</button></a>
         </div>
         ';

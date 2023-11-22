@@ -30,6 +30,7 @@ foreach ($orders as $order){
                 <h3>'.$order['email'].'</h3>
                 <h3>'. $order['dateOrder'].'</h3>
                 <h3>'.$orderPrice.' zł</h3>
+                <img src="../icons/'.$status['icon'].'" width="70px">
                 <form class="orderForm" action="changeStatusesAdmin.php" method="post">
                 <input type="text" name="idOrder" id="idOrder" value="'.$order['idOrder'].'" hidden>
                  <select class="selectAdmin" name="idStatus" id="idStatus" required>';

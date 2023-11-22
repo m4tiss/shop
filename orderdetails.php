@@ -29,7 +29,7 @@ if (isset($_GET['idOrder'])) {
         echo '
         <div class="paymentAndStatusDiv">
             <h3>Metoda płatności:</h3><img src="icons/' . $paymentMethod['icon'] . '" alt="' . $paymentMethod['icon'] . '" width="100px">
-            <h3>Status Zamówienia:</h3><h3>' . $status['nameStatus'] . '</h3>
+            <h3>Status Zamówienia:</h3><h3>' . $status['nameStatus'] . '</h3><img src="../icons/'.$status['icon'].'" width="70px">
         </div>
         ';
 

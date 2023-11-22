@@ -519,7 +519,8 @@ function getStatus($conn, $idStatus): array
         $row = mysqli_fetch_assoc($statusResult);
         $status = array(
             'idStatus' => $row['idStatus'],
-            'nameStatus' => $row['nameStatus']
+            'nameStatus' => $row['nameStatus'],
+            'icon' => $row['icon']
         );
     } else {
         echo "Nie ma takiego statusu w bazie!";
