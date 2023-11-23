@@ -119,6 +119,33 @@
 .modalButton:hover{
   @include basicButtonHover;
 }
+.custom-file-input {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.custom-file-input input {
+  position: absolute;
+  font-size: 100px;
+  cursor: pointer;
+  right: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.custom-file-input label {
+  display: inline-block;
+  cursor: pointer;
+  background-color: blueviolet;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.file-name {
+  margin-left: 10px;
+}
 
 @media screen and (max-width: 1300px) {
   .paymentAndStatusDiv{

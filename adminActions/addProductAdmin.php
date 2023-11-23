@@ -62,17 +62,24 @@ foreach ($producers as $producer) {
 }
 echo '</select>
     <label for="productPhoto">Dodaj zdjęcie produktu:</label>
-    <input type="file" name="productPhoto" id="productPhoto" accept="image/*" required>
+      <div class="custom-file-input">
+        <input type="file" name="productPhoto" id="productPhoto" accept="image/*" required onchange="updateFileName(this)">
+        <label for="productPhoto">Choose a file</label>
+        <span class="file-name"></span>
+  </div>
     <label for="productDescription">Dodaj opis produktu:</label>
     <textarea class="textAreaAdmin" name="productDescription" id="productDescription" placeholder="Wpisz opis produktu" rows="4" required></textarea>
+    
+    
      <label for="productPrice">Podaj cenę produktu:</label>
-    <input type="number" name="productPrice" id="productPrice" placeholder="Podaj cenę" step="0.01" required>
+    <input class="inputPriceAdmin" type="number" name="productPrice" id="productPrice" placeholder="Podaj cenę" step="0.01" required>
     <button  class="adminButton" type="submit">Dodaj produkt</button>
 </form>
         </div>
     </div>
+    </div>
 </div>';
-echo '</div>';
+echo '<script src="../scripts/customFileInput.js"></script>';
 
 
 include('../footer.php'); ?>
