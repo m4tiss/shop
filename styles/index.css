@@ -2,10 +2,14 @@
   display: none;
 }
 
+@font-face {
+  font-family: "Inconsolata";
+  src: url("../shop/Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf") format("truetype");
+}
 * {
   margin: 0;
   padding: 0;
-  font-family: Inconsolata, serif;
+  font-family: "Inconsolata", serif;
 }
 
 a {
